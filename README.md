@@ -4,7 +4,7 @@
 
 Install dependencies. We are going to use Vite, Tailwind, and React.
 
-To process the Tailwind css we are going to use `postcss` and `auotprefixer`.
+To process the Tailwind css we are going to use `postcss` and `autoprefixer`.
 
 ```sh
 npm init -y
@@ -19,7 +19,8 @@ Modify `package.json`
 ```json
   "scripts": {
     "dev": "vite",
-    "build": "vite build"
+    "build": "vite build",
+    "preview": "vite preview"
   },
 ```
 
@@ -36,17 +37,21 @@ module.exports = {
 };
 ```
 
+Create a `main.css` and add the basic Tailwind directives.
+
+```css
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+```
+
 Modify `index.html` to include tailwind output.css.
 
 ```html
 <head>
   ...
-  <link href="./output.css" rel="stylesheet" />
+  <link href="./main.css" rel="stylesheet" />
 </head>
 ```
 
-To get Tailwind to compile the CSS you need to run the following.
-
-```sh
-npx tailwindcss -i ./input.css -o ./output.css --watch
-```
+Now when you run with `npm run dev` the css will automatically be generated.
