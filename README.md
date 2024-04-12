@@ -2,16 +2,15 @@
 
 ## Development notes
 
-Install dependencies. We are going to use Vite, Tailwind, and React.
+We use Vite, React, and Tailwind.
 
-To process the Tailwind css we are going to use `postcss` and `autoprefixer`.
+### Vite
+
+Create the basic Vite app.
 
 ```sh
 npm init -y
 npm install vite@latest -D
-npm install -D tailwindcss postcss autoprefixer
-npx tailwindcss init
-npm install react react-dom react-router-dom
 ```
 
 Modify `package.json`
@@ -22,6 +21,23 @@ Modify `package.json`
     "build": "vite build",
     "preview": "vite preview"
   },
+```
+
+### React
+
+React works out of the box with Vite, but we do need to install the desired React packages. The `index.html` file loads `index.jsx` which then loads the app component (`src/app.jsx`).
+
+```sh
+npm install react react-dom react-router-dom
+```
+
+### Tailwind
+
+To process the Tailwind css we are going to use `postcss` and `autoprefixer`.
+
+```sh
+npm install -D tailwindcss postcss autoprefixer
+npx tailwindcss init
 ```
 
 Modify `tailwind.config.js`
