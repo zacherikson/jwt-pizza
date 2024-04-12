@@ -2,12 +2,14 @@
 
 ## Development notes
 
-Install dependencies
+Install dependencies. We are going to use Vite, Tailwind, and React.
+
+To process the Tailwind css we are going to use `postcss` and `auotprefixer`.
 
 ```sh
 npm init -y
 npm install vite@latest -D
-npm install -D tailwindcss
+npm install -D tailwindcss postcss autoprefixer
 npx tailwindcss init
 npm install react react-dom react-router-dom
 ```
