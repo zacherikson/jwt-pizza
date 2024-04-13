@@ -71,3 +71,11 @@ Modify `index.html` to include tailwind output.css.
 ```
 
 Now when you run with `npm run dev` the css will automatically be generated.
+
+## Preline
+
+Added the Tailwind preline component library.
+
+```sh
+npm i preline
+```
