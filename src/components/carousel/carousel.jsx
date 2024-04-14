@@ -5,9 +5,9 @@ export default function Carousel({ slides }) {
   return (
     <div
       data-hs-carousel='{"loadingClasses": "opacity-0","isAutoPlay": true}'
-      className='relative m-4'
+      className='relative m-4 min-w-[100%]'
     >
-      <div className='hs-carousel relative overflow-hidden w-full min-h-[350px] bg-white rounded-lg'>
+      <div className='hs-carousel relative overflow-hidden w-full min-w-[100%] min-h-[350px] bg-white rounded-lg'>
         <div className='hs-carousel-body absolute top-0 bottom-0 start-0 flex flex-nowrap transition-transform duration-700 opacity-0'>
           {slides.map((slide, index) => (
             <Slide key={index} image={slide} />
