@@ -204,7 +204,7 @@ export default function App() {
             </p>
             <button
               type='button'
-              className='w-32 my-4 py-3 px-4 inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-orange-400 text-white hover:bg-orange-500 disabled:opacity-50 disabled:pointer-events-none'
+              className='w-32 my-4 py-3 px-4 inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-orange-400 text-white hover:bg-orange-500'
               onClick={onClick}
             >
               Buy now ({count})
@@ -258,35 +258,37 @@ export default function App() {
               image='pizza6.png'
             />
           </div>
-
-          <div className='border-t-2 border-gray-200 dark:border-gray-700'>
-            <nav className='-mb-0.5 flex space-x-6 justify-between'>
-              <a
-                className='hs-tab-active:font-semibold hs-tab-active:border-blue-600 hs-tab-active:text-blue-600 py-4 px-1 inline-flex items-center gap-2 border-b-2 border-transparent text-sm whitespace-nowrap text-gray-500 hover:text-blue-600 focus:outline-none focus:text-blue-600 active'
-                href='#'
-                aria-current='page'
-              >
-                About
-              </a>
-              <a
-                className='hs-tab-active:font-semibold hs-tab-active:border-blue-600 hs-tab-active:text-blue-600 py-4 px-1 inline-flex items-center gap-2 border-b-2 border-transparent text-sm whitespace-nowrap text-gray-500 hover:text-blue-600 focus:outline-none focus:text-blue-600'
-                href='#'
-              >
-                Franchise
-              </a>
-              <a
-                className='hs-tab-active:font-semibold hs-tab-active:border-blue-600 hs-tab-active:text-blue-600 py-4 px-1 inline-flex items-center gap-2 border-b-2 border-transparent text-sm whitespace-nowrap text-gray-500 hover:text-blue-600 focus:outline-none focus:text-blue-600'
-                href='#'
-              >
-                History
-              </a>
-            </nav>
-            <p className='text-center italic text-gray-500'>
-              © 2024 PizzaShop Ltd. All rights reserved.
-            </p>
-          </div>
         </div>
       </main>
+
+      <footer className='m-8'>
+        <div className='container border-t-2 border-gray-200 dark:border-gray-700'>
+          <nav className='-mb-0.5 flex space-x-6 justify-between'>
+            <a
+              className='hs-tab-active:font-semibold hs-tab-active:border-blue-600 hs-tab-active:text-blue-600 py-4 px-1 inline-flex items-center gap-2 border-b-2 border-transparent text-sm whitespace-nowrap text-gray-500 hover:text-blue-600 focus:outline-none focus:text-blue-600 active'
+              href='#'
+              aria-current='page'
+            >
+              About
+            </a>
+            <a
+              className='hs-tab-active:font-semibold hs-tab-active:border-blue-600 hs-tab-active:text-blue-600 py-4 px-1 inline-flex items-center gap-2 border-b-2 border-transparent text-sm whitespace-nowrap text-gray-500 hover:text-blue-600 focus:outline-none focus:text-blue-600'
+              href='#'
+            >
+              Franchise
+            </a>
+            <a
+              className='hs-tab-active:font-semibold hs-tab-active:border-blue-600 hs-tab-active:text-blue-600 py-4 px-1 inline-flex items-center gap-2 border-b-2 border-transparent text-sm whitespace-nowrap text-gray-500 hover:text-blue-600 focus:outline-none focus:text-blue-600'
+              href='#'
+            >
+              History
+            </a>
+          </nav>
+          <p className='text-sm text-center italic text-gray-500'>
+            © 2024 PizzaShop Ltd. All rights reserved.
+          </p>
+        </div>
+      </footer>
     </div>
   );
 }
