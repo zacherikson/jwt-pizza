@@ -1,6 +1,8 @@
 import React from 'react';
 import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
+import Card from './components/card';
+import Carousel from './components/carousel/carousel';
 import 'preline/preline';
 
 export default function App() {
@@ -47,9 +49,9 @@ export default function App() {
                     viewBox='0 0 24 24'
                     fill='none'
                     stroke='currentColor'
-                    stroke-width='2'
-                    stroke-linecap='round'
-                    stroke-linejoin='round'
+                    strokeWidth='2'
+                    strokeLinecap='round'
+                    strokeLinejoin='round'
                   >
                     <line x1='3' x2='21' y1='6' y2='6' />
                     <line x1='3' x2='21' y1='12' y2='12' />
@@ -63,9 +65,9 @@ export default function App() {
                     viewBox='0 0 24 24'
                     fill='none'
                     stroke='currentColor'
-                    stroke-width='2'
-                    stroke-linecap='round'
-                    stroke-linejoin='round'
+                    strokeWidth='2'
+                    strokeLinecap='round'
+                    strokeLinejoin='round'
                   >
                     <path d='M18 6 6 18' />
                     <path d='m6 6 12 12' />
@@ -109,7 +111,7 @@ export default function App() {
         </header>
       </div>
 
-      <main>
+      <main className='m-8'>
         <ol className='flex items-center whitespace-nowrap'>
           <li className='inline-flex items-center'>
             <a
@@ -124,9 +126,9 @@ export default function App() {
                 viewBox='0 0 24 24'
                 fill='none'
                 stroke='currentColor'
-                stroke-width='2'
-                stroke-linecap='round'
-                stroke-linejoin='round'
+                strokeWidth='2'
+                strokeLinecap='round'
+                strokeLinejoin='round'
               >
                 <path d='m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z'></path>
                 <polyline points='9 22 9 12 15 12 15 22'></polyline>
@@ -141,9 +143,9 @@ export default function App() {
               viewBox='0 0 24 24'
               fill='none'
               stroke='currentColor'
-              stroke-width='2'
-              stroke-linecap='round'
-              stroke-linejoin='round'
+              strokeWidth='2'
+              strokeLinecap='round'
+              strokeLinejoin='round'
             >
               <path d='m9 18 6-6-6-6'></path>
             </svg>
@@ -161,9 +163,9 @@ export default function App() {
                 viewBox='0 0 24 24'
                 fill='none'
                 stroke='currentColor'
-                stroke-width='2'
-                stroke-linecap='round'
-                stroke-linejoin='round'
+                strokeWidth='2'
+                strokeLinecap='round'
+                strokeLinejoin='round'
               >
                 <rect width='7' height='7' x='14' y='3' rx='1'></rect>
                 <path d='M10 21V8a1 1 0 0 0-1-1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-5a1 1 0 0 0-1-1H3'></path>
@@ -177,9 +179,9 @@ export default function App() {
                 viewBox='0 0 24 24'
                 fill='none'
                 stroke='currentColor'
-                stroke-width='2'
-                stroke-linecap='round'
-                stroke-linejoin='round'
+                strokeWidth='2'
+                strokeLinecap='round'
+                strokeLinejoin='round'
               >
                 <path d='m9 18 6-6-6-6'></path>
               </svg>
@@ -192,95 +194,33 @@ export default function App() {
             Application
           </li>
         </ol>
-        <div className='container mx-auto m-4 p-4 bg-slate-300'>
-          <p>The world's best pizza</p>
-
-          <div
-            data-hs-carousel='{
-    "loadingClasses": "opacity-0",
-    "isAutoPlay": true
-  }'
-            className='relative'
-          >
-            <div className='hs-carousel relative overflow-hidden w-full min-h-[350px] bg-white rounded-lg'>
-              <div className='hs-carousel-body absolute top-0 bottom-0 start-0 flex flex-nowrap transition-transform duration-700 opacity-0'>
-                <div className='hs-carousel-slide'>
-                  <div className='flex justify-center h-full bg-gray-100 p-6'>
-                    <span className='self-center text-4xl transition duration-700'>
-                      First slide
-                    </span>
-                  </div>
-                </div>
-                <div className='hs-carousel-slide'>
-                  <div className='flex justify-center h-full bg-gray-200 p-6'>
-                    <span className='self-center text-4xl transition duration-700'>
-                      Second slide
-                    </span>
-                  </div>
-                </div>
-                <div className='hs-carousel-slide'>
-                  <div className='flex justify-center h-full bg-gray-300 p-6'>
-                    <span className='self-center text-4xl transition duration-700'>
-                      Third slide
-                    </span>
-                  </div>
-                </div>
-              </div>
-            </div>
-
+        <div className='container my-4 p-8 rounded-md'>
+          <div className='flex flex-col justify-between'>
+            <p className='text-5xl font-extrabold text-orange-600 italic'>
+              The world's best pizza
+            </p>
             <button
               type='button'
-              className='hs-carousel-prev hs-carousel:disabled:opacity-50 disabled:pointer-events-none absolute inset-y-0 start-0 inline-flex justify-center items-center w-[46px] h-full text-gray-800 hover:bg-gray-800/[.1]'
+              className='w-32 my-4 py-3 px-4 inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-orange-400 text-white hover:bg-orange-500 disabled:opacity-50 disabled:pointer-events-none'
+              onClick={onClick}
             >
-              <span className='text-2xl' aria-hidden='true'>
-                <svg
-                  className='flex-shrink-0 size-4'
-                  xmlns='http://www.w3.org/2000/svg'
-                  width='16'
-                  height='16'
-                  fill='currentColor'
-                  viewBox='0 0 16 16'
-                >
-                  <path
-                    fill-rule='evenodd'
-                    d='M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z'
-                  ></path>
-                </svg>
-              </span>
-              <span className='sr-only'>Previous</span>
+              Buy now ({count})
             </button>
-            <button
-              type='button'
-              className='hs-carousel-next hs-carousel:disabled:opacity-50 disabled:pointer-events-none absolute inset-y-0 end-0 inline-flex justify-center items-center w-[46px] h-full text-gray-800 hover:bg-gray-800/[.1]'
-            >
-              <span className='sr-only'>Next</span>
-              <span className='text-2xl' aria-hidden='true'>
-                <svg
-                  className='flex-shrink-0 size-4'
-                  xmlns='http://www.w3.org/2000/svg'
-                  width='16'
-                  height='16'
-                  fill='currentColor'
-                  viewBox='0 0 16 16'
-                >
-                  <path
-                    fill-rule='evenodd'
-                    d='M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z'
-                  ></path>
-                </svg>
-              </span>
-            </button>
-
-            <div className='hs-carousel-pagination flex justify-center absolute bottom-3 start-0 end-0 space-x-2'>
-              <span className='hs-carousel-active:bg-blue-700 hs-carousel-active:border-blue-700 size-3 border border-gray-400 rounded-full cursor-pointer'></span>
-              <span className='hs-carousel-active:bg-blue-700 hs-carousel-active:border-blue-700 size-3 border border-gray-400 rounded-full cursor-pointer'></span>
-              <span className='hs-carousel-active:bg-blue-700 hs-carousel-active:border-blue-700 size-3 border border-gray-400 rounded-full cursor-pointer'></span>
-            </div>
           </div>
+
+          <Carousel
+            slides={[
+              'pizza7.png',
+              'pizza8.png',
+              'pizza9.png',
+              'pizza10.png',
+              'pizza11.png',
+            ]}
+          />
 
           <blockquote className='relative m-10'>
             <svg
-              className='absolute -top-6 -start-8 size-16 text-gray-100 dark:text-gray-700'
+              className='absolute -top-6 -start-8 size-16 text-slate-300 dark:text-gray-700'
               width='16'
               height='16'
               viewBox='0 0 16 16'
@@ -297,20 +237,69 @@ export default function App() {
             <div className='relative z-10'>
               <p className='text-gray-800 dark:text-white'>
                 <em>
-                  Most amazing pizza experience of my life. Italy reborn! - Don
+                  Most amazing pizza experience of my life. Milan reborn! - Don
                   Julio
                 </em>
               </p>
             </div>
           </blockquote>
 
-          <button
-            type='button'
-            className='py-3 px-4 inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none'
-            onClick={onClick}
-          >
-            Buy now ({count})
-          </button>
+          <div className='m-4 grid gap-x-8 gap-y-4 grid-cols-3'>
+            <Card
+              title='Springville'
+              description='The Springville store'
+              image='pizza1.png'
+            />
+            <Card
+              title='Orem'
+              description='The Orem store'
+              image='pizza2.png'
+            />
+            <Card
+              title='Provo'
+              description='The provo store'
+              image='pizza3.png'
+            />
+            <Card
+              title='Lindon'
+              description='The Lindon store'
+              image='pizza4.png'
+            />
+            <Card
+              title='Nephi'
+              description='The Nephi store'
+              image='pizza5.png'
+            />
+            <Card
+              title='American Fork'
+              description='The American Fork store'
+              image='pizza6.png'
+            />
+          </div>
+
+          <div className='border-t-2 border-gray-200 dark:border-gray-700'>
+            <nav className='-mb-0.5 flex space-x-6 justify-between'>
+              <a
+                className='hs-tab-active:font-semibold hs-tab-active:border-blue-600 hs-tab-active:text-blue-600 py-4 px-1 inline-flex items-center gap-2 border-b-2 border-transparent text-sm whitespace-nowrap text-gray-500 hover:text-blue-600 focus:outline-none focus:text-blue-600 active'
+                href='#'
+                aria-current='page'
+              >
+                About
+              </a>
+              <a
+                className='hs-tab-active:font-semibold hs-tab-active:border-blue-600 hs-tab-active:text-blue-600 py-4 px-1 inline-flex items-center gap-2 border-b-2 border-transparent text-sm whitespace-nowrap text-gray-500 hover:text-blue-600 focus:outline-none focus:text-blue-600'
+                href='#'
+              >
+                Franchise
+              </a>
+              <a
+                className='hs-tab-active:font-semibold hs-tab-active:border-blue-600 hs-tab-active:text-blue-600 py-4 px-1 inline-flex items-center gap-2 border-b-2 border-transparent text-sm whitespace-nowrap text-gray-500 hover:text-blue-600 focus:outline-none focus:text-blue-600'
+                href='#'
+              >
+                History
+              </a>
+            </nav>
+          </div>
         </div>
       </main>
     </div>
