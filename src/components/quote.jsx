@@ -4,7 +4,7 @@ export default function Quote({ quote, author }) {
   return (
     <blockquote className='relative m-10'>
       <svg
-        className='absolute -top-6 -start-8 size-16 text-slate-300 dark:text-gray-700'
+        className='absolute text-xl -top-6 -start-8 size-16 text-slate-300 dark:text-gray-700'
         width='16'
         height='16'
         viewBox='0 0 16 16'
@@ -21,7 +21,8 @@ export default function Quote({ quote, author }) {
       <div className='relative z-10'>
         <p className='text-gray-800 dark:text-white'>
           <em>
-            {quote} — {author}
+            {quote}
+            <span className='text-gray-400'> — {author}</span>
           </em>
         </p>
       </div>

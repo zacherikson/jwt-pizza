@@ -4,6 +4,8 @@ import { useLocation } from 'react-router-dom';
 import Card from './components/card';
 import Carousel from './components/carousel/carousel';
 import Quote from './components/quote';
+import Slide from './components/slide';
+
 import 'preline/preline';
 
 export default function App() {
@@ -29,7 +31,7 @@ export default function App() {
             <div className='flex items-center justify-between'>
               <img className='w-10 m-3' src='/pizza-shop-icon.png' />
               <a
-                className='flex-none text-xl font-semibold text-white dark:text-gray-800'
+                className='flex-none text-4xl font-semibold text-white dark:text-gray-800'
                 href='#'
               >
                 PizzaShop
@@ -209,11 +211,19 @@ export default function App() {
             </button>
           </div>
 
-          <Carousel slides={['pizza10.png', 'pizza9.png', 'pizza11.png']} />
-
-          <Quote
-            quote='Most amazing pizza experience of my life. Milan reborn!'
-            author='Don Julio'
+          <Carousel
+            slides={[
+              <Quote
+                quote='Most amazing pizza experience of my life.'
+                author='Megan Fox, Springville'
+              />,
+              <Quote quote='Milan reborn!' author='Trina Smith, Provo' />,
+              <Quote quote='All I can say is WOW!' author='Don Julio, Orem' />,
+              <Quote
+                quote='Best pizza ever. I can eat this every day!'
+                author='Terrence Jones, Mapleton'
+              />,
+            ]}
           />
 
           <div className='m-4 grid gap-x-8 gap-y-4 sm:gird-cols-1 md:grid-cols-2 lg:grid-cols-4 xlg:grid-cols-5'>
