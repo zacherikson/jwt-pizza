@@ -74,8 +74,46 @@ Now when you run with `npm run dev` the css will automatically be generated.
 
 ## Preline
 
-Added the Tailwind preline component library.
+Added the Tailwind [Preline component library](https://preline.co/) so that I can use all of their nifty nav, slideshow, containers, and cards.
 
 ```sh
 npm i preline
+```
+
+Updated the tailwind config to use preline.
+
+```js
+const defaultTheme = require('tailwindcss/defaultTheme');
+
+module.exports = {
+  content: ['index.html', './src/**/*.{html,js,jsx}', './node_modules/preline/preline.js'],
+  theme: {
+    extend: {
+      fontFamily: {
+        sans: ['Inter var', ...defaultTheme.fontFamily.sans],
+      },
+    },
+  },
+  plugins: [require('preline/plugin')],
+};
+```
+
+Import preline into app.jsx.
+
+```js
+import 'preline/preline';
+```
+
+Initialize components whenever the page location changes.
+
+```js
+import { useLocation, Routes, Route, NavLink } from 'react-router-dom';
+
+export default function App() {
+  const location = useLocation();
+
+  useEffect(() => {
+    window.HSStaticMethods.autoInit();
+  }, [location.pathname]);
+  //...
 ```
