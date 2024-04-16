@@ -3,7 +3,8 @@ import { useEffect } from 'react';
 import { useLocation, Routes, Route, NavLink } from 'react-router-dom';
 import Home from './views/home';
 import About from './views/about';
-
+import Login from './views/login';
+import Breadcrumb from './components/breadcrumb';
 import 'preline/preline';
 
 export default function App() {
@@ -23,10 +24,7 @@ export default function App() {
           >
             <div className='flex items-center justify-between'>
               <img className='w-10 m-3' src='/pizza-shop-icon.png' />
-              <NavLink
-                className='flex-none text-4xl font-semibold text-white dark:text-gray-800'
-                to='/'
-              >
+              <NavLink className='flex-none text-4xl font-semibold text-white dark:text-gray-800' to='/'>
                 PizzaShop
               </NavLink>
               <div className='sm:hidden'>
@@ -76,9 +74,12 @@ export default function App() {
               className='hs-collapse hidden overflow-hidden transition-all duration-300 basis-full grow sm:block'
             >
               <div className='flex flex-col gap-5 mt-5 sm:flex-row sm:items-center sm:justify-end sm:mt-0 sm:ps-5'>
-                <a className='font-medium text-white' href='#'>
-                  Landing
-                </a>
+                <NavLink
+                  className='font-medium text-gray-400 hover:text-gray-500 dark:text-gray-500 dark:hover:text-gray-400'
+                  to='/login'
+                >
+                  Login
+                </NavLink>
                 <a
                   className='font-medium text-gray-400 hover:text-gray-500 dark:text-gray-500 dark:hover:text-gray-400'
                   href='#'
@@ -103,10 +104,13 @@ export default function App() {
         </header>
       </div>
 
+      <Breadcrumb />
+
       <main className='m-8'>
         <Routes>
           <Route path='/' element={<Home />} exact />
           <Route path='/about' element={<About />} />
+          <Route path='/login' element={<Login />} />
         </Routes>
       </main>
 
@@ -132,9 +136,7 @@ export default function App() {
               History
             </a>
           </nav>
-          <p className='text-sm text-center italic text-gray-500'>
-            © 2024 PizzaShop Ltd. All rights reserved.
-          </p>
+          <p className='text-sm text-center italic text-gray-500'>© 2024 PizzaShop Ltd. All rights reserved.</p>
         </div>
       </footer>
     </div>
