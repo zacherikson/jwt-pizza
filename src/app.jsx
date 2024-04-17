@@ -5,6 +5,7 @@ import Main from './views/main';
 import Home from './views/home';
 import About from './views/about';
 import Login from './views/login';
+import NotFound from './views/notFound';
 import Breadcrumb from './components/breadcrumb';
 import 'preline/preline';
 
@@ -75,30 +76,19 @@ export default function App() {
               className='hs-collapse hidden overflow-hidden transition-all duration-300 basis-full grow sm:block'
             >
               <div className='flex flex-col gap-5 mt-5 sm:flex-row sm:items-center sm:justify-end sm:mt-0 sm:ps-5'>
-                <NavLink
-                  className='font-medium text-gray-400 hover:text-gray-500 dark:text-gray-500 dark:hover:text-gray-400'
-                  to='/login'
-                >
-                  Login
-                </NavLink>
-                <a
-                  className='font-medium text-gray-400 hover:text-gray-500 dark:text-gray-500 dark:hover:text-gray-400'
-                  href='#'
-                >
-                  Account
-                </a>
-                <a
-                  className='font-medium text-gray-400 hover:text-gray-500 dark:text-gray-500 dark:hover:text-gray-400'
-                  href='#'
-                >
-                  Work
-                </a>
-                <NavLink
-                  className='font-medium text-gray-400 hover:text-gray-500 dark:text-gray-500 dark:hover:text-gray-400'
-                  to='/about'
-                >
-                  About
-                </NavLink>
+                {[
+                  { title: 'Home', to: '/' },
+                  { title: 'Franchise portal', to: '/login' },
+                  { title: 'About', to: '/about' },
+                ].map((item) => (
+                  <NavLink
+                    key={item.title}
+                    className='font-medium text-gray-400 hover:text-gray-500 dark:text-gray-500 dark:hover:text-gray-400'
+                    to={item.to}
+                  >
+                    {item.title}
+                  </NavLink>
+                ))}
               </div>
             </div>
           </nav>
@@ -134,30 +124,33 @@ export default function App() {
               </Main>
             }
           />
+          <Route
+            path='*'
+            element={
+              <Main title='Opps'>
+                <NotFound />
+              </Main>
+            }
+          />
         </Routes>
       </main>
 
       <footer className='m-8 flex justify-center'>
         <div className='container border-t-2 border-gray-200 dark:border-gray-700 max-w-3xl'>
           <nav className='-mb-0.5 flex space-x-6 justify-between'>
-            <NavLink
-              className='hs-tab-active:font-semibold hs-tab-active:border-orange-600 hs-tab-active:text-orange-600 py-4 px-1 inline-flex items-center gap-2 border-b-2 border-transparent text-sm whitespace-nowrap text-gray-200 hover:text-orange-600 focus:outline-none focus:text-orange-600'
-              to='/about'
-            >
-              About
-            </NavLink>
-            <a
-              className='hs-tab-active:font-semibold hs-tab-active:border-orange-600 hs-tab-active:text-orange-600 py-4 px-1 inline-flex items-center gap-2 border-b-2 border-transparent text-sm whitespace-nowrap text-gray-200 hover:text-orange-600 focus:outline-none focus:text-orange-600'
-              href='#'
-            >
-              Franchise
-            </a>
-            <a
-              className='hs-tab-active:font-semibold hs-tab-active:border-orange-600 hs-tab-active:text-orange-600 py-4 px-1 inline-flex items-center gap-2 border-b-2 border-transparent text-sm whitespace-nowrap text-gray-200 hover:text-orange-600 focus:outline-none focus:text-orange-600'
-              href='#'
-            >
-              History
-            </a>
+            {[
+              { title: 'About', to: '/about' },
+              { title: 'Franchise portal', to: '/login' },
+              { title: 'History', to: '/history' },
+            ].map((item) => (
+              <NavLink
+                key={item.title}
+                className='hs-tab-active:font-semibold hs-tab-active:border-orange-600 hs-tab-active:text-orange-600 py-4 px-1 inline-flex items-center gap-2 border-b-2 border-transparent text-sm whitespace-nowrap text-gray-200 hover:text-orange-600 focus:outline-none focus:text-orange-600'
+                to={item.to}
+              >
+                {item.title}
+              </NavLink>
+            ))}
           </nav>
           <p className='text-sm text-center italic text-gray-500'>© 2024 PizzaShop Ltd. All rights reserved.</p>
         </div>
