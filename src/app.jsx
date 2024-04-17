@@ -1,6 +1,7 @@
 import React from 'react';
 import { useEffect } from 'react';
 import { useLocation, Routes, Route, NavLink } from 'react-router-dom';
+import Main from './views/main';
 import Home from './views/home';
 import About from './views/about';
 import Login from './views/login';
@@ -24,11 +25,8 @@ export default function App() {
           >
             <div className='flex items-center justify-between'>
               <img className='w-10 m-3' src='/pizza-shop-icon.png' />
-              <NavLink
-                className='flex-none text-4xl font-semibold text-white dark:text-gray-800'
-                to='/'
-              >
-                PizzaShop
+              <NavLink className='flex-none text-4xl font-thin text-white dark:text-gray-800' to='/'>
+                Pizza Shop
               </NavLink>
               <div className='sm:hidden'>
                 <button
@@ -111,9 +109,31 @@ export default function App() {
 
       <main>
         <Routes>
-          <Route path='/' element={<Home />} exact />
-          <Route path='/about' element={<About />} />
-          <Route path='/login' element={<Login />} />
+          <Route
+            path='/'
+            element={
+              <Main title='The valleys best pizza'>
+                <Home />
+              </Main>
+            }
+            exact
+          />
+          <Route
+            path='/about'
+            element={
+              <Main title='The secret sauce'>
+                <About />
+              </Main>
+            }
+          />
+          <Route
+            path='/login'
+            element={
+              <Main title='Franchise portal'>
+                <Login />
+              </Main>
+            }
+          />
         </Routes>
       </main>
 
@@ -121,27 +141,25 @@ export default function App() {
         <div className='container border-t-2 border-gray-200 dark:border-gray-700 max-w-3xl'>
           <nav className='-mb-0.5 flex space-x-6 justify-between'>
             <NavLink
-              className='hs-tab-active:font-semibold hs-tab-active:border-blue-600 hs-tab-active:text-blue-600 py-4 px-1 inline-flex items-center gap-2 border-b-2 border-transparent text-sm whitespace-nowrap text-gray-500 hover:text-blue-600 focus:outline-none focus:text-blue-600 active'
+              className='hs-tab-active:font-semibold hs-tab-active:border-orange-600 hs-tab-active:text-orange-600 py-4 px-1 inline-flex items-center gap-2 border-b-2 border-transparent text-sm whitespace-nowrap text-gray-200 hover:text-orange-600 focus:outline-none focus:text-orange-600'
               to='/about'
             >
               About
             </NavLink>
             <a
-              className='hs-tab-active:font-semibold hs-tab-active:border-blue-600 hs-tab-active:text-blue-600 py-4 px-1 inline-flex items-center gap-2 border-b-2 border-transparent text-sm whitespace-nowrap text-gray-500 hover:text-blue-600 focus:outline-none focus:text-blue-600'
+              className='hs-tab-active:font-semibold hs-tab-active:border-orange-600 hs-tab-active:text-orange-600 py-4 px-1 inline-flex items-center gap-2 border-b-2 border-transparent text-sm whitespace-nowrap text-gray-200 hover:text-orange-600 focus:outline-none focus:text-orange-600'
               href='#'
             >
               Franchise
             </a>
             <a
-              className='hs-tab-active:font-semibold hs-tab-active:border-blue-600 hs-tab-active:text-blue-600 py-4 px-1 inline-flex items-center gap-2 border-b-2 border-transparent text-sm whitespace-nowrap text-gray-500 hover:text-blue-600 focus:outline-none focus:text-blue-600'
+              className='hs-tab-active:font-semibold hs-tab-active:border-orange-600 hs-tab-active:text-orange-600 py-4 px-1 inline-flex items-center gap-2 border-b-2 border-transparent text-sm whitespace-nowrap text-gray-200 hover:text-orange-600 focus:outline-none focus:text-orange-600'
               href='#'
             >
               History
             </a>
           </nav>
-          <p className='text-sm text-center italic text-gray-500'>
-            © 2024 PizzaShop Ltd. All rights reserved.
-          </p>
+          <p className='text-sm text-center italic text-gray-500'>© 2024 PizzaShop Ltd. All rights reserved.</p>
         </div>
       </footer>
     </div>
