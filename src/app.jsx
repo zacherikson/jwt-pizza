@@ -15,7 +15,7 @@ export default function App() {
   }, [location.pathname]);
 
   return (
-    <div>
+    <div className='h-full  bg-gray-800'>
       <div className='space-y-4'>
         <header className='flex flex-wrap sm:justify-start sm:flex-nowrap w-full bg-gray-800 text-sm py-4 dark:bg-white'>
           <nav
@@ -24,7 +24,10 @@ export default function App() {
           >
             <div className='flex items-center justify-between'>
               <img className='w-10 m-3' src='/pizza-shop-icon.png' />
-              <NavLink className='flex-none text-4xl font-semibold text-white dark:text-gray-800' to='/'>
+              <NavLink
+                className='flex-none text-4xl font-semibold text-white dark:text-gray-800'
+                to='/'
+              >
                 PizzaShop
               </NavLink>
               <div className='sm:hidden'>
@@ -104,9 +107,9 @@ export default function App() {
         </header>
       </div>
 
-      <Breadcrumb />
+      <Breadcrumb location='About' />
 
-      <main className='m-8'>
+      <main>
         <Routes>
           <Route path='/' element={<Home />} exact />
           <Route path='/about' element={<About />} />
@@ -114,8 +117,8 @@ export default function App() {
         </Routes>
       </main>
 
-      <footer className='m-8'>
-        <div className='container border-t-2 border-gray-200 dark:border-gray-700'>
+      <footer className='m-8 flex justify-center'>
+        <div className='container border-t-2 border-gray-200 dark:border-gray-700 max-w-3xl'>
           <nav className='-mb-0.5 flex space-x-6 justify-between'>
             <NavLink
               className='hs-tab-active:font-semibold hs-tab-active:border-blue-600 hs-tab-active:text-blue-600 py-4 px-1 inline-flex items-center gap-2 border-b-2 border-transparent text-sm whitespace-nowrap text-gray-500 hover:text-blue-600 focus:outline-none focus:text-blue-600 active'
@@ -136,7 +139,9 @@ export default function App() {
               History
             </a>
           </nav>
-          <p className='text-sm text-center italic text-gray-500'>© 2024 PizzaShop Ltd. All rights reserved.</p>
+          <p className='text-sm text-center italic text-gray-500'>
+            © 2024 PizzaShop Ltd. All rights reserved.
+          </p>
         </div>
       </footer>
     </div>
