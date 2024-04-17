@@ -6,7 +6,7 @@ export default function About() {
       <div className='bg-slate-600 flex flex-col justify-center sm:items-center mx-auto size-full'>
         <div className='text-center py-8 px-4 sm:px-6 lg:px-8'>
           <h2 className='mt-1 sm:mt-3 text-4xl font-bold text-white sm:text-6xl'>
-            <span className='bg-clip-text bg-gradient-to-tr  from-orange-800 to-orange-600  text-transparent'>
+            <span className='bg-clip-text bg-gradient-to-tr  from-orange-600 to-orange-400  text-transparent'>
               Franchise portal
             </span>
           </h2>
@@ -14,10 +14,7 @@ export default function About() {
           <form>
             <div className='mt-8 space-y-4'>
               <div>
-                <label
-                  htmlFor='hs-cover-with-gradient-form-email-1'
-                  className='sr-only'
-                >
+                <label htmlFor='hs-cover-with-gradient-form-email-1' className='sr-only'>
                   Email address
                 </label>
                 <div className='relative'>
@@ -47,10 +44,7 @@ export default function About() {
                 </div>
               </div>
               <div>
-                <label
-                  htmlFor='hs-cover-with-gradient-form-name-1'
-                  className='sr-only'
-                >
+                <label htmlFor='hs-cover-with-gradient-form-name-1' className='sr-only'>
                   Password
                 </label>
                 <div className='relative'>
