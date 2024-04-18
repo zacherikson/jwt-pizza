@@ -11,7 +11,7 @@ export default function Breadcrumb({ location }) {
           to='/'
         >
           <HouseIcon />
-          Home
+          home
         </NavLink>
       </li>
       {location && (

@@ -27,11 +27,9 @@ export default function App() {
           >
             <div className='flex items-center justify-between'>
               <img className='w-10 m-3' src='/pizza-shop-icon.png' />
-              <NavLink className='flex-none text-4xl dark:text-gray-800' to='/'>
-                <span className='font-thin bg-clip-text bg-gradient-to-tr from-orange-500 to-orange-300 text-transparent'>
-                  Pizza Shop
-                </span>
-              </NavLink>
+              <span className='font-thin flex-none text-4xl dark:text-gray-800 bg-clip-text bg-gradient-to-tr from-orange-500 to-orange-300 text-transparent'>
+                Pizza Shop
+              </span>
               <div className='sm:hidden'>
                 <button
                   type='button'
@@ -69,7 +67,7 @@ export default function App() {
         </header>
       </div>
 
-      <Breadcrumb location='About' />
+      <Breadcrumb location={location.pathname.replace('/', '')} />
 
       <main className='size-full'>
         <Routes>
