@@ -7,6 +7,7 @@ import About from './views/about';
 import Login from './views/login';
 import NotFound from './views/notFound';
 import Breadcrumb from './components/breadcrumb';
+import { HamburgerIcon, CloseIcon } from './icons';
 import 'preline/preline';
 
 export default function App() {
@@ -26,11 +27,10 @@ export default function App() {
           >
             <div className='flex items-center justify-between'>
               <img className='w-10 m-3' src='/pizza-shop-icon.png' />
-              <NavLink
-                className='flex-none text-4xl font-thin text-white dark:text-gray-800'
-                to='/'
-              >
-                Pizza Shop
+              <NavLink className='flex-none text-4xl dark:text-gray-800' to='/'>
+                <span className='font-thin bg-clip-text bg-gradient-to-tr from-orange-500 to-orange-300 text-transparent'>
+                  Pizza Shop
+                </span>
               </NavLink>
               <div className='sm:hidden'>
                 <button
@@ -40,37 +40,8 @@ export default function App() {
                   aria-controls='navbar-dark'
                   aria-label='Toggle navigation'
                 >
-                  <svg
-                    className='hs-collapse-open:hidden flex-shrink-0 size-4'
-                    xmlns='http://www.w3.org/2000/svg'
-                    width='24'
-                    height='24'
-                    viewBox='0 0 24 24'
-                    fill='none'
-                    stroke='currentColor'
-                    strokeWidth='2'
-                    strokeLinecap='round'
-                    strokeLinejoin='round'
-                  >
-                    <line x1='3' x2='21' y1='6' y2='6' />
-                    <line x1='3' x2='21' y1='12' y2='12' />
-                    <line x1='3' x2='21' y1='18' y2='18' />
-                  </svg>
-                  <svg
-                    className='hs-collapse-open:block hidden flex-shrink-0 size-4'
-                    xmlns='http://www.w3.org/2000/svg'
-                    width='24'
-                    height='24'
-                    viewBox='0 0 24 24'
-                    fill='none'
-                    stroke='currentColor'
-                    strokeWidth='2'
-                    strokeLinecap='round'
-                    strokeLinejoin='round'
-                  >
-                    <path d='M18 6 6 18' />
-                    <path d='m6 6 12 12' />
-                  </svg>
+                  <HamburgerIcon />
+                  <CloseIcon />
                 </button>
               </div>
             </div>
@@ -155,9 +126,7 @@ export default function App() {
               </NavLink>
             ))}
           </nav>
-          <p className='text-sm text-center italic text-gray-500'>
-            © 2024 Pizza Shop LTD. All rights reserved.
-          </p>
+          <p className='text-sm text-center italic text-gray-500'>© 2024 Pizza Shop LTD. All rights reserved.</p>
         </div>
       </footer>
     </div>
