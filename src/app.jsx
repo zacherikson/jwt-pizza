@@ -156,7 +156,7 @@ export default function App() {
             ))}
           </nav>
           <p className='text-sm text-center italic text-gray-500'>
-            © 2024 PizzaShop Ltd. All rights reserved.
+            © 2024 Pizza Shop LTD. All rights reserved.
           </p>
         </div>
       </footer>
