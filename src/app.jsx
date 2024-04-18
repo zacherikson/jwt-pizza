@@ -17,7 +17,7 @@ export default function App() {
   }, [location.pathname]);
 
   return (
-    <div className='h-full  bg-gray-800'>
+    <div className='bg-gray-800'>
       <div className='space-y-4'>
         <header className='flex flex-wrap sm:justify-start sm:flex-nowrap w-full bg-gray-800 text-sm py-4 dark:bg-white'>
           <nav
@@ -26,7 +26,10 @@ export default function App() {
           >
             <div className='flex items-center justify-between'>
               <img className='w-10 m-3' src='/pizza-shop-icon.png' />
-              <NavLink className='flex-none text-4xl font-thin text-white dark:text-gray-800' to='/'>
+              <NavLink
+                className='flex-none text-4xl font-thin text-white dark:text-gray-800'
+                to='/'
+              >
                 Pizza Shop
               </NavLink>
               <div className='sm:hidden'>
@@ -97,12 +100,12 @@ export default function App() {
 
       <Breadcrumb location='About' />
 
-      <main>
+      <main className='size-full'>
         <Routes>
           <Route
             path='/'
             element={
-              <Main title='The valleys best pizza'>
+              <Main title="The valley's best pizza">
                 <Home />
               </Main>
             }
@@ -152,7 +155,9 @@ export default function App() {
               </NavLink>
             ))}
           </nav>
-          <p className='text-sm text-center italic text-gray-500'>© 2024 PizzaShop Ltd. All rights reserved.</p>
+          <p className='text-sm text-center italic text-gray-500'>
+            © 2024 PizzaShop Ltd. All rights reserved.
+          </p>
         </div>
       </footer>
     </div>
