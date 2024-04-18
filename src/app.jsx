@@ -86,7 +86,7 @@ export default function App() {
                 ].map((item) => (
                   <NavLink
                     key={item.title}
-                    className='font-medium text-gray-400 hover:text-gray-500 dark:text-gray-500 dark:hover:text-gray-400'
+                    className='font-medium text-gray-400 hover:text-gray-500 dark:text-gray-500 dark:hover:text-gray-400  focus:text-orange-600'
                     to={item.to}
                   >
                     {item.title}
@@ -148,7 +148,7 @@ export default function App() {
             ].map((item) => (
               <NavLink
                 key={item.title}
-                className='hs-tab-active:font-semibold hs-tab-active:border-orange-600 hs-tab-active:text-orange-600 py-4 px-1 inline-flex items-center gap-2 border-b-2 border-transparent text-sm whitespace-nowrap text-gray-200 hover:text-orange-600 focus:outline-none focus:text-orange-600'
+                className=' py-4 px-1 inline-flex items-center gap-2 text-sm whitespace-nowrap text-gray-200 hover:text-orange-600 focus:text-orange-600'
                 to={item.to}
               >
                 {item.title}
