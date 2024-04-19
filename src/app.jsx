@@ -8,8 +8,8 @@ import Login from './views/login';
 import Menu from './views/menu';
 import History from './views/history';
 import AdminDashboard from './views/adminDashboard';
-import CreateStore from './views/CreateStore';
-import StoreRefund from './views/StoreRefund';
+import CreateStore from './views/createStore';
+import RefundStore from './views/refundStore';
 import Payment from './views/payment';
 import NotFound from './views/notFound';
 import Breadcrumb from './components/breadcrumb';
@@ -31,7 +31,7 @@ export default function App() {
     { title: 'History', to: '/history', component: <History />, display: ['footer'] },
     { title: 'Admin dashboard', to: '/admin-dashboard', component: <AdminDashboard />, display: ['admin'] },
     { title: 'Create store', to: '/:subPath?/create-store', component: <CreateStore />, display: [] },
-    { title: 'Store refund', to: '/:subPath?/store-refund', component: <StoreRefund />, display: [] },
+    { title: 'Store refund', to: '/:subPath?/refund-store', component: <RefundStore />, display: [] },
     { title: 'Payment', to: '/payment', component: <Payment />, display: [] },
     { title: 'Opps', to: '*', component: <NotFound />, display: [] },
   ];

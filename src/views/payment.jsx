@@ -1,38 +1,26 @@
 import React from 'react';
-import { useLocation } from 'react-router-dom';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
+import Button from '../components/button';
 
 export default function Payment() {
   const location = useLocation();
   const orderCount = location.state?.orderCount || 0;
   const navigate = useNavigate();
 
-  function onCancel() {
-    navigate('/menu', { state: { orderCount: 0 } });
-  }
-
-  function onPay() {
+  function processPayment() {
     alert(`You just bought ${orderCount} pizzas!`);
     navigate('/menu', { state: { orderCount: 0 } });
   }
 
+  function cancel() {
+    navigate('/menu', { state: { orderCount: orderCount } });
+  }
+
   return (
     <>
-      <div className='text-neutral-100'>Money money money for {orderCount} pizzas</div>
-      <button
-        type='button'
-        className='w-32 my-4 py-3 px-4 text-sm font-semibold rounded-lg border border-transparent bg-orange-800 text-white hover:bg-orange-600'
-        onClick={onPay}
-      >
-        Pay now
-      </button>
-      <button
-        type='button'
-        className='w-32 my-4 py-3 px-4 text-sm font-semibold rounded-lg border border-transparent bg-orange-800 text-white hover:bg-orange-600'
-        onClick={onCancel}
-      >
-        Cancel
-      </button>
+      <div className='text-neutral-100'>Send me those {orderCount} pizzas right now!</div>
+      <Button title='Pay now' onPress={processPayment} />
+      <Button title='Cancel' onPress={cancel} />
     </>
   );
 }
