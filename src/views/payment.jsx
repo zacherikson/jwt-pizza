@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 
 export default function Payment() {
   const location = useLocation();
-  const orderCount = location.state.orderCount;
+  const orderCount = location.state?.orderCount || 0;
   const navigate = useNavigate();
 
   function onCancel() {
@@ -12,7 +12,8 @@ export default function Payment() {
   }
 
   function onPay() {
-    alert('Payment successful');
+    alert(`You just bought ${orderCount} pizzas!`);
+    navigate('/menu', { state: { orderCount: 0 } });
   }
 
   return (

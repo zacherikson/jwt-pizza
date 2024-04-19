@@ -7,8 +7,9 @@ import About from './views/about';
 import Login from './views/login';
 import Menu from './views/menu';
 import History from './views/history';
-import Path1 from './views/path1';
-import Path2 from './views/path2';
+import AdminDashboard from './views/adminDashboard';
+import CreateStore from './views/CreateStore';
+import StoreRefund from './views/StoreRefund';
 import Payment from './views/payment';
 import NotFound from './views/notFound';
 import Breadcrumb from './components/breadcrumb';
@@ -28,8 +29,9 @@ export default function App() {
     { title: 'Franchise', to: '/login', component: <Login />, desc: 'Franchise portal', display: ['nav', 'footer'] },
     { title: 'About', to: '/about', component: <About />, desc: 'The secret sauce', display: ['nav', 'footer'] },
     { title: 'History', to: '/history', component: <History />, display: ['footer'] },
-    { title: 'Path1', to: '/path1', component: <Path1 />, display: ['nav'] },
-    { title: 'Path2', to: '/:subPath?/path2', component: <Path2 />, display: [] },
+    { title: 'Admin dashboard', to: '/admin-dashboard', component: <AdminDashboard />, display: ['admin'] },
+    { title: 'Create store', to: '/:subPath?/create-store', component: <CreateStore />, display: [] },
+    { title: 'Store refund', to: '/:subPath?/store-refund', component: <StoreRefund />, display: [] },
     { title: 'Payment', to: '/payment', component: <Payment />, display: [] },
     { title: 'Opps', to: '*', component: <NotFound />, display: [] },
   ];
