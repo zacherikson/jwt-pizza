@@ -117,3 +117,7 @@ export default function App() {
   }, [location.pathname]);
   //...
 ```
+
+## Icons
+
+[HeroIcons](https://heroicons.com/) - MIT license

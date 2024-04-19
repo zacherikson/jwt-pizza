@@ -4,10 +4,11 @@ import Button from '../components/button';
 
 export default function RefundStore() {
   const store = useLocation().state?.store || 'all';
+  const refundAmount = useLocation().state?.refundAmount || 0;
   const navigate = useNavigate();
 
   function refund() {
-    alert(`Refunded money to ${store}!`);
+    alert(`Refunded $${refundAmount.toLocaleString()} to ${store}!`);
     navigate('/admin-dashboard');
   }
 
@@ -18,7 +19,7 @@ export default function RefundStore() {
   return (
     <>
       <div className='text-neutral-100'>
-        Would you like to refund the <span className='font-bold text-yellow-300'>{store}</span> store all of its money?
+        Are you sure you want to refund ${refundAmount.toLocaleString()} to the <span className='font-bold text-yellow-300'>{store}</span> store?
       </div>
       <Button title='Refund' onPress={refund} />
       <Button title='Cancel' onPress={cancel} />
