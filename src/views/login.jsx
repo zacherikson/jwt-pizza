@@ -1,21 +1,26 @@
 import React from 'react';
 import { CloseEyeIcon, PersonIcon, EmailIcon } from '../icons';
 import Button from '../components/button';
-
-const roles = ['admin', 'franchise', 'user'];
+import { login } from '../api/api';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 export default function Login() {
   const [password, setPassword] = React.useState('');
   const [email, setEmail] = React.useState('');
 
-  function login() {
-    localStorage.setItem('email', email);
-    const role = roles.find((role) => email.includes(role)) || 'user';
-    localStorage.setItem('role', role);
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  function submit(event) {
+    event.preventDefault();
+    if (login(email, password)) {
+      const locationText = location.pathname.substring(0, location.pathname.lastIndexOf('/') + 1);
+      navigate(locationText);
+    }
   }
 
   return (
-    <form onSubmit={login}>
+    <form onSubmit={submit}>
       <div className='mt-8 space-y-4'>
         <div>
           <label htmlFor='hs-cover-with-gradient-form-email-1' className='sr-only'>
