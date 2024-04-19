@@ -26,8 +26,9 @@ export default function App() {
   const navItems = [
     { title: 'Home', to: '/', component: <Home />, desc: "The valley's best pizza", display: [] },
     { title: 'Menu', to: '/menu', component: <Menu />, display: ['nav'] },
+    { title: 'Login', to: '/login', component: <Login />, desc: 'Login', display: ['nav'] },
     { title: 'Franchise', to: '/login', component: <Login />, desc: 'Franchise portal', display: ['nav', 'footer'] },
-    { title: 'About', to: '/about', component: <About />, desc: 'The secret sauce', display: ['nav', 'footer'] },
+    { title: 'About', to: '/about', component: <About />, desc: 'The secret sauce', display: ['footer'] },
     { title: 'History', to: '/history', component: <History />, display: ['footer'] },
     { title: 'Admin dashboard', to: '/admin-dashboard', component: <AdminDashboard />, display: ['admin'] },
     { title: 'Create store', to: '/:subPath?/create-store', component: <CreateStore />, display: [] },
