@@ -9,6 +9,7 @@ import Menu from './views/menu';
 import History from './views/history';
 import Path1 from './views/path1';
 import Path2 from './views/path2';
+import Payment from './views/payment';
 import NotFound from './views/notFound';
 import Breadcrumb from './components/breadcrumb';
 import { HamburgerIcon, CloseIcon } from './icons';
@@ -29,6 +30,7 @@ export default function App() {
     { title: 'History', to: '/history', component: <History />, display: ['footer'] },
     { title: 'Path1', to: '/path1', component: <Path1 />, display: ['nav'] },
     { title: 'Path2', to: '/:subPath?/path2', component: <Path2 />, display: [] },
+    { title: 'Payment', to: '/payment', component: <Payment />, display: [] },
     { title: 'Opps', to: '*', component: <NotFound />, display: [] },
   ];
 
@@ -40,12 +42,7 @@ export default function App() {
       <main className='size-full'>
         <Routes>
           {navItems.map((item) => (
-            <Route
-              key={item.title}
-              path={item.to}
-              element={<Main title={item.desc || item.title}>{item.component}</Main>}
-              exact
-            />
+            <Route key={item.title} path={item.to} element={<Main title={item.desc || item.title}>{item.component}</Main>} exact />
           ))}
         </Routes>
       </main>
@@ -59,10 +56,7 @@ function Header({ navItems }) {
   return (
     <div className='space-y-4'>
       <header className='flex flex-wrap sm:justify-start sm:flex-nowrap w-full bg-gray-800 text-sm py-4 dark:bg-white'>
-        <nav
-          className='max-w-[85rem] w-full mx-auto px-4 sm:flex sm:items-center sm:justify-between'
-          aria-label='Global'
-        >
+        <nav className='max-w-[85rem] w-full mx-auto px-4 sm:flex sm:items-center sm:justify-between' aria-label='Global'>
           <div className='flex items-center justify-between'>
             <img className='w-10 m-3' src='/pizza-shop-icon.png' />
             <span className='font-normal flex-none text-4xl dark:text-gray-800 bg-clip-text bg-gradient-to-tr from-orange-500 to-orange-300 text-transparent'>
@@ -81,10 +75,7 @@ function Header({ navItems }) {
               </button>
             </div>
           </div>
-          <div
-            id='navbar-dark'
-            className='hs-collapse hidden overflow-hidden transition-all duration-300 basis-full grow sm:block'
-          >
+          <div id='navbar-dark' className='hs-collapse hidden overflow-hidden transition-all duration-300 basis-full grow sm:block'>
             <div className='flex flex-col gap-5 mt-5 sm:flex-row sm:items-center sm:justify-end sm:mt-0 sm:ps-5'>
               {navItems.map(
                 (item) =>
