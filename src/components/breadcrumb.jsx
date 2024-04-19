@@ -23,7 +23,6 @@ export default function Breadcrumb({ location }) {
       </li>
     );
   });
-  console.log(paths);
   return (
     <ol className='flex items-center whitespace-nowrap py-2 px-4 bg-gray-300'>
       <li className='inline-flex items-center'>
