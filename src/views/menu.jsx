@@ -46,7 +46,7 @@ export default function Menu() {
 
       <div className='m-4 grid gap-x-8 gap-y-4 sm:gird-cols-1 md:grid-cols-2 lg:grid-cols-4 xlg:grid-cols-5'>
         {pizzas.map((pizza) => (
-          <button type='button' onClick={onClick}>
+          <button key={pizza.title} type='button' onClick={onClick}>
             <Card title={pizza.title} description={pizza.description} image={pizza.image} />
           </button>
         ))}
