@@ -2,15 +2,20 @@ import React from 'react';
 import { CloseEyeIcon, PersonIcon, EmailIcon } from '../icons';
 import Button from '../components/button';
 
+const roles = ['admin', 'franchise', 'user'];
+
 export default function Login() {
   const [password, setPassword] = React.useState('');
   const [email, setEmail] = React.useState('');
 
   function login() {
-    console.log('login', email, password);
+    localStorage.setItem('email', email);
+    const role = roles.find((role) => email.includes(role)) || 'user';
+    localStorage.setItem('role', role);
   }
+
   return (
-    <>
+    <form onSubmit={login}>
       <div className='mt-8 space-y-4'>
         <div>
           <label htmlFor='hs-cover-with-gradient-form-email-1' className='sr-only'>
@@ -53,8 +58,8 @@ export default function Login() {
           </div>
         </div>
 
-        <Button title='Login' onPress={login} />
+        <Button title='Login' submit />
       </div>
-    </>
+    </form>
   );
 }
