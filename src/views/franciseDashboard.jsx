@@ -1,13 +1,12 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import { StoreIcon } from '../icons';
-import NotFound from './notFound';
 import Button from '../components/button';
 import { getUser } from '../api/api';
 
-export default function AdminDashboard() {
-  const navigate = useNavigate();
+export default function FranchiseDashboard() {
   const [storeName, setStoreName] = React.useState('');
+  const user = getUser();
 
   const stores = [
     { name: 'Orem', totalRevenue: 3000000, address: '234 N 300 S' },
@@ -23,14 +22,42 @@ export default function AdminDashboard() {
     navigate('/admin-dashboard/refund-store', { state: { store: store.name, refundAmount: store.totalRevenue } });
   }
 
-  const user = getUser();
-  if (user?.role !== 'admin') {
-    return <NotFound />;
+  if (user?.role !== 'franchise') {
+    return (
+      <div className='text-left'>
+        <div className='text-neutral-100'>
+          If you are already a franchiser, please
+          <span className='font-semibold mx-1 text-orange-400 underline'>
+            <NavLink to='/franchise-dashboard/login'>login</NavLink>
+          </span>
+          using your franchise account
+        </div>
+        <div>
+          <img src='/pizza-shop-logo.png' className='w-64 m-4 float-left' />
+          <p className='py-2 text-white'>
+            If you don't already own a franchise you should consider it. Here are all the reasons why you should buy a franchise with the Pizza Shop.
+          </p>
+          <p className='py-2 text-white'>
+            Artisan occupy pug, banjo etsy woke. Tumeric banh mi pug, irony venmo Matt Holt. VHS banjo 8-bit, chambray Brendan Eich venmo. Tote bag
+            skateboard banh mi, irony pug venmo. Tumeric banjo pug, etsy shoreditch Uncle Bob. Mixtape banh mi farm-to-table, irony pug Evan You.
+            Artisan occupy pug, banjo etsy woke. Tumeric banh mi pug, irony venmo Linus Torvalds.
+          </p>
+          <p className='py-2 text-white'>
+            Pug banjo 8-bit, chambray Ryan Dahl venmo. Tote bag skateboard banh mi, irony pug venmo. Tumeric banjo pug, etsy shoreditch TJ
+            Holowaychuk. Mixtape banh mi farm-to-table, irony pug Jordan Walke. Artisan occupy pug, banjo etsy woke. Tumeric banh mi pug, irony venmo
+            Alan Ashton. VHS banjo 8-bit, chambray Tim Berners-Lee venmo.
+          </p>
+          <p className='py-2 text-white'>
+            To purchase a franchise call <span className='font-semibold text-orange-400'>1-800-555-5555</span>
+          </p>
+        </div>
+      </div>
+    );
   }
 
   return (
     <div>
-      <div className='text-neutral-100'>The secret dashboard.</div>
+      <div className='text-neutral-100'>Everything you need to run Pizza Shop.</div>
 
       <div className='bg-neutral-100 overflow-clip my-4'>
         <div className='flex flex-col'>

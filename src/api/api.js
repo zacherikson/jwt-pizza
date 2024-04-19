@@ -1,4 +1,5 @@
-const roles = ['admin', 'manager', 'employee'];
+const roles = ['admin', 'manager', 'franchise'];
+
 function login(email, password) {
   if (!password) return false;
 
@@ -8,4 +9,19 @@ function login(email, password) {
   return true;
 }
 
-export { login };
+function logout() {
+  localStorage.removeItem('email');
+  localStorage.removeItem('role');
+}
+
+function getUser() {
+  const email = localStorage.getItem('email');
+  const role = localStorage.getItem('role');
+
+  if (email) {
+    return { email, role };
+  }
+  return null;
+}
+
+export { login, logout, getUser };

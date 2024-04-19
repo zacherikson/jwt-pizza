@@ -5,7 +5,9 @@ import Main from './views/main';
 import Home from './views/home';
 import About from './views/about';
 import Login from './views/login';
+import Logout from './views/logout';
 import Menu from './views/menu';
+import FranchiseDashboard from './views/franciseDashboard';
 import History from './views/history';
 import AdminDashboard from './views/adminDashboard';
 import CreateStore from './views/createStore';
@@ -14,20 +16,29 @@ import Payment from './views/payment';
 import NotFound from './views/notFound';
 import Breadcrumb from './components/breadcrumb';
 import { HamburgerIcon, CloseIcon } from './icons';
+import { getUser } from './api/api';
 import 'preline/preline';
 
 export default function App() {
+  const user = getUser();
   const location = useLocation();
 
   useEffect(() => {
     window.HSStaticMethods.autoInit();
   }, [location.pathname]);
 
+  function loggedIn() {
+    return !!getUser();
+  }
+
+  function loggedOut() {
+    return !loggedIn();
+  }
+
   const navItems = [
     { title: 'Home', to: '/', component: <Home />, desc: "The valley's best pizza", display: [] },
-    { title: 'Menu', to: '/menu', component: <Menu />, display: ['nav'] },
-    { title: 'Login', to: '/login', component: <Login />, desc: 'Login', display: ['nav'] },
-    { title: 'Franchise', to: '/login', component: <Login />, desc: 'Franchise portal', display: ['nav', 'footer'] },
+    { title: 'Order', to: '/menu', component: <Menu />, display: ['nav'] },
+    { title: 'Franchise', to: '/franchise-dashboard', component: <FranchiseDashboard />, desc: 'Franchise portal', display: ['nav', 'footer'] },
     { title: 'About', to: '/about', component: <About />, desc: 'The secret sauce', display: ['footer'] },
     { title: 'History', to: '/history', component: <History />, display: ['footer'] },
     { title: 'Admin dashboard', to: '/admin-dashboard', component: <AdminDashboard />, display: ['admin'] },
@@ -35,11 +46,13 @@ export default function App() {
     { title: 'Store refund', to: '/:subPath?/refund-store', component: <RefundStore />, display: [] },
     { title: 'Payment', to: '/payment', component: <Payment />, display: [] },
     { title: 'Opps', to: '*', component: <NotFound />, display: [] },
+    { title: 'Login', to: '/:subPath?/login', component: <Login />, constraint: [loggedOut], display: ['nav'] },
+    { title: 'Logout', to: '/:subPath?/logout', component: <Logout />, constraint: [loggedIn], display: ['nav'] },
   ];
 
   return (
     <div className='bg-gray-800'>
-      <Header navItems={navItems} />
+      <Header user={user} navItems={(user, navItems)} />
       <Breadcrumb location={location.pathname.replace('/', '')} />
 
       <main className='size-full'>
@@ -55,7 +68,7 @@ export default function App() {
   );
 }
 
-function Header({ navItems }) {
+function Header({ user, navItems }) {
   return (
     <div className='space-y-4'>
       <header className='flex flex-wrap sm:justify-start sm:flex-nowrap w-full bg-gray-800 text-sm py-4 dark:bg-white'>
@@ -82,11 +95,12 @@ function Header({ navItems }) {
             <div className='flex flex-col gap-5 mt-5 sm:flex-row sm:items-center sm:justify-end sm:mt-0 sm:ps-5'>
               {navItems.map(
                 (item) =>
-                  item.display.includes('nav') && (
+                  item.display.includes('nav') &&
+                  (!item.constraint || item.constraint.every((f) => f())) && (
                     <NavLink
                       key={item.title}
                       className='font-medium text-gray-400 hover:text-gray-500 dark:text-gray-500 dark:hover:text-gray-400  focus:text-orange-600'
-                      to={item.to}
+                      to={item.to.replace(':subPath?/', '')}
                     >
                       {item.title}
                     </NavLink>
@@ -94,6 +108,7 @@ function Header({ navItems }) {
               )}
             </div>
           </div>
+          <div className='pl-4 font-semibold text-orange-400'>{user?.email}</div>
         </nav>
       </header>
     </div>
