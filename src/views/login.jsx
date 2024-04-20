@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { CloseEyeIcon, PersonIcon, EmailIcon } from '../icons';
 import Button from '../components/button';
 import { login } from '../api/api';
@@ -11,6 +11,11 @@ export default function Login() {
 
   const location = useLocation();
   const navigate = useNavigate();
+  const emailRef = React.useRef();
+
+  useEffect(() => {
+    emailRef.current.focus();
+  }, []);
 
   function submit(event) {
     event.preventDefault();
@@ -32,6 +37,7 @@ export default function Login() {
               <input
                 type='email'
                 value={email}
+                ref={emailRef}
                 onChange={(e) => setEmail(e.target.value)}
                 id='hs-cover-with-gradient-form-email-1'
                 className='py-3 ps-11 pe-4 block w-full bg-white/10 border-white/20 text-white placeholder:text-white rounded-lg text-sm focus:border-white/30 focus:ring-white/30 sm:p-4 sm:ps-11'
