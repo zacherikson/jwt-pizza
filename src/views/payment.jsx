@@ -13,7 +13,7 @@ export default function Payment() {
   React.useEffect(() => {
     if (!user) {
       const loginPath = location.pathname + '/login';
-      navigate(loginPath);
+      navigate(loginPath, { state: location.state });
     }
   });
 

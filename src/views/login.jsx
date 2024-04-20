@@ -21,7 +21,7 @@ export default function Login() {
     event.preventDefault();
     if (login(email, password)) {
       const locationText = location.pathname.substring(0, location.pathname.lastIndexOf('/') + 1);
-      navigate(locationText);
+      navigate(locationText, { state: location.state });
     }
   }
 
