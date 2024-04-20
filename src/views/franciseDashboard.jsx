@@ -1,10 +1,13 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import { NavLink } from 'react-router-dom';
+import View from './view';
 import { StoreIcon } from '../icons';
 import Button from '../components/button';
 import { getUser } from '../api/api';
 
 export default function FranchiseDashboard() {
+  const navigate = useNavigate();
   const [storeName, setStoreName] = React.useState('');
   const user = getUser();
 
@@ -15,48 +18,51 @@ export default function FranchiseDashboard() {
   ];
 
   function createStore() {
-    navigate('/admin-dashboard/create-store', { state: { store: storeName } });
+    navigate('/franchise-dashboard/create-store', { state: { store: storeName } });
   }
 
-  function refundStore(store) {
-    navigate('/admin-dashboard/refund-store', { state: { store: store.name, refundAmount: store.totalRevenue } });
+  function deleteStore(store) {
+    alert(`Deleted store ${store.name}!`);
   }
 
   if (user?.role !== 'franchise') {
     return (
-      <div className='text-left'>
-        <div className='text-neutral-100'>
-          If you are already a franchiser, please
-          <span className='font-semibold mx-1 text-orange-400 underline'>
-            <NavLink to='/franchise-dashboard/login'>login</NavLink>
-          </span>
-          using your franchise account
+      <View title='So you want a pice of the pie'>
+        <div className='text-left'>
+          <div className='text-neutral-100'>
+            If you are already a franchiser, please
+            <span className='font-semibold mx-1 text-orange-400 underline'>
+              <NavLink to='/franchise-dashboard/login'>login</NavLink>
+            </span>
+            using your franchise account
+          </div>
+          <div>
+            <img src='/pizza-shop-logo.png' className='w-64 m-4 float-left' />
+            <p className='py-2 text-white'>
+              If you don't already own a franchise you should consider it. Here are all the reasons why you should buy a franchise with the Pizza
+              Shop.
+            </p>
+            <p className='py-2 text-white'>
+              Artisan occupy pug, banjo etsy woke. Tumeric banh mi pug, irony venmo Matt Holt. VHS banjo 8-bit, chambray Brendan Eich venmo. Tote bag
+              skateboard banh mi, irony pug venmo. Tumeric banjo pug, etsy shoreditch Uncle Bob. Mixtape banh mi farm-to-table, irony pug Evan You.
+              Artisan occupy pug, banjo etsy woke. Tumeric banh mi pug, irony venmo Linus Torvalds.
+            </p>
+            <p className='py-2 text-white'>
+              Pug banjo 8-bit, chambray Ryan Dahl venmo. Tote bag skateboard banh mi, irony pug venmo. Tumeric banjo pug, etsy shoreditch TJ
+              Holowaychuk. Mixtape banh mi farm-to-table, irony pug Jordan Walke. Artisan occupy pug, banjo etsy woke. Tumeric banh mi pug, irony
+              venmo Alan Ashton. VHS banjo 8-bit, chambray Tim Berners-Lee venmo.
+            </p>
+            <p className='py-2 text-white'>
+              To purchase a franchise call <span className='font-semibold text-orange-400'>1-800-555-5555</span>
+            </p>
+          </div>
         </div>
-        <div>
-          <img src='/pizza-shop-logo.png' className='w-64 m-4 float-left' />
-          <p className='py-2 text-white'>
-            If you don't already own a franchise you should consider it. Here are all the reasons why you should buy a franchise with the Pizza Shop.
-          </p>
-          <p className='py-2 text-white'>
-            Artisan occupy pug, banjo etsy woke. Tumeric banh mi pug, irony venmo Matt Holt. VHS banjo 8-bit, chambray Brendan Eich venmo. Tote bag
-            skateboard banh mi, irony pug venmo. Tumeric banjo pug, etsy shoreditch Uncle Bob. Mixtape banh mi farm-to-table, irony pug Evan You.
-            Artisan occupy pug, banjo etsy woke. Tumeric banh mi pug, irony venmo Linus Torvalds.
-          </p>
-          <p className='py-2 text-white'>
-            Pug banjo 8-bit, chambray Ryan Dahl venmo. Tote bag skateboard banh mi, irony pug venmo. Tumeric banjo pug, etsy shoreditch TJ
-            Holowaychuk. Mixtape banh mi farm-to-table, irony pug Jordan Walke. Artisan occupy pug, banjo etsy woke. Tumeric banh mi pug, irony venmo
-            Alan Ashton. VHS banjo 8-bit, chambray Tim Berners-Lee venmo.
-          </p>
-          <p className='py-2 text-white'>
-            To purchase a franchise call <span className='font-semibold text-orange-400'>1-800-555-5555</span>
-          </p>
-        </div>
-      </div>
+      </View>
     );
   }
 
   return (
-    <div>
+    <View title='Pizza pie central'>
       <div className='text-neutral-100'>Everything you need to run Pizza Shop.</div>
 
       <div className='bg-neutral-100 overflow-clip my-4'>
@@ -93,9 +99,9 @@ export default function FranchiseDashboard() {
                           <button
                             type='button'
                             className='inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent text-blue-600 hover:text-blue-800 disabled:opacity-50 disabled:pointer-events-none dark:text-blue-500 dark:hover:text-blue-400'
-                            onClick={() => refundStore(store)}
+                            onClick={() => deleteStore(store)}
                           >
-                            Refund
+                            delete
                           </button>
                         </td>
                       </tr>
@@ -125,6 +131,6 @@ export default function FranchiseDashboard() {
         </div>
         <Button className='flex-none' title='Create store' onPress={createStore} />
       </div>
-    </div>
+    </View>
   );
 }

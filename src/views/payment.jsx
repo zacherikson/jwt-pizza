@@ -1,5 +1,6 @@
 import React from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
+import View from './view';
 import Button from '../components/button';
 import { getUser, login } from '../api/api';
 
@@ -26,10 +27,10 @@ export default function Payment() {
   }
 
   return (
-    <>
+    <View title='So worth it'>
       <div className='text-neutral-100'>Send me those {orderCount} pizzas right now!</div>
       <Button title='Pay now' onPress={processPayment} />
       <Button title='Cancel' onPress={cancel} />
-    </>
+    </View>
   );
 }

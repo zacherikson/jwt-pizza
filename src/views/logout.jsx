@@ -1,6 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { logout } from '../api/api';
+import View from './view';
 
 export default function Logout() {
   logout();
@@ -10,5 +11,9 @@ export default function Logout() {
     navigate('/');
   }, []);
 
-  return <div>Logging out ...</div>;
+  return (
+    <View title='Logout'>
+      <div>Logging out ...</div>
+    </View>
+  );
 }

@@ -1,8 +1,9 @@
 import React from 'react';
+import View from './view';
 
 export default function About() {
   return (
-    <>
+    <View title='The secret sauce'>
       <div className='text-left'>
         <img src='/pizza-shop-logo.png' className='w-64 m-4 float-left' />
         <p className='py-2 text-white'>
@@ -25,6 +26,6 @@ export default function About() {
           pug, banjo etsy woke. Tumeric banh mi pug, irony venmo. VHS banjo 8-bit, chambray venmo. Pug banjo 8-bit, chambray venmo.
         </p>
       </div>
-    </>
+    </View>
   );
 }

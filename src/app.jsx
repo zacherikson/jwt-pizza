@@ -1,7 +1,6 @@
 import React from 'react';
 import { useEffect } from 'react';
 import { useLocation, Routes, Route, NavLink } from 'react-router-dom';
-import Main from './views/main';
 import Home from './views/home';
 import About from './views/about';
 import Login from './views/login';
@@ -58,7 +57,7 @@ export default function App() {
       <main className='size-full'>
         <Routes>
           {navItems.map((item) => (
-            <Route key={item.title} path={item.to} element={<Main title={item.desc || item.title}>{item.component}</Main>} exact />
+            <Route key={item.title} path={item.to} element={item.component} exact />
           ))}
         </Routes>
       </main>

@@ -1,4 +1,5 @@
 import React from 'react';
+import View from './view';
 import { useNavigate } from 'react-router-dom';
 import { StoreIcon } from '../icons';
 import NotFound from './notFound';
@@ -29,8 +30,8 @@ export default function AdminDashboard() {
   }
 
   return (
-    <div>
-      <div className='text-neutral-100'>The secret dashboard.</div>
+    <View title="Mama Ricci's kitchen">
+      <div className='text-neutral-100'>Keep the dough rolling and the franchises signing up.</div>
 
       <div className='bg-neutral-100 overflow-clip my-4'>
         <div className='flex flex-col'>
@@ -98,6 +99,6 @@ export default function AdminDashboard() {
         </div>
         <Button className='flex-none' title='Create store' onPress={createStore} />
       </div>
-    </div>
+    </View>
   );
 }

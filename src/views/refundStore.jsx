@@ -1,5 +1,6 @@
 import React from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
+import View from './view';
 import Button from '../components/button';
 
 export default function RefundStore() {
@@ -17,12 +18,12 @@ export default function RefundStore() {
   }
 
   return (
-    <>
+    <View title='Give a little back'>
       <div className='text-neutral-100'>
         Are you sure you want to refund ${refundAmount.toLocaleString()} to the <span className='font-bold text-yellow-300'>{store}</span> store?
       </div>
       <Button title='Refund' onPress={refund} />
       <Button title='Cancel' onPress={cancel} />
-    </>
+    </View>
   );
 }
