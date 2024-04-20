@@ -9,8 +9,10 @@ import Menu from './views/menu';
 import FranchiseDashboard from './views/franchiseDashboard';
 import History from './views/history';
 import AdminDashboard from './views/adminDashboard';
+import DinnerDashboard from './views/dinnerDashboard';
 import CreateStore from './views/createStore';
-import RefundStore from './views/refundStore';
+import CreateFranchise from './views/createFranchise';
+import RefundFranchise from './views/refundFranchise';
 import Payment from './views/payment';
 import NotFound from './views/notFound';
 import Breadcrumb from './components/breadcrumb';
@@ -35,14 +37,16 @@ export default function App() {
   }
 
   const navItems = [
-    { title: 'Home', to: '/', component: <Home />, desc: "The valley's best pizza", display: [] },
+    { title: 'Home', to: '/', component: <Home />, display: [] },
+    { title: 'Dinner', to: '/dinner-dashboard', component: <DinnerDashboard />, display: [] },
     { title: 'Order', to: '/menu', component: <Menu />, display: ['nav'] },
-    { title: 'Franchise', to: '/franchise-dashboard', component: <FranchiseDashboard />, desc: 'Franchise portal', display: ['nav', 'footer'] },
-    { title: 'About', to: '/about', component: <About />, desc: 'The secret sauce', display: ['footer'] },
+    { title: 'Franchise', to: '/franchise-dashboard', component: <FranchiseDashboard />, display: ['nav', 'footer'] },
+    { title: 'About', to: '/about', component: <About />, display: ['footer'] },
     { title: 'History', to: '/history', component: <History />, display: ['footer'] },
     { title: 'Admin dashboard', to: '/admin-dashboard', component: <AdminDashboard />, display: ['admin'] },
     { title: 'Create store', to: '/:subPath?/create-store', component: <CreateStore />, display: [] },
-    { title: 'Store refund', to: '/:subPath?/refund-store', component: <RefundStore />, display: [] },
+    { title: 'Create Franchise', to: '/:subPath?/create-franchise', component: <CreateFranchise />, display: [] },
+    { title: 'Franchise refund', to: '/:subPath?/refund-franchise', component: <RefundFranchise />, display: [] },
     { title: 'Payment', to: '/payment', component: <Payment />, display: [] },
     { title: 'Opps', to: '*', component: <NotFound />, display: [] },
     { title: 'Login', to: '/:subPath?/login', component: <Login />, constraint: [loggedOut], display: ['nav'] },
@@ -82,8 +86,6 @@ function Header({ user, navItems }) {
                 type='button'
                 className='hs-collapse-toggle p-2 inline-flex justify-center items-center gap-2 rounded-lg border border-gray-700 font-medium bg-gray-800 text-gray-400 shadow-sm align-middle hover:bg-gray-700/[.25] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-blue-600 transition-all text-sm dark:bg-gray-800 dark:hover:bg-slate-800 dark:border-gray-700 dark:text-gray-400 dark:hover:text-white dark:focus:ring-offset-gray-800'
                 data-hs-collapse='#navbar-dark'
-                aria-controls='navbar-dark'
-                aria-label='Toggle navigation'
               >
                 <HamburgerIcon />
                 <CloseIcon />
@@ -107,7 +109,14 @@ function Header({ user, navItems }) {
               )}
             </div>
           </div>
-          <div className='pl-4 font-semibold text-orange-400'>{user?.email}</div>
+          {user && (
+            <NavLink
+              className='font-medium text-gray-400 hover:text-gray-500 dark:text-gray-500 dark:hover:text-gray-400  focus:text-orange-600'
+              to='dinner-dashboard'
+            >
+              <div className='pl-4 font-semibold text-orange-400'>{user.email}</div>
+            </NavLink>
+          )}
         </nav>
       </header>
     </div>

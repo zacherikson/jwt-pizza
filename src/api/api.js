@@ -1,10 +1,10 @@
-const roles = ['admin', 'manager', 'franchise'];
+const roles = ['admin', 'dinner', 'franchise'];
 
 function login(email, password) {
   if (!password) return false;
 
   localStorage.setItem('email', email);
-  const role = roles.find((role) => email.includes(role)) || 'user';
+  const role = roles.find((role) => email.includes(role)) || 'dinner';
   localStorage.setItem('role', role);
   return true;
 }
