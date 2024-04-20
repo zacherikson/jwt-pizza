@@ -17,21 +17,27 @@ import Payment from './views/payment';
 import NotFound from './views/notFound';
 import Breadcrumb from './components/breadcrumb';
 import { HamburgerIcon, CloseIcon } from './icons';
-import { getUser } from './api/api';
+import Api from './api/api';
 import 'preline/preline';
 
 export default function App() {
-  const user = getUser();
+  const [user, setUser] = React.useState(null);
   const location = useLocation();
+
+  useEffect(() => {
+    (async () => {
+      const u = await Api.getUser();
+      setUser(u);
+    })();
+  }, []);
 
   useEffect(() => {
     window.HSStaticMethods.autoInit();
   }, [location.pathname]);
 
   function loggedIn() {
-    return !!getUser();
+    return !!user;
   }
-
   function loggedOut() {
     return !loggedIn();
   }
@@ -49,8 +55,8 @@ export default function App() {
     { title: 'Franchise refund', to: '/:subPath?/refund-franchise', component: <RefundFranchise />, display: [] },
     { title: 'Payment', to: '/payment', component: <Payment />, display: [] },
     { title: 'Opps', to: '*', component: <NotFound />, display: [] },
-    { title: 'Login', to: '/:subPath?/login', component: <Login />, constraint: [loggedOut], display: ['nav'] },
-    { title: 'Logout', to: '/:subPath?/logout', component: <Logout />, constraint: [loggedIn], display: ['nav'] },
+    { title: 'Login', to: '/:subPath?/login', component: <Login setUser={setUser} />, constraints: [loggedOut], display: ['nav'] },
+    { title: 'Logout', to: '/:subPath?/logout', component: <Logout setUser={setUser} />, constraints: [loggedIn], display: ['nav'] },
   ];
 
   return (
@@ -72,6 +78,10 @@ export default function App() {
 }
 
 function Header({ user, navItems }) {
+  function validateConstraints(constraints) {
+    return constraints.every((c) => c());
+  }
+
   const userText = user ? (user.email.charAt(0) + user.email.split('@')[1].charAt(0)).toUpperCase() : '?';
   return (
     <div className='space-y-4'>
@@ -95,10 +105,10 @@ function Header({ user, navItems }) {
           </div>
           <div id='navbar-dark' className='hs-collapse hidden overflow-hidden transition-all duration-300 basis-full grow sm:block'>
             <div className='flex flex-col gap-5 mt-5 sm:flex-row sm:items-center sm:justify-end sm:mt-0 sm:ps-5'>
-              {navItems.map(
-                (item) =>
+              {navItems.map((item) => {
+                return (
                   item.display.includes('nav') &&
-                  (!item.constraint || item.constraint.every((f) => f())) && (
+                  (!item.constraints || validateConstraints(item.constraints)) && (
                     <NavLink
                       key={item.title}
                       className='font-medium text-gray-400 hover:text-gray-500 dark:text-gray-500 dark:hover:text-gray-400  focus:text-orange-600'
@@ -107,7 +117,8 @@ function Header({ user, navItems }) {
                       {item.title}
                     </NavLink>
                   )
-              )}
+                );
+              })}
             </div>
           </div>
           {user && (

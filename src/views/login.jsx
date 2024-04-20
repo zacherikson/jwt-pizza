@@ -1,11 +1,11 @@
 import React, { useEffect } from 'react';
 import { CloseEyeIcon, PersonIcon, EmailIcon } from '../icons';
 import Button from '../components/button';
-import { login } from '../api/api';
+import Api from '../api/api';
 import { useLocation, useNavigate } from 'react-router-dom';
 import View from './view';
 
-export default function Login() {
+export default function Login({ setUser }) {
   const [password, setPassword] = React.useState('');
   const [email, setEmail] = React.useState('');
 
@@ -17,9 +17,11 @@ export default function Login() {
     emailRef.current.focus();
   }, []);
 
-  function submit(event) {
+  async function submit(event) {
     event.preventDefault();
-    if (login(email, password)) {
+    const user = await Api.login(email, password);
+    if (user) {
+      setUser(user);
       const locationText = location.pathname.substring(0, location.pathname.lastIndexOf('/') + 1);
       navigate(locationText, { state: location.state });
     }

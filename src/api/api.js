@@ -1,27 +1,41 @@
 const roles = ['admin', 'dinner', 'franchise'];
 
-function login(email, password) {
-  if (!password) return false;
+class Api {
+  isAdmin(user) {
+    return user?.role === 'admin';
+  }
 
-  localStorage.setItem('email', email);
-  const role = roles.find((role) => email.includes(role)) || 'dinner';
-  localStorage.setItem('role', role);
-  return true;
-}
+  isFranchise(user) {
+    return user?.role === 'franchise';
+  }
 
-function logout() {
-  localStorage.removeItem('email');
-  localStorage.removeItem('role');
-}
+  async login(email, password) {
+    if (!password) return false;
 
-function getUser() {
-  const email = localStorage.getItem('email');
-  const role = localStorage.getItem('role');
-
-  if (email) {
+    localStorage.setItem('email', email);
+    const role = roles.find((role) => email.includes(role)) || 'dinner';
+    localStorage.setItem('role', role);
     return { email, role };
   }
-  return null;
+
+  async logout() {
+    localStorage.removeItem('email');
+    localStorage.removeItem('role');
+  }
+
+  async getUser() {
+    const email = localStorage.getItem('email');
+    const role = localStorage.getItem('role');
+
+    if (email) {
+      return { email, role };
+    }
+    return null;
+  }
+
+  loggedIn() {
+    return !!this.getUser();
+  }
 }
 
-export { login, logout, getUser };
+export default new Api();

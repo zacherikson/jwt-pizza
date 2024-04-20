@@ -4,12 +4,18 @@ import { NavLink } from 'react-router-dom';
 import View from './view';
 import { CautionIcon, StoreIcon } from '../icons';
 import Button from '../components/button';
-import { getUser } from '../api/api';
+import Api from '../api/api';
 
 export default function FranchiseDashboard() {
   const navigate = useNavigate();
   const [storeName, setStoreName] = React.useState('');
-  const user = getUser();
+  const [user, setUser] = React.useState(null);
+
+  React.useEffect(() => {
+    (async () => {
+      setUser(await Api.getUser());
+    })();
+  }, []);
 
   const stores = [
     { name: 'Orem', totalRevenue: 3000000, address: '234 N 300 S' },
@@ -25,7 +31,7 @@ export default function FranchiseDashboard() {
     alert(`Deleted store ${store.name}!`);
   }
 
-  if (user?.role !== 'franchise') {
+  if (Api.isFranchise(user)) {
     return whyFranchise();
   }
 

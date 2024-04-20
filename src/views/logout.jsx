@@ -1,19 +1,22 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { logout } from '../api/api';
+import Api from '../api/api';
 import View from './view';
 
-export default function Logout() {
-  logout();
+export default function Logout({ setUser }) {
   const navigate = useNavigate();
 
   React.useEffect(() => {
-    navigate('/');
+    (async () => {
+      await Api.logout();
+      setUser(null);
+      navigate('/');
+    })();
   }, []);
 
   return (
     <View title='Logout'>
-      <div>Logging out ...</div>
+      <div className='text-neutral-100'>Logging out ...</div>
     </View>
   );
 }

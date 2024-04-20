@@ -1,17 +1,23 @@
 import React from 'react';
 import View from './view';
 import NotFound from './notFound';
-import Button from '../components/button';
-import { getUser } from '../api/api';
+import Api from '../api/api';
 
 export default function DinnerDashboard() {
+  const [user, setUser] = React.useState(null);
+
+  React.useEffect(() => {
+    (async () => {
+      setUser(await Api.getUser());
+    })();
+  }, []);
+
   const purchases = [
     { name: 'Pepperoni', price: 25, date: new Date('2024-03-10T00:00:00Z') },
     { name: 'Veggie', price: 50, date: '2024-03-10T00:00:00Z' },
     { name: 'Margarita', price: 45, date: '2024-03-10T00:00:00Z' },
   ];
 
-  const user = getUser();
   if (!user) {
     return <NotFound />;
   }
