@@ -18,8 +18,11 @@ export default function DinnerDashboard() {
 
   return (
     <View title='Your pizza kitchen'>
+      <div className='my-4 text-sm text-orange-200 text-left'>
+        <div>email: {user.email}</div>
+        <div>role: {user.role}</div>
+      </div>
       <div className='text-neutral-100'>Here is your history of all the good times.</div>
-
       <div className='bg-neutral-100 overflow-clip my-4'>
         <div className='flex flex-col'>
           <div className='-m-1.5 overflow-x-auto'>

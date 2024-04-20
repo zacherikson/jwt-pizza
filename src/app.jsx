@@ -72,6 +72,7 @@ export default function App() {
 }
 
 function Header({ user, navItems }) {
+  const userText = user ? (user.email.charAt(0) + user.email.split('@')[1].charAt(0)).toUpperCase() : '?';
   return (
     <div className='space-y-4'>
       <header className='flex flex-wrap sm:justify-start sm:flex-nowrap w-full bg-gray-800 text-sm py-4 dark:bg-white'>
@@ -114,7 +115,19 @@ function Header({ user, navItems }) {
               className='font-medium text-gray-400 hover:text-gray-500 dark:text-gray-500 dark:hover:text-gray-400  focus:text-orange-600'
               to='dinner-dashboard'
             >
-              <div className='pl-4 font-semibold text-orange-400'>{user.email}</div>
+              <div className='hs-tooltip inline-block  [--placement:bottom]'>
+                <div className='hs-tooltip-toggle pl-4 font-semibold text-orange-400'>
+                  <span className='inline-flex items-center justify-center size-[30px] rounded-full bg-orange-800 font-semibold text-white leading-none'>
+                    {userText}
+                  </span>
+                  <span
+                    className='hs-tooltip-content hs-tooltip-shown:opacity-100 hs-tooltip-shown:visible opacity-0 transition-opacity inline-block absolute invisible z-10 py-1 px-2 bg-neutral-200 text-xs font-medium text-neutral-800 rounded shadow-sm dark:bg-neutral-700'
+                    role='tooltip'
+                  >
+                    {user.email}
+                  </span>
+                </div>
+              </div>
             </NavLink>
           )}
         </nav>
