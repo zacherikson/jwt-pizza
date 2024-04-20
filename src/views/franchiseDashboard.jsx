@@ -107,17 +107,49 @@ function whyFranchise() {
   return (
     <View title='So you want a piece of the pie'>
       <div className='text-left'>
-        <div className='text-neutral-100'>
-          If you are already a franchiser, please
-          <span className='font-semibold mx-1 text-orange-400 underline'>
-            <NavLink to='/franchise-dashboard/login'>login</NavLink>
-          </span>
-          using your franchise account
+        <div
+          className='my-4 bg-yellow-50 border border-yellow-200 text-sm text-yellow-800 rounded-lg p-4 dark:bg-yellow-800/10 dark:border-yellow-900 dark:text-yellow-500'
+          role='alert'
+        >
+          <div className='flex'>
+            <div className='flex-shrink-0'>
+              <svg
+                className='flex-shrink-0 size-4 mt-0.5'
+                xmlns='http://www.w3.org/2000/svg'
+                width='24'
+                height='24'
+                viewBox='0 0 24 24'
+                fill='none'
+                stroke='currentColor'
+                strokeWidth='2'
+                strokeLinecap='round'
+                strokeLinejoin='round'
+              >
+                <path d='m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z'></path>
+                <path d='M12 9v4'></path>
+                <path d='M12 17h.01'></path>
+              </svg>
+            </div>
+            <div className='ms-4'>
+              <div className='mt-1 text-sm text-yellow-700'>
+                If you are already a franchiser, please
+                <span className='font-semibold mx-1 text-yellow-800 underline'>
+                  <NavLink to='/franchise-dashboard/login'>login</NavLink>
+                </span>
+                using your franchise account
+              </div>
+            </div>
+          </div>
         </div>
+
         <div>
           <img src='/pizza-shop-logo.png' className='w-64 m-4 float-left' />
           <p className='py-2 text-white'>
-            If you don't already own a franchise you should consider it. Here are all the reasons why you should buy a franchise with the Pizza Shop.
+            To purchase a franchise call <span className='font-semibold text-orange-400'>1-800-555-5555</span>
+          </p>
+          <p className='py-2 text-white'>
+            Now is the time to get in on the Pizza Shop tsunami. The pizza sells itself. People cannot get enough. Setup your shop and let the pizza
+            fly. Here are all the reasons why you should buy a franchise with the Pizza Shop.
           </p>
           <p className='py-2 text-white'>
             Owning a franchise with the Pizza Shop can be highly profitable. With our proven business model and strong brand recognition, you can
@@ -137,16 +169,16 @@ function whyFranchise() {
                     <table className='min-w-full divide-y divide-gray-200 dark:divide-neutral-700'>
                       <thead>
                         <tr>
-                          <th scope='col' className='px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase dark:text-neutral-500'>
+                          <th scope='col' className='px-6 text-sm py-3 text-start font-extrabold text-gray-500 uppercase dark:text-neutral-500'>
                             Year
                           </th>
-                          <th scope='col' className='px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase dark:text-neutral-500'>
+                          <th scope='col' className='px-6 text-sm py-3 text-start font-extrabold text-gray-500 uppercase dark:text-neutral-500'>
                             Profit
                           </th>
-                          <th scope='col' className='px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase dark:text-neutral-500'>
+                          <th scope='col' className='px-6 text-sm py-3 text-start font-extrabold text-gray-500 uppercase dark:text-neutral-500'>
                             Costs
                           </th>
-                          <th scope='col' className='px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase dark:text-neutral-500'>
+                          <th scope='col' className='px-6 text-sm py-3 text-start font-extrabold text-gray-500 uppercase dark:text-neutral-500'>
                             Franchise Fee
                           </th>
                         </tr>

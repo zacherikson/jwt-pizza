@@ -6,7 +6,7 @@ import About from './views/about';
 import Login from './views/login';
 import Logout from './views/logout';
 import Menu from './views/menu';
-import FranchiseDashboard from './views/franciseDashboard';
+import FranchiseDashboard from './views/franchiseDashboard';
 import History from './views/history';
 import AdminDashboard from './views/adminDashboard';
 import CreateStore from './views/createStore';
