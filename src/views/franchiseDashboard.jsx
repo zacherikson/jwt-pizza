@@ -6,22 +6,16 @@ import { CautionIcon, StoreIcon } from '../icons';
 import Button from '../components/button';
 import Api from '../api/api';
 
-export default function FranchiseDashboard() {
+export default function FranchiseDashboard({ user }) {
   const navigate = useNavigate();
   const [storeName, setStoreName] = React.useState('');
-  const [user, setUser] = React.useState(null);
+  const [franchiseStores, setFranchiseStores] = React.useState([]);
 
   React.useEffect(() => {
     (async () => {
-      setUser(await Api.getUser());
+      setFranchiseStores(await Api.getFranchiseStores(user));
     })();
-  }, []);
-
-  const stores = [
-    { name: 'Orem', totalRevenue: 3000000, address: '234 N 300 S' },
-    { name: 'Provo', totalRevenue: 53000, address: '234 N 300 S' },
-    { name: 'Payson', totalRevenue: 458767832, address: '234 N 300 S' },
-  ];
+  }, [user]);
 
   function createStore() {
     navigate('/franchise-dashboard/create-store', { state: { store: storeName } });
@@ -31,13 +25,13 @@ export default function FranchiseDashboard() {
     alert(`Deleted store ${store.name}!`);
   }
 
-  if (Api.isFranchise(user)) {
+  if (!Api.isFranchisee(user)) {
     return whyFranchise();
   }
 
   return (
-    <View title='Pizza pie central'>
-      <div className='text-neutral-100'>Everything you need to run Pizza Shop.</div>
+    <View title='Franchise central'>
+      <div className='text-neutral-100'>Everything you need to run Pizza Shop. Your gateway to success.</div>
 
       <div className='bg-neutral-100 overflow-clip my-4'>
         <div className='flex flex-col'>
@@ -62,7 +56,7 @@ export default function FranchiseDashboard() {
                     </tr>
                   </thead>
                   <tbody className='divide-y divide-gray-200 dark:divide-neutral-700'>
-                    {stores.map((store) => (
+                    {franchiseStores.map((store) => (
                       <tr key={store.name} className='hover:bg-gray-100 dark:hover:bg-neutral-700'>
                         <td className='px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-neutral-200'>{store.name}</td>
                         <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200'>

@@ -3,17 +3,14 @@ import View from './view';
 import NotFound from './notFound';
 import Api from '../api/api';
 
-export default function DinnerDashboard() {
-  const [user, setUser] = React.useState(null);
+export default function DinnerDashboard({ user }) {
   const [purchases, setPurchases] = React.useState([]);
 
   React.useEffect(() => {
     (async () => {
-      const user = await Api.getUser();
-      setUser(user);
       setPurchases(await Api.getPurchases(user));
     })();
-  }, []);
+  }, [user]);
 
   if (!user) {
     return <NotFound />;

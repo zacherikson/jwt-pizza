@@ -5,7 +5,7 @@ class Api {
     return user?.role === 'admin';
   }
 
-  isFranchise(user) {
+  isFranchisee(user) {
     return user?.role === 'franchise';
   }
 
@@ -25,15 +25,47 @@ class Api {
   async getPurchases(purchasingUser) {
     let purchases = [];
 
-    const user = await this.getUser();
-    if (user && (this.isAdmin(user) || user.email === purchasingUser.email)) {
-      purchases = [
-        { name: 'Pepperoni', price: 35, date: new Date('2024-03-10T00:00:00Z') },
-        { name: 'Veggie', price: 50, date: '2024-03-10T00:00:00Z' },
-        { name: 'Margarita', price: 45, date: '2024-03-10T00:00:00Z' },
-      ];
+    if (purchasingUser) {
+      const user = await this.getUser();
+      if (user && (this.isAdmin(user) || user.email === purchasingUser.email)) {
+        purchases = [
+          { name: 'Pepperoni', price: 35, date: new Date('2024-03-10T00:00:00Z') },
+          { name: 'Veggie', price: 50, date: '2024-03-10T00:00:00Z' },
+          { name: 'Margarita', price: 45, date: '2024-03-10T00:00:00Z' },
+        ];
+      }
     }
     return purchases;
+  }
+
+  async getFranchiseStores(franchiseUser) {
+    let franchiseStores = [];
+
+    if (franchiseUser) {
+      const user = await this.getUser();
+      if (this.isFranchisee(user) || this.isAdmin(user)) {
+        franchiseStores = [
+          { name: 'Orem', totalRevenue: 3000000, address: '234 N 300 S' },
+          { name: 'Provo', totalRevenue: 53000, address: '234 N 300 S' },
+          { name: 'Payson', totalRevenue: 458767832, address: '234 N 300 S' },
+        ];
+      }
+    }
+    return franchiseStores;
+  }
+
+  async getFranchises() {
+    let franchises = [];
+
+    const user = await this.getUser();
+    if (this.isAdmin(user)) {
+      franchises = [
+        { name: 'SuperPie', totalRevenue: 3000000, franchisee: 'joe@franchise.com' },
+        { name: 'LotaPizza', totalRevenue: 53000, franchisee: 'moe@franchise.com' },
+        { name: 'PizzaCorp', totalRevenue: 458767832, franchisee: 'berry@franchise.com' },
+      ];
+    }
+    return franchises;
   }
 
   async login(email, password) {

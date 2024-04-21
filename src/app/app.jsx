@@ -27,8 +27,8 @@ export default function App() {
 
   useEffect(() => {
     (async () => {
-      const u = await Api.getUser();
-      setUser(u);
+      const user = await Api.getUser();
+      setUser(user);
     })();
   }, []);
 
@@ -45,12 +45,12 @@ export default function App() {
 
   const navItems = [
     { title: 'Home', to: '/', component: <Home />, display: [] },
-    { title: 'Dinner', to: '/dinner-dashboard', component: <DinnerDashboard />, display: [] },
+    { title: 'Dinner', to: '/dinner-dashboard', component: <DinnerDashboard user={user} />, display: [] },
     { title: 'Order', to: '/menu', component: <Menu />, display: ['nav'] },
-    { title: 'Franchise', to: '/franchise-dashboard', component: <FranchiseDashboard />, display: ['nav', 'footer'] },
+    { title: 'Franchise', to: '/franchise-dashboard', component: <FranchiseDashboard user={user} />, display: ['nav', 'footer'] },
     { title: 'About', to: '/about', component: <About />, display: ['footer'] },
     { title: 'History', to: '/history', component: <History />, display: ['footer'] },
-    { title: 'Admin dashboard', to: '/admin-dashboard', component: <AdminDashboard />, display: ['admin'] },
+    { title: 'Admin dashboard', to: '/admin-dashboard', component: <AdminDashboard user={user} />, display: ['admin'] },
     { title: 'Create store', to: '/:subPath?/create-store', component: <CreateStore />, display: [] },
     { title: 'Create Franchise', to: '/:subPath?/create-franchise', component: <CreateFranchise />, display: [] },
     { title: 'Franchise refund', to: '/:subPath?/refund-franchise', component: <RefundFranchise />, display: [] },

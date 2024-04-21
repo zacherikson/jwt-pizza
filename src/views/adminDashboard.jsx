@@ -6,16 +6,16 @@ import NotFound from './notFound';
 import Button from '../components/button';
 import Api from '../api/api';
 
-export default function AdminDashboard() {
+export default function AdminDashboard({ user }) {
   const navigate = useNavigate();
   const [franchiseName, setFranchiseName] = React.useState('');
-  const [user, setUser] = React.useState(null);
+  const [franchises, setFranchises] = React.useState([]);
 
-  const franchises = [
-    { name: 'SuperPie', totalRevenue: 3000000, address: 'Cedar City' },
-    { name: 'LotaPizza', totalRevenue: 53000, address: 'Salt Lake City' },
-    { name: 'PizzaCorp', totalRevenue: 458767832, address: 'Orem' },
-  ];
+  React.useEffect(() => {
+    (async () => {
+      setFranchises(await Api.getFranchises());
+    })();
+  }, [user]);
 
   function createFranchise() {
     navigate('/admin-dashboard/create-franchise', { state: { franchise: franchiseName } });
@@ -24,12 +24,6 @@ export default function AdminDashboard() {
   function refundFranchise(franchise) {
     navigate('/admin-dashboard/refund-franchise', { state: { franchise: franchise.name, refundAmount: franchise.totalRevenue } });
   }
-
-  React.useEffect(() => {
-    (async () => {
-      setUser(await Api.getUser());
-    })();
-  }, []);
 
   let response = <NotFound />;
   if (Api.isAdmin(user)) {
@@ -49,10 +43,10 @@ export default function AdminDashboard() {
                           Name
                         </th>
                         <th scope='col' className='px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase dark:text-neutral-500'>
-                          Age
+                          Revenue
                         </th>
                         <th scope='col' className='px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase dark:text-neutral-500'>
-                          Address
+                          Franchisee
                         </th>
                         <th scope='col' className='px-6 py-3 text-end text-xs font-medium text-gray-500 uppercase dark:text-neutral-500'>
                           Action
@@ -62,12 +56,16 @@ export default function AdminDashboard() {
                     <tbody className='divide-y divide-gray-200 dark:divide-neutral-700'>
                       {franchises.map((franchise) => (
                         <tr key={franchise.name} className='hover:bg-gray-100 dark:hover:bg-neutral-700'>
-                          <td className='px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-neutral-200'>{franchise.name}</td>
-                          <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200'>
+                          <td className='text-left px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-neutral-200'>
+                            {franchise.name}
+                          </td>
+                          <td className='text-left px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200'>
                             ${franchise.totalRevenue.toLocaleString()}
                           </td>
-                          <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200'>{franchise.address}</td>
-                          <td className='px-6 py-4 whitespace-nowrap text-end text-sm font-medium'>
+                          <td className='text-left px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200'>
+                            {franchise.franchisee}
+                          </td>
+                          <td className='text-left px-6 py-4 whitespace-nowrap text-end text-sm font-medium'>
                             <button
                               type='button'
                               className='inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent text-blue-600 hover:text-blue-800 disabled:opacity-50 disabled:pointer-events-none dark:text-blue-500 dark:hover:text-blue-400'
