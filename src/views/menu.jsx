@@ -1,5 +1,5 @@
-import React from 'react';
-import { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import Api from '../api/api';
 import View from './view';
 import Card from '../components/card';
 import Button from '../components/button';
@@ -7,7 +7,15 @@ import { useNavigate, useLocation } from 'react-router-dom';
 
 export default function Menu() {
   const [count, setCount] = useState(useLocation().state?.orderCount || 0);
+  const [pizzas, setPizzas] = useState([]);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    (async () => {
+      const response = await Api.getPizzas();
+      setPizzas(response);
+    })();
+  }, []);
 
   function onClick() {
     setCount(count + 1);
@@ -19,14 +27,6 @@ export default function Menu() {
     }
   }
 
-  const pizzas = [
-    { title: 'Veggie', description: 'A garden of delight', image: 'pizza1.png' },
-    { title: 'Pepperoni', description: 'Spicy treat', image: 'pizza2.png' },
-    { title: 'Margarita', description: 'Essential classic', image: 'pizza3.png' },
-    { title: 'Crusty', description: 'A dry mouthed favorite', image: 'pizza4.png' },
-    { title: 'Flat', description: 'Something special', image: 'pizza5.png' },
-    { title: 'Chared Leopard', description: 'For those with a darker side', image: 'pizza6.png' },
-  ];
   return (
     <View title='Awesome is on the way'>
       <div className='flow flow-col justify-center text-neutral-100'>

@@ -9,6 +9,19 @@ class Api {
     return user?.role === 'franchise';
   }
 
+  async getPizzas() {
+    const pizzas = [
+      { title: 'Veggie', description: 'A garden of delight', image: 'pizza1.png' },
+      { title: 'Pepperoni', description: 'Spicy treat', image: 'pizza2.png' },
+      { title: 'Margarita', description: 'Essential classic', image: 'pizza3.png' },
+      { title: 'Crusty', description: 'A dry mouthed favorite', image: 'pizza4.png' },
+      { title: 'Flat', description: 'Something special', image: 'pizza5.png' },
+      { title: 'Chared Leopard', description: 'For those with a darker side', image: 'pizza6.png' },
+    ];
+
+    return pizzas;
+  }
+
   async login(email, password) {
     if (!password) return false;
 
