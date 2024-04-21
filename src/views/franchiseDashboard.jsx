@@ -144,7 +144,7 @@ function whyFranchise() {
           <p className='py-2 text-white'>
             In addition to financial success, owning a franchise also allows you to make a positive impact on your community. By providing delicious
             pizzas and creating job opportunities, you contribute to the local economy and bring joy to people's lives. It's a rewarding experience
-            that combines entrepreneurship with social responsibility.
+            that combines entrepreneurship with social responsibility. The following table shows a possible stream of income from your franchise.
           </p>
           <div className='bg-neutral-100 overflow-clip my-4'>
             <div className='flex flex-col'>
@@ -194,16 +194,20 @@ function whyFranchise() {
               </div>
             </div>
           </div>
-          <p className='py-2 text-white'>
-            Artisan occupy pug, banjo etsy woke. Tumeric banh mi pug, irony venmo Matt Holt. VHS banjo 8-bit, chambray Brendan Eich venmo. Tote bag
-            skateboard banh mi, irony pug venmo. Tumeric banjo pug, etsy shoreditch Uncle Bob. Mixtape banh mi farm-to-table, irony pug Evan You.
-            Artisan occupy pug, banjo etsy woke. Tumeric banh mi pug, irony venmo Linus Torvalds.
-          </p>
-          <p className='py-2 text-white'>
-            Pug banjo 8-bit, chambray Ryan Dahl venmo. Tote bag skateboard banh mi, irony pug venmo. Tumeric banjo pug, etsy shoreditch TJ
-            Holowaychuk. Mixtape banh mi farm-to-table, irony pug Jordan Walke. Artisan occupy pug, banjo etsy woke. Tumeric banh mi pug, irony venmo
-            Alan Ashton. VHS banjo 8-bit, chambray Tim Berners-Lee venmo.
-          </p>
+          <div className='py-4'>
+            <h2 className='py-2 text-2xl sm:text-4xl font-thin text-orange-600'>Unleash Your Potential</h2>
+            <p className='py-2 text-neutral-100 text-left mx-4 pb-4 first-line:uppercase first-line:tracking-widest  first-letter:text-7xl first-letter:font-bold first-letter:text-orange-800  first-letter:mr-3 first-letter:float-left'>
+              Are you ready to embark on a journey towards unimaginable wealth? Owning a franchise with the Pizza Shop is your ticket to financial
+              success. With our proven business model and strong brand recognition, you have the opportunity to generate substantial revenue. Imagine
+              the thrill of watching your profits soar year after year, as customers flock to your pizza shop, craving our mouthwatering creations.
+            </p>
+            <p className='py-2 text-white'>
+              But it's not just about the money. By becoming a franchise owner, you become part of a community that is passionate about delivering
+              exceptional pizzas and creating memorable experiences. You'll have the chance to build a team of dedicated employees who share your
+              vision and work together to achieve greatness. And as your business grows, so does your impact on the local economy, creating jobs and
+              bringing joy to countless pizza lovers.
+            </p>
+          </div>
           <p className='py-2 text-white'>
             To purchase a franchise call <span className='font-semibold text-orange-400'>1-800-555-5555</span>
           </p>
