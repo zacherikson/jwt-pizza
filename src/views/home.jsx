@@ -28,7 +28,11 @@ export default function Home() {
           ]}
         />
       </div>
-      <p className='text-neutral-100 text-left mx-4 pb-4'>
+      <p
+        className='text-neutral-100 text-left mx-4 pb-4 first-line:uppercase first-line:tracking-widest
+  first-letter:text-7xl first-letter:font-bold first-letter:text-orange-800
+  first-letter:mr-3 first-letter:float-left'
+      >
         Pizza is an absolute delight that brings joy to people of all ages. The perfect combination of crispy crust, savory sauce, and gooey cheese
         makes pizza an irresistible treat. At Pizza Shop, we take pride in serving the valley's best pizza, crafted with love and passion. Our skilled
         chefs use only the finest ingredients to create mouthwatering pizzas that will leave you craving for more. Whether you prefer classic flavors
