@@ -22,6 +22,20 @@ class Api {
     return pizzas;
   }
 
+  async getPurchases(purchasingUser) {
+    let purchases = [];
+
+    const user = await this.getUser();
+    if (user && (this.isAdmin(user) || user.email === purchasingUser.email)) {
+      purchases = [
+        { name: 'Pepperoni', price: 35, date: new Date('2024-03-10T00:00:00Z') },
+        { name: 'Veggie', price: 50, date: '2024-03-10T00:00:00Z' },
+        { name: 'Margarita', price: 45, date: '2024-03-10T00:00:00Z' },
+      ];
+    }
+    return purchases;
+  }
+
   async login(email, password) {
     if (!password) return false;
 

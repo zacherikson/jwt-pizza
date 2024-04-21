@@ -5,18 +5,15 @@ import Api from '../api/api';
 
 export default function DinnerDashboard() {
   const [user, setUser] = React.useState(null);
+  const [purchases, setPurchases] = React.useState([]);
 
   React.useEffect(() => {
     (async () => {
-      setUser(await Api.getUser());
+      const user = await Api.getUser();
+      setUser(user);
+      setPurchases(await Api.getPurchases(user));
     })();
   }, []);
-
-  const purchases = [
-    { name: 'Pepperoni', price: 25, date: new Date('2024-03-10T00:00:00Z') },
-    { name: 'Veggie', price: 50, date: '2024-03-10T00:00:00Z' },
-    { name: 'Margarita', price: 45, date: '2024-03-10T00:00:00Z' },
-  ];
 
   if (!user) {
     return <NotFound />;
