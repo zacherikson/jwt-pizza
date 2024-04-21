@@ -34,6 +34,7 @@ export default function App() {
 
   useEffect(() => {
     window.HSStaticMethods.autoInit();
+    window.scrollTo(0, 0);
   }, [location.pathname]);
 
   function loggedIn() {
