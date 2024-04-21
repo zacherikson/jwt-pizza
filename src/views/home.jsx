@@ -29,7 +29,7 @@ export default function Home() {
         />
       </div>
       <p
-        className='text-neutral-100 text-left mx-4 pb-4 first-line:uppercase first-line:tracking-widest
+        className='text-neutral-100 text-left mx-4 mt-12 pb-4 first-line:uppercase first-line:tracking-widest
   first-letter:text-7xl first-letter:font-bold first-letter:text-orange-800
   first-letter:mr-3 first-letter:float-left'
       >
@@ -60,15 +60,6 @@ export default function Home() {
         meat lover, a vegetarian, or have dietary restrictions, our pizzas are crafted to satisfy every palate. Come and experience the magic of pizza
         at Pizza Shop today!
       </p>
-      <p className='text-neutral-100 text-left mx-4 pb-4'>
-        Pizza is more than just a meal; it's an expression of artistry and craftsmanship. Our talented chefs at Pizza Shop pour their heart and soul
-        into every pizza they create. From kneading the dough to selecting the freshest ingredients, every step is executed with precision and
-        passion. The result? A pizza that is not only visually stunning but also bursting with flavor. At Pizza Shop, we believe that every bite
-        should be a moment of pure bliss. So treat yourself to the valley's best pizza and embark on a culinary adventure that will leave you craving
-        for more.
-      </p>
-
-      {/* <img className='w-screen bg-slate-50' src='/pizza-hero.jpg' alt='pizza' /> */}
     </View>
   );
 }
