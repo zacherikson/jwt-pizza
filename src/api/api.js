@@ -173,13 +173,14 @@ class Api {
   }
 
   async getFranchises() {
-    let result = [];
-
-    const user = await this.getUser();
-    if (this.isAdmin(user)) {
-      result = franchises;
-    }
-    return result;
+    return new Promise(async (resolve, reject) => {
+      const user = await this.getUser();
+      if (this.isAdmin(user)) {
+        resolve(franchises);
+      } else {
+        reject({ code: 401, msg: 'unauthorized' });
+      }
+    });
   }
 }
 
