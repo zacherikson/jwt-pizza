@@ -58,8 +58,8 @@ export default function DinnerDashboard({ user }) {
                           </tr>
                         </thead>
                         <tbody className='divide-y divide-gray-200 dark:divide-neutral-700'>
-                          {purchases.map((purchase) => (
-                            <tr key={purchase.name} className='hover:bg-gray-100 dark:hover:bg-neutral-700'>
+                          {purchases.map((purchase, index) => (
+                            <tr key={index} className='hover:bg-gray-100 dark:hover:bg-neutral-700'>
                               <td className='px-6 py-4 whitespace-nowrap text-start text-xs sm:text-sm font-medium text-gray-800 dark:text-neutral-200'>{purchase.name}</td>
                               <td className='px-6 py-4 whitespace-nowrap text-start text-xs sm:text-sm text-gray-800 dark:text-neutral-200'>${purchase.price.toLocaleString()}</td>
                               <td className='px-6 py-4 whitespace-nowrap text-start text-xs sm:text-sm text-gray-800 dark:text-neutral-200'>{purchase.date.toLocaleString()}</td>
