@@ -20,9 +20,21 @@ export default function DinnerDashboard({ user }) {
   return (
     <View title='Your pizza kitchen'>
       <div className='text-left py-8 px-4 sm:px-6 lg:px-8'>
-        <div className='my-4 text-sm text-orange-200 text-left'>
-          <div>email: {user.email}</div>
-          <div>role: {user.roles.join(',')}</div>
+        <div className='hs-tooltip inline-block'>
+          <img
+            className='hs-tooltip-toggle relative inline-block size-[96px] rounded-full ring-2 ring-white hover:z-10 dark:ring-neutral-900'
+            src='https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=facearea&facepad=2&w=300&h=300&q=80'
+            alt='Employee stock photo'
+          />
+        </div>
+
+        <div className='my-4 text-lg text-orange-200 text-left'>
+          <div>
+            <span className='font-semibold text-orange-400'>email:</span> {user.email}
+          </div>
+          <div>
+            <span className='font-semibold text-orange-400'>role:</span> {user.roles.join(',')}
+          </div>
         </div>
 
         {purchases?.length === 0 && (
@@ -43,15 +55,15 @@ export default function DinnerDashboard({ user }) {
                   <div className='p-1.5 min-w-full inline-block align-middle'>
                     <div className='overflow-hidden'>
                       <table className='min-w-full divide-y divide-gray-200 dark:divide-neutral-700'>
-                        <thead>
+                        <thead className='uppercase text-neutral-100 bg-slate-400 border-b-2 border-gray-500'>
                           <tr>
-                            <th scope='col' className='px-6 py-3 text-start text-xs sm:text-sm font-medium text-gray-500 uppercase dark:text-neutral-500'>
+                            <th scope='col' className='px-6 py-3 text-start text-xs sm:text-sm font-medium'>
                               Pie
                             </th>
-                            <th scope='col' className='px-6 py-3 text-start text-xs sm:text-sm font-medium text-gray-500 uppercase dark:text-neutral-500'>
+                            <th scope='col' className='px-6 py-3 text-start text-xs sm:text-sm font-medium'>
                               Price
                             </th>
-                            <th scope='col' className='px-6 py-3 text-start text-xs sm:text-sm font-medium text-gray-500 uppercase dark:text-neutral-500'>
+                            <th scope='col' className='px-6 py-3 text-start text-xs sm:text-sm font-medium'>
                               Date
                             </th>
                           </tr>

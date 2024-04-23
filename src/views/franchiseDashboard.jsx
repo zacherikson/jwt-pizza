@@ -40,18 +40,18 @@ export default function FranchiseDashboard({ user }) {
             <div className='p-1.5 min-w-full inline-block align-middle'>
               <div className='overflow-hidden'>
                 <table className='min-w-full divide-y divide-gray-200 dark:divide-neutral-700'>
-                  <thead>
+                  <thead className='uppercase text-neutral-100 bg-slate-400 border-b-2 border-gray-500'>
                     <tr>
-                      <th scope='col' className='px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase dark:text-neutral-500'>
+                      <th scope='col' className='px-6 py-3 text-start text-xs font-medium'>
                         City
                       </th>
-                      <th scope='col' className='px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase dark:text-neutral-500'>
+                      <th scope='col' className='px-6 py-3 text-start text-xs font-medium'>
                         Address
                       </th>
-                      <th scope='col' className='px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase dark:text-neutral-500'>
+                      <th scope='col' className='px-6 py-3 text-start text-xs font-medium'>
                         Revenue
                       </th>
-                      <th scope='col' className='px-6 py-3 text-end text-xs font-medium text-gray-500 uppercase dark:text-neutral-500'>
+                      <th scope='col' className='px-6 py-3 text-end text-xs font-medium'>
                         Action
                       </th>
                     </tr>
@@ -146,18 +146,18 @@ function whyFranchise() {
                 <div className='p-1.5 min-w-full inline-block align-middle'>
                   <div className='overflow-hidden'>
                     <table className='min-w-full divide-y divide-gray-200 dark:divide-neutral-700'>
-                      <thead>
+                      <thead className='uppercase text-neutral-100 bg-slate-400 border-b-2 border-gray-500'>
                         <tr>
-                          <th scope='col' className='px-6 text-sm py-3 text-start font-extrabold text-gray-500 uppercase dark:text-neutral-500'>
+                          <th scope='col' className='px-6 text-sm py-3 text-start font-medium'>
                             Year
                           </th>
-                          <th scope='col' className='px-6 text-sm py-3 text-start font-extrabold text-gray-500 uppercase dark:text-neutral-500'>
+                          <th scope='col' className='px-6 text-sm py-3 text-start font-medium'>
                             Profit
                           </th>
-                          <th scope='col' className='px-6 text-sm py-3 text-start font-extrabold text-gray-500 uppercase dark:text-neutral-500'>
+                          <th scope='col' className='px-6 text-sm py-3 text-start font-medium'>
                             Costs
                           </th>
-                          <th scope='col' className='px-6 text-sm py-3 text-start font-extrabold text-gray-500 uppercase dark:text-neutral-500'>
+                          <th scope='col' className='px-6 text-sm py-3 text-start font-medium'>
                             Franchise Fee
                           </th>
                         </tr>

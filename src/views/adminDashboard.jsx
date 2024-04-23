@@ -35,18 +35,18 @@ export default function AdminDashboard({ user }) {
               <div className='p-1.5 min-w-full inline-block align-middle'>
                 <div className='overflow-hidden'>
                   <table className='min-w-full divide-y divide-gray-200 dark:divide-neutral-700'>
-                    <thead>
+                    <thead className='uppercase text-neutral-100 bg-slate-400 border-b-2 border-gray-500'>
                       <tr>
-                        <th scope='col' className='px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase dark:text-neutral-500'>
+                        <th scope='col' className='px-6 py-3 text-start text-xs font-medium'>
                           Name
                         </th>
-                        <th scope='col' className='px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase dark:text-neutral-500'>
+                        <th scope='col' className='px-6 py-3 text-start text-xs font-medium'>
                           Revenue
                         </th>
-                        <th scope='col' className='px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase dark:text-neutral-500'>
+                        <th scope='col' className='px-6 py-3 text-start text-xs font-medium'>
                           Franchisee
                         </th>
-                        <th scope='col' className='px-6 py-3 text-end text-xs font-medium text-gray-500 uppercase dark:text-neutral-500'>
+                        <th scope='col' className='px-6 py-3 text-end text-xs font-medium'>
                           Action
                         </th>
                       </tr>
@@ -54,15 +54,9 @@ export default function AdminDashboard({ user }) {
                     <tbody className='divide-y divide-gray-200 dark:divide-neutral-700'>
                       {franchises.map((franchise) => (
                         <tr key={franchise.name} className='hover:bg-gray-100 dark:hover:bg-neutral-700'>
-                          <td className='text-left px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-neutral-200'>
-                            {franchise.name}
-                          </td>
-                          <td className='text-left px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200'>
-                            ${franchise.totalRevenue.toLocaleString()}
-                          </td>
-                          <td className='text-left px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200'>
-                            {franchise.franchisee}
-                          </td>
+                          <td className='text-left px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-neutral-200'>{franchise.name}</td>
+                          <td className='text-left px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200'>${franchise.totalRevenue.toLocaleString()}</td>
+                          <td className='text-left px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200'>{franchise.franchisee}</td>
                           <td className='text-left px-6 py-4 whitespace-nowrap text-end text-sm font-medium'>
                             <button
                               type='button'

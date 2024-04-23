@@ -40,12 +40,12 @@ export default function Payment() {
             <div className='p-1.5 min-w-full inline-block align-middle'>
               <div className='overflow-hidden'>
                 <table className='min-w-full divide-y divide-gray-200 dark:divide-neutral-700'>
-                  <thead>
+                  <thead className='text-neutral-100 bg-slate-400 border-b-2 border-gray-500'>
                     <tr>
-                      <th scope='col' className='px-6 py-3 text-start text-xs sm:text-sm font-medium text-gray-500 uppercase dark:text-neutral-500'>
+                      <th scope='col' className='px-6 py-3 text-start text-xs sm:text-sm font-medium'>
                         Pie
                       </th>
-                      <th scope='col' className='px-6 py-3 text-start text-xs sm:text-sm font-medium text-gray-500 uppercase dark:text-neutral-500'>
+                      <th scope='col' className='px-6 py-3 text-start text-xs sm:text-sm font-medium'>
                         Price
                       </th>
                     </tr>
