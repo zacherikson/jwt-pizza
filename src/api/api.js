@@ -64,6 +64,14 @@ class Api {
     return result;
   }
 
+  async createFranchise(newFranchise) {
+    return new Promise((resolve) => {
+      newFranchise.totalRevenue = 0;
+      franchises.push(newFranchise);
+      resolve(franchises);
+    });
+  }
+
   async getFranchises() {
     let result = [];
 

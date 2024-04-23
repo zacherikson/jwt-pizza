@@ -1,14 +1,12 @@
 import React from 'react';
 import View from './view';
 import { useNavigate } from 'react-router-dom';
-import { StoreIcon } from '../icons';
 import NotFound from './notFound';
 import Button from '../components/button';
 import Api from '../api/api';
 
 export default function AdminDashboard({ user }) {
   const navigate = useNavigate();
-  const [franchiseName, setFranchiseName] = React.useState('');
   const [franchises, setFranchises] = React.useState([]);
 
   React.useEffect(() => {
@@ -18,7 +16,7 @@ export default function AdminDashboard({ user }) {
   }, [user]);
 
   function createFranchise() {
-    navigate('/admin-dashboard/create-franchise', { state: { franchise: franchiseName } });
+    navigate('/admin-dashboard/create-franchise');
   }
 
   function refundFranchise(franchise) {
@@ -85,20 +83,6 @@ export default function AdminDashboard({ user }) {
         </div>
 
         <div className='flex'>
-          <div className='max-w-sm space-y-3 py-4  flex-1'>
-            <div className='relative'>
-              <input
-                type='text'
-                value={franchiseName}
-                onChange={(e) => setFranchiseName(e.target.value)}
-                className='peer py-3 px-4 ps-11 block w-full bg-gray-100 border-transparent rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-700 dark:border-transparent dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600'
-                placeholder='New franchise name'
-              />
-              <div className='absolute   text-orange-800 inset-y-0 start-0 flex items-center pointer-events-none ps-4 peer-disabled:opacity-50 peer-disabled:pointer-events-none'>
-                <StoreIcon />
-              </div>
-            </div>
-          </div>
           <Button className='flex-none' title='Franchise!' onPress={createFranchise} />
         </div>
       </View>
