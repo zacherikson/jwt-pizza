@@ -1,4 +1,17 @@
-const roles = ['admin', 'dinner', 'franchise'];
+const roles = ['admin', 'dinner', 'franchisee'];
+
+const users = [
+  { name: 'Rajah Singh', email: 'f@ps.com', role: ['franchisee'] },
+  { name: 'Zara Ahmed', email: 'a@ps.com', role: ['admin'] },
+  { name: 'Kai Chen', email: 'd@ps.com', role: ['dinner'] },
+  { name: 'Lila Patel', email: 'lila@example.com', role: ['dinner'] },
+  { name: 'Aiden Kim', email: 'aiden@example.com', role: ['dinner'] },
+  { name: 'Sofia Nguyen', email: 'sofia@example.com', role: ['dinner'] },
+  { name: 'Emilio Costa', email: 'emilio@example.com', role: ['dinner'] },
+  { name: 'Amara Ali', email: 'amara@example.com', role: ['dinner'] },
+  { name: 'Nikolai Petrov', email: 'nikolai@example.com', role: ['franchisee'] },
+  { name: 'Luna Santos', email: 'luna@example.com', role: ['franchisee'] },
+];
 
 const pizzas = [
   { title: 'Veggie', description: 'A garden of delight', image: 'pizza1.png' },
@@ -9,10 +22,26 @@ const pizzas = [
   { title: 'Chared Leopard', description: 'For those with a darker side', image: 'pizza6.png' },
 ];
 
-const purchases = [
-  { name: 'Pepperoni', price: 35, date: new Date('2024-03-10T00:00:00Z') },
-  { name: 'Veggie', price: 50, date: '2024-03-10T00:00:00Z' },
-  { name: 'Margarita', price: 45, date: '2024-03-10T00:00:00Z' },
+const purchaseHistory = [
+  {
+    email: 'a@ps.com',
+    pizzas: [
+      { name: 'Pepperoni', price: 35, date: new Date('2024-03-10T00:00:00Z') },
+      { name: 'Veggie', price: 50, date: '2024-03-10T00:00:00Z' },
+      { name: 'Margarita', price: 45, date: '2024-03-10T00:00:00Z' },
+    ],
+  },
+  {
+    email: 'd@ps.com',
+    pizzas: [
+      { name: 'Pepperoni', price: 35, date: new Date('2024-03-10T00:00:00Z') },
+      { name: 'Pepperoni', price: 50, date: '2024-03-10T00:00:00Z' },
+      { name: 'Pepperoni', price: 45, date: '2024-03-10T00:00:00Z' },
+      { name: 'Pepperoni', price: 45, date: '2024-03-10T00:00:00Z' },
+      { name: 'Pepperoni', price: 45, date: '2024-03-10T00:00:00Z' },
+      { name: 'Pepperoni', price: 45, date: '2024-03-10T00:00:00Z' },
+    ],
+  },
 ];
 
 const franchiseStores = [
@@ -22,9 +51,9 @@ const franchiseStores = [
 ];
 
 const franchises = [
-  { name: 'SuperPie', totalRevenue: 3000000, franchisee: 'joe@franchise.com' },
-  { name: 'LotaPizza', totalRevenue: 53000, franchisee: 'moe@franchise.com' },
-  { name: 'PizzaCorp', totalRevenue: 458767832, franchisee: 'berry@franchise.com' },
+  { name: 'SuperPie', totalRevenue: 3000000, franchisee: 'f@ps.com' },
+  { name: 'LotaPizza', totalRevenue: 53000, franchisee: 'luna@example.com' },
+  { name: 'PizzaCorp', totalRevenue: 458767832, franchisee: 'nikolai@example.com' },
 ];
 
 class Api {
@@ -33,7 +62,42 @@ class Api {
   }
 
   isFranchisee(user) {
-    return user?.role === 'franchise';
+    return user?.role === 'franchisee';
+  }
+
+  async login(email, password) {
+    return new Promise((resolve, reject) => {
+      if (!!password) {
+        const user = users.find((user) => user.email === email);
+        if (user) {
+          localStorage.setItem('user', JSON.stringify(user));
+          resolve(user);
+          return;
+        }
+      }
+      reject({ code: 404, msg: 'not found' });
+    });
+  }
+
+  async logout() {
+    return new Promise((resolve) => {
+      localStorage.removeItem('user');
+      resolve();
+    });
+  }
+
+  async getUser() {
+    return new Promise((resolve) => {
+      let user = localStorage.getItem('user');
+      if (user) {
+        user = JSON.parse(user);
+      }
+      return resolve(user);
+    });
+  }
+
+  loggedIn() {
+    return !!this.getUser();
   }
 
   async getPizzas() {
@@ -41,15 +105,22 @@ class Api {
   }
 
   async getPurchases(purchasingUser) {
-    let result = [];
+    return new Promise(async (resolve) => {
+      let result = [];
 
-    if (purchasingUser) {
-      const user = await this.getUser();
-      if (user && (this.isAdmin(user) || user.email === purchasingUser.email)) {
-        result = purchases;
+      if (purchasingUser) {
+        const user = await this.getUser();
+        if (user && (this.isAdmin(user) || user.email === purchasingUser.email)) {
+          result = purchaseHistory.find((purchase) => purchase.email === purchasingUser.email);
+          if (result) {
+            result = result.pizzas;
+          } else {
+            result = [];
+          }
+        }
       }
-    }
-    return result;
+      resolve(result);
+    });
   }
 
   async getFranchiseStores(franchiseUser) {
@@ -80,34 +151,6 @@ class Api {
       result = franchises;
     }
     return result;
-  }
-
-  async login(email, password) {
-    if (!password) return false;
-
-    localStorage.setItem('email', email);
-    const role = roles.find((role) => email.includes(role)) || 'dinner';
-    localStorage.setItem('role', role);
-    return { email, role };
-  }
-
-  async logout() {
-    localStorage.removeItem('email');
-    localStorage.removeItem('role');
-  }
-
-  async getUser() {
-    const email = localStorage.getItem('email');
-    const role = localStorage.getItem('role');
-
-    if (email) {
-      return { email, role };
-    }
-    return null;
-  }
-
-  loggedIn() {
-    return !!this.getUser();
   }
 }
 

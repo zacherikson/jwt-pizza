@@ -19,11 +19,13 @@ export default function Login({ setUser }) {
 
   async function submit(event) {
     event.preventDefault();
-    const user = await Api.login(email, password);
-    if (user) {
+    try {
+      const user = await Api.login(email, password);
       setUser(user);
       const locationText = location.pathname.substring(0, location.pathname.lastIndexOf('/') + 1);
       navigate(locationText, { state: location.state });
+    } catch (error) {
+      alert(JSON.stringify(error));
     }
   }
 
