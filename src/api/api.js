@@ -1,16 +1,20 @@
-const roles = ['admin', 'dinner', 'franchisee'];
+const Role = {
+  Diner: 'diner',
+  Franchisee: 'franchisee',
+  Admin: 'admin',
+};
 
 const users = [
-  { name: 'Rajah Singh', email: 'f@ps.com', roles: ['franchisee'] },
-  { name: 'Zara Ahmed', email: 'a@ps.com', roles: ['admin'] },
-  { name: 'Kai Chen', email: 'd@ps.com', roles: ['dinner'] },
-  { name: 'Lila Patel', email: 'lila@example.com', roles: ['dinner'] },
-  { name: 'Aiden Kim', email: 'aiden@example.com', roles: ['dinner'] },
-  { name: 'Sofia Nguyen', email: 'sofia@example.com', roles: ['dinner'] },
-  { name: 'Emilio Costa', email: 'emilio@example.com', roles: ['dinner'] },
-  { name: 'Amara Ali', email: 'amara@example.com', roles: ['dinner'] },
-  { name: 'Nikolai Petrov', email: 'nikolai@example.com', roles: ['franchisee'] },
-  { name: 'Luna Santos', email: 'luna@example.com', roles: ['franchisee'] },
+  { name: 'Rajah Singh', email: 'f@ps.com', roles: [Role.Franchisee] },
+  { name: 'Zara Ahmed', email: 'a@ps.com', roles: [Role.Admin] },
+  { name: 'Kai Chen', email: 'd@ps.com', roles: [Role.Diner] },
+  { name: 'Lila Patel', email: 'lila@example.com', roles: [Role.Diner] },
+  { name: 'Aiden Kim', email: 'aiden@example.com', roles: [Role.Diner] },
+  { name: 'Sofia Nguyen', email: 'sofia@example.com', roles: [Role.Diner] },
+  { name: 'Emilio Costa', email: 'emilio@example.com', roles: [Role.Diner] },
+  { name: 'Amara Ali', email: 'amara@example.com', roles: [Role.Diner] },
+  { name: 'Nikolai Petrov', email: 'nikolai@example.com', roles: [Role.Franchisee] },
+  { name: 'Luna Santos', email: 'luna@example.com', roles: [Role.Franchisee] },
 ];
 
 const pizzaMenu = [
@@ -66,18 +70,18 @@ const franchises = [
   { name: 'PizzaCorp', admin: ['nikolai@example.com'], stores: [{ city: 'Spanish Fork', totalRevenue: 3000000, address: '234 N 300 S' }] },
 ];
 
-class Api {
+class ApiFacade {
   isAdmin(user) {
-    return user?.roles.includes('admin');
+    return user?.roles.includes(Role.Admin);
   }
 
   isFranchisee(user) {
-    return user?.roles.includes('franchisee');
+    return user?.roles.includes(Role.Franchisee);
   }
 
   async login(email, password) {
     return new Promise((resolve, reject) => {
-      if (!!password) {
+      if (!!email && !!password) {
         const user = users.find((user) => user.email === email);
         if (user) {
           localStorage.setItem('user', JSON.stringify(user));
@@ -86,6 +90,23 @@ class Api {
         }
       }
       reject({ code: 404, msg: 'not found' });
+    });
+  }
+
+  async register(name, email, password) {
+    return new Promise(async (resolve, reject) => {
+      if (!!email && !!password) {
+        let user = users.find((user) => user.email === email);
+        if (user) {
+          reject({ code: 409, msg: 'user already exists' });
+        }
+        user = { name: name, email: email, roles: [Role.Diner] };
+        users.push(user);
+        await this.login(email, password);
+        resolve(user);
+      } else {
+        reject({ code: 400, msg: 'invalid' });
+      }
     });
   }
 
@@ -154,7 +175,7 @@ class Api {
 
     if (franchiseUser) {
       const user = await this.getUser();
-      if (this.isFranchisee(user) || this.isAdmin(user)) {
+      if (this.isRole.Franchisee(user) || this.isAdmin(user)) {
         const franchise = franchises.find((franchise) => franchise.admin.includes(franchiseUser.email));
         if (franchise) {
           result = franchise;
@@ -186,7 +207,7 @@ class Api {
   async closeStore(franchise, store) {
     return new Promise(async (resolve, reject) => {
       const user = await this.getUser();
-      if (this.isFranchisee(user) || this.isAdmin(user)) {
+      if (this.isRole.Franchisee(user) || this.isAdmin(user)) {
         const match = franchises.find((candidate) => candidate.name === franchise.name);
         if (match) {
           match.stores = match.stores.filter((s) => s.city !== store.city);
@@ -199,4 +220,5 @@ class Api {
   }
 }
 
-export default new Api();
+const Api = new ApiFacade();
+export { Api, Role };

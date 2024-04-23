@@ -1,6 +1,6 @@
 import React from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import Api from '../api/api';
+import { Api } from '../api/api';
 import View from './view';
 import Button from '../components/button';
 

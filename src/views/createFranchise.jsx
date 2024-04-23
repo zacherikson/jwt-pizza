@@ -1,7 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { StoreIcon } from '../icons';
-import Api from '../api/api';
+import { Api } from '../api/api';
 import View from './view';
 
 import Button from '../components/button';

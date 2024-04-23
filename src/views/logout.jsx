@@ -1,6 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import Api from '../api/api';
+import { Api } from '../api/api';
 import View from './view';
 
 export default function Logout({ setUser }) {

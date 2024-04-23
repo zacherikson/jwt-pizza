@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import Api from '../api/api';
+import { Api } from '../api/api';
 import View from './view';
 import Card from '../components/card';
 import Button from '../components/button';

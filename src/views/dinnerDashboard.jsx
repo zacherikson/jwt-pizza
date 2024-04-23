@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import View from './view';
 import NotFound from './notFound';
-import Api from '../api/api';
+import { Api } from '../api/api';
 
 export default function DinnerDashboard({ user }) {
   const [purchases, setPurchases] = React.useState([]);

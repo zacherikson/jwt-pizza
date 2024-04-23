@@ -2,7 +2,7 @@ import React from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import View from './view';
 import Button from '../components/button';
-import Api from '../api/api';
+import { Api } from '../api/api';
 
 export default function Payment() {
   const location = useLocation();

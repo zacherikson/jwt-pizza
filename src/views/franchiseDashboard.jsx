@@ -4,7 +4,7 @@ import { NavLink } from 'react-router-dom';
 import View from './view';
 import { CautionIcon, StoreIcon } from '../icons';
 import Button from '../components/button';
-import Api from '../api/api';
+import { Api } from '../api/api';
 
 export default function FranchiseDashboard({ user }) {
   const navigate = useNavigate();

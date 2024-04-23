@@ -3,7 +3,7 @@ import View from './view';
 import { useNavigate } from 'react-router-dom';
 import NotFound from './notFound';
 import Button from '../components/button';
-import Api from '../api/api';
+import { Api } from '../api/api';
 
 export default function AdminDashboard({ user }) {
   const navigate = useNavigate();

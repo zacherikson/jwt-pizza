@@ -18,7 +18,7 @@ import CloseStore from '../views/closeStore';
 import Payment from '../views/payment';
 import NotFound from '../views/notFound';
 import Breadcrumb from '../components/breadcrumb';
-import Api from '../api/api';
+import { Api } from '../api/api';
 import 'preline/preline';
 
 export default function App() {
