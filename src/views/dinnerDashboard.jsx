@@ -19,7 +19,7 @@ export default function DinnerDashboard({ user }) {
 
   return (
     <View title='Your pizza kitchen'>
-      <div className='my-4'>
+      <div className='text-left py-8 px-4 sm:px-6 lg:px-8'>
         <div className='my-4 text-sm text-orange-200 text-left'>
           <div>email: {user.email}</div>
           <div>role: {user.roles.join(',')}</div>
@@ -29,8 +29,7 @@ export default function DinnerDashboard({ user }) {
           <div className='text-neutral-100'>
             How have you lived this long without having a pizza?{' '}
             <Link className='text-orange-400 underline font-semibold' to='/menu'>
-              {' '}
-              Buy one{' '}
+              Buy one
             </Link>{' '}
             now!
           </div>

@@ -11,15 +11,10 @@ export default function Header({ user, navItems }) {
   return (
     <div className='space-y-4'>
       <header className='flex flex-wrap sm:justify-start sm:flex-nowrap w-full bg-gray-800 text-sm py-4 dark:bg-white'>
-        <nav
-          className='max-w-[85rem] w-full mx-auto px-4 sm:flex sm:items-center sm:justify-between'
-          aria-label='Global'
-        >
+        <nav className='max-w-[85rem] w-full mx-auto px-4 sm:flex sm:items-center sm:justify-between' aria-label='Global'>
           <div className='flex items-center justify-between'>
             <img className='w-10 m-3' src='/pizza-shop-icon.png' />
-            <span className='font-normal flex-none text-4xl dark:text-gray-800 bg-clip-text bg-gradient-to-tr from-orange-500 to-orange-300 text-transparent'>
-              Pizza Shop
-            </span>
+            <span className='font-normal flex-none text-4xl dark:text-gray-800 bg-clip-text bg-gradient-to-tr from-orange-500 to-orange-300 text-transparent'>Pizza Shop</span>
             <div className='sm:hidden'>
               <button
                 type='button'
@@ -31,10 +26,7 @@ export default function Header({ user, navItems }) {
               </button>
             </div>
           </div>
-          <div
-            id='navbar-dark'
-            className='hs-collapse hidden overflow-hidden transition-all duration-300 basis-full grow sm:block'
-          >
+          <div id='navbar-dark' className='hs-collapse hidden overflow-hidden transition-all duration-300 basis-full grow sm:block'>
             <div className='flex flex-col gap-5 mt-5 sm:flex-row sm:items-center sm:justify-end sm:mt-0 sm:ps-5'>
               {navItems.map((item) => {
                 return (
@@ -53,15 +45,10 @@ export default function Header({ user, navItems }) {
             </div>
           </div>
           {user && (
-            <NavLink
-              className='font-medium text-gray-400 hover:text-gray-500 dark:text-gray-500 dark:hover:text-gray-400  focus:text-orange-600'
-              to='dinner-dashboard'
-            >
+            <NavLink className='font-medium text-gray-400 hover:text-gray-500 dark:text-gray-500 dark:hover:text-gray-400  focus:text-orange-600' to='dinner-dashboard'>
               <div className='hs-tooltip inline-block  [--placement:bottom]'>
                 <div className='hs-tooltip-toggle pl-4 font-semibold text-orange-400'>
-                  <span className='inline-flex items-center justify-center size-[30px] rounded-full bg-orange-800 font-semibold text-white leading-none'>
-                    {userText}
-                  </span>
+                  <span className='inline-flex items-center justify-center size-[30px] rounded-full bg-orange-800 font-semibold text-white leading-none'>{userText}</span>
                 </div>
               </div>
             </NavLink>
