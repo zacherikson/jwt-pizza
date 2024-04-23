@@ -182,6 +182,21 @@ class Api {
       }
     });
   }
+
+  async closeStore(franchise, store) {
+    return new Promise(async (resolve, reject) => {
+      const user = await this.getUser();
+      if (this.isFranchisee(user) || this.isAdmin(user)) {
+        const match = franchises.find((candidate) => candidate.name === franchise.name);
+        if (match) {
+          match.stores = match.stores.filter((s) => s.city !== store.city);
+          resolve({ code: 200, msg: 'store closed' });
+          return;
+        }
+      }
+      reject({ code: 401, msg: 'unauthorized' });
+    });
+  }
 }
 
 export default new Api();

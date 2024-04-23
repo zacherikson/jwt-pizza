@@ -19,8 +19,8 @@ export default function AdminDashboard({ user }) {
     navigate('/admin-dashboard/create-franchise');
   }
 
-  function refundFranchise(franchise, store) {
-    navigate('/admin-dashboard/refund-franchise', { state: { franchise: franchise.name, refundAmount: store.totalRevenue } });
+  function closeStore(franchise, store) {
+    navigate('/admin-dashboard/close-store', { state: { franchise: franchise, store: store } });
   }
 
   let response = <NotFound />;
@@ -70,9 +70,9 @@ export default function AdminDashboard({ user }) {
                                 <button
                                   type='button'
                                   className='inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent text-blue-600 hover:text-blue-800 disabled:opacity-50 disabled:pointer-events-none dark:text-blue-500 dark:hover:text-blue-400'
-                                  onClick={() => refundFranchise(franchise, store)}
+                                  onClick={() => closeStore(franchise, store)}
                                 >
-                                  Refund
+                                  Close
                                 </button>
                               </td>
                             </tr>

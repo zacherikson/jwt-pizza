@@ -14,7 +14,7 @@ import AdminDashboard from '../views/adminDashboard';
 import DinnerDashboard from '../views/dinnerDashboard';
 import CreateStore from '../views/createStore';
 import CreateFranchise from '../views/createFranchise';
-import RefundFranchise from '../views/refundFranchise';
+import CloseStore from '../views/closeStore';
 import Payment from '../views/payment';
 import NotFound from '../views/notFound';
 import Breadcrumb from '../components/breadcrumb';
@@ -43,18 +43,24 @@ export default function App() {
   function loggedOut() {
     return !loggedIn();
   }
+  function isAdmin() {
+    return Api.isAdmin(user);
+  }
+  function isNotAdmin() {
+    return !Api.isAdmin(user);
+  }
 
   const navItems = [
     { title: 'Home', to: '/', component: <Home />, display: [] },
     { title: 'Dinner', to: '/dinner-dashboard', component: <DinnerDashboard user={user} />, display: [] },
     { title: 'Order', to: '/menu', component: <Menu />, display: ['nav'] },
-    { title: 'Franchise', to: '/franchise-dashboard', component: <FranchiseDashboard user={user} />, display: ['nav', 'footer'] },
+    { title: 'Franchise', to: '/franchise-dashboard', component: <FranchiseDashboard user={user} />, constraints: [isNotAdmin], display: ['nav', 'footer'] },
     { title: 'About', to: '/about', component: <About />, display: ['footer'] },
     { title: 'History', to: '/history', component: <History />, display: ['footer'] },
-    { title: 'Admin dashboard', to: '/admin-dashboard', component: <AdminDashboard user={user} />, display: ['admin'] },
+    { title: 'Admin', to: '/admin-dashboard', component: <AdminDashboard user={user} />, constraints: [isAdmin], display: ['nav'] },
+    { title: 'Create franchise', to: '/:subPath?/create-franchise', component: <CreateFranchise />, display: [] },
     { title: 'Create store', to: '/:subPath?/create-store', component: <CreateStore />, display: [] },
-    { title: 'Create Franchise', to: '/:subPath?/create-franchise', component: <CreateFranchise />, display: [] },
-    { title: 'Franchise refund', to: '/:subPath?/refund-franchise', component: <RefundFranchise />, display: [] },
+    { title: 'Close store', to: '/:subPath?/close-store', component: <CloseStore />, display: [] },
     { title: 'Payment', to: '/payment', component: <Payment />, display: [] },
     { title: 'Opps', to: '*', component: <NotFound />, display: [] },
     { title: 'Login', to: '/:subPath?/login', component: <Login setUser={setUser} />, constraints: [loggedOut], display: ['nav'] },
