@@ -6,7 +6,7 @@ import Api from '../api/api';
 
 export default function Payment() {
   const location = useLocation();
-  const orderCount = location.state?.orderCount || 0;
+  const order = location.state?.order || [];
   const navigate = useNavigate();
 
   React.useEffect(() => {
@@ -19,20 +19,59 @@ export default function Payment() {
     })();
   }, []);
 
-  function processPayment() {
-    alert(`You just bought ${orderCount} pizzas!`);
-    navigate('/menu', { state: { orderCount: 0 } });
+  async function processPayment() {
+    const confirmation = await Api.purchase(order);
+    alert(`You just bought ${confirmation.length} pizzas!`);
+    navigate('/dinner-dashboard', { state: { order: [] } });
   }
 
   function cancel() {
-    navigate('/menu', { state: { orderCount: orderCount } });
+    navigate('/menu', { state: { order: order } });
   }
 
   return (
     <View title='So worth it'>
-      <div className='text-neutral-100'>Send me those {orderCount} pizzas right now!</div>
+      <div className='text-neutral-100'>Send me those {order.length} pizzas right now!</div>
       <Button title='Pay now' onPress={processPayment} />
       <Button title='Cancel' onPress={cancel} />
+      <div className='bg-neutral-100 overflow-clip my-4'>
+        <div className='flex flex-col'>
+          <div className='-m-1.5 overflow-x-auto'>
+            <div className='p-1.5 min-w-full inline-block align-middle'>
+              <div className='overflow-hidden'>
+                <table className='min-w-full divide-y divide-gray-200 dark:divide-neutral-700'>
+                  <thead>
+                    <tr>
+                      <th scope='col' className='px-6 py-3 text-start text-xs sm:text-sm font-medium text-gray-500 uppercase dark:text-neutral-500'>
+                        Pie
+                      </th>
+                      <th scope='col' className='px-6 py-3 text-start text-xs sm:text-sm font-medium text-gray-500 uppercase dark:text-neutral-500'>
+                        Price
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody className='divide-y divide-gray-200 dark:divide-neutral-700'>
+                    {order.map((pizza, index) => (
+                      <tr key={index} className='hover:bg-gray-100 dark:hover:bg-neutral-700'>
+                        <td className='px-6 py-4 whitespace-nowrap text-start text-xs sm:text-sm font-medium text-gray-800 dark:text-neutral-200'>{pizza.title}</td>
+                        <td className='px-6 py-4 whitespace-nowrap text-start text-xs sm:text-sm text-gray-800 dark:text-neutral-200'>${pizza.price.toLocaleString()}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                  <tfoot>
+                    <tr className='bg-orange-200 border-t-2 border-red-500'>
+                      <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200'>
+                        {order.length} pie{order.length > 1 ? 's' : ''}
+                      </td>
+                      <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200'>${order.reduce((a, c) => a + c.price, 0).toLocaleString()}</td>
+                    </tr>
+                  </tfoot>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </View>
   );
 }

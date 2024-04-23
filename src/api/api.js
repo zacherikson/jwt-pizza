@@ -14,12 +14,12 @@ const users = [
 ];
 
 const pizzaMenu = [
-  { title: 'Veggie', description: 'A garden of delight', image: 'pizza1.png' },
-  { title: 'Pepperoni', description: 'Spicy treat', image: 'pizza2.png' },
-  { title: 'Margarita', description: 'Essential classic', image: 'pizza3.png' },
-  { title: 'Crusty', description: 'A dry mouthed favorite', image: 'pizza4.png' },
-  { title: 'Flat', description: 'Something special', image: 'pizza5.png' },
-  { title: 'Chared Leopard', description: 'For those with a darker side', image: 'pizza6.png' },
+  { title: 'Veggie', description: 'A garden of delight', image: 'pizza1.png', price: 24 },
+  { title: 'Pepperoni', description: 'Spicy treat', image: 'pizza2.png', price: 33 },
+  { title: 'Margarita', description: 'Essential classic', image: 'pizza3.png', price: 14 },
+  { title: 'Crusty', description: 'A dry mouthed favorite', image: 'pizza4.png', price: 42 },
+  { title: 'Flat', description: 'Something special', image: 'pizza5.png', price: 29 },
+  { title: 'Chared Leopard', description: 'For those with a darker side', image: 'pizza6.png', price: 10 },
 ];
 
 const purchaseHistory = [
@@ -36,8 +36,8 @@ const purchaseHistory = [
     pizzas: [
       { name: 'Pepperoni', price: 35, date: new Date('2024-03-10T00:00:00Z') },
       { name: 'Pepperoni', price: 50, date: '2024-03-10T00:00:00Z' },
-      { name: 'Pepperoni', price: 45, date: '2024-03-10T00:00:00Z' },
-      { name: 'Pepperoni', price: 45, date: '2024-03-10T00:00:00Z' },
+      { name: 'Crusty', price: 45, date: '2024-03-10T00:00:00Z' },
+      { name: 'Flat', price: 45, date: '2024-03-10T00:00:00Z' },
       { name: 'Pepperoni', price: 45, date: '2024-03-10T00:00:00Z' },
       { name: 'Pepperoni', price: 45, date: '2024-03-10T00:00:00Z' },
     ],
@@ -124,6 +124,28 @@ class Api {
         }
       }
       resolve(result);
+    });
+  }
+
+  async purchase(order) {
+    return new Promise(async (resolve, reject) => {
+      const user = await this.getUser();
+      if (user) {
+        const purchases = [];
+        order.forEach((pizza) => {
+          purchases.push({ name: pizza.title, price: pizza.price, date: new Date().toISOString() });
+        });
+
+        let userPurchaseHistory = purchaseHistory.find((purchase) => purchase.email === user.email);
+        if (!userPurchaseHistory) {
+          userPurchaseHistory = { email: user.email, pizzas: [] };
+          purchaseHistory.push(userPurchaseHistory);
+        }
+        userPurchaseHistory.pizzas = [...purchases, ...userPurchaseHistory.pizzas];
+        resolve(purchases);
+      } else {
+        reject({ code: 401, msg: 'unauthorized' });
+      }
     });
   }
 
