@@ -22,7 +22,7 @@ export default function DinnerDashboard({ user }) {
       <div className='my-4'>
         <div className='my-4 text-sm text-orange-200 text-left'>
           <div>email: {user.email}</div>
-          <div>role: {user.role}</div>
+          <div>role: {user.roles.join(',')}</div>
         </div>
 
         {purchases?.length === 0 && (

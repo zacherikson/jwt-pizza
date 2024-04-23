@@ -12,7 +12,7 @@ export default function Menu() {
 
   useEffect(() => {
     (async () => {
-      const response = await Api.getPizzas();
+      const response = await Api.getPizzaMenu();
       setPizzas(response);
     })();
   }, []);
@@ -32,9 +32,7 @@ export default function Menu() {
       <div className='flow flow-col text-center justify-center text-neutral-100'>
         <div className='my-2 sm:my-8'>Pick your pizza from below. Remember to order extra for a midnight party.</div>
 
-        <div className='text-yellow-200'>
-          {count > 0 ? 'Selected pizzas: ' + count : 'What are you waiting for? Pick a pizza!'}
-        </div>
+        <div className='text-yellow-200'>{count > 0 ? 'Selected pizzas: ' + count : 'What are you waiting for? Pick a pizza!'}</div>
         <Button title='Checkout' onPress={onCheckout} disabled={count <= 0} className='disabled' />
 
         <div className='m-4 grid gap-x-8 gap-y-4 sm:gird-cols-1 md:grid-cols-2 lg:grid-cols-4 xlg:grid-cols-5'>

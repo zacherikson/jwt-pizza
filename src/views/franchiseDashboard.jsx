@@ -8,17 +8,17 @@ import Api from '../api/api';
 
 export default function FranchiseDashboard({ user }) {
   const navigate = useNavigate();
-  const [storeName, setStoreName] = React.useState('');
-  const [franchiseStores, setFranchiseStores] = React.useState([]);
+  const [newStoreName, setNewStoreName] = React.useState('');
+  const [franchise, setFranchise] = React.useState([]);
 
   React.useEffect(() => {
     (async () => {
-      setFranchiseStores(await Api.getFranchiseStores(user));
+      setFranchise(await Api.getFranchise(user));
     })();
   }, [user]);
 
   function createStore() {
-    navigate('/franchise-dashboard/create-store', { state: { store: storeName } });
+    navigate('/franchise-dashboard/create-store', { state: { store: newStoreName } });
   }
 
   function deleteStore(store) {
@@ -29,9 +29,10 @@ export default function FranchiseDashboard({ user }) {
     return whyFranchise();
   }
 
+  console.log(franchise);
   return (
     <View title='Franchise central'>
-      <div className='text-neutral-100'>Everything you need to run Pizza Shop. Your gateway to success.</div>
+      <div className='text-neutral-100'>Everything you need to run a Pizza Shop. Your gateway to success.</div>
 
       <div className='bg-neutral-100 overflow-clip my-4'>
         <div className='flex flex-col'>
@@ -41,44 +42,26 @@ export default function FranchiseDashboard({ user }) {
                 <table className='min-w-full divide-y divide-gray-200 dark:divide-neutral-700'>
                   <thead>
                     <tr>
-                      <th
-                        scope='col'
-                        className='px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase dark:text-neutral-500'
-                      >
-                        Name
+                      <th scope='col' className='px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase dark:text-neutral-500'>
+                        City
                       </th>
-                      <th
-                        scope='col'
-                        className='px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase dark:text-neutral-500'
-                      >
-                        Age
-                      </th>
-                      <th
-                        scope='col'
-                        className='px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase dark:text-neutral-500'
-                      >
+                      <th scope='col' className='px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase dark:text-neutral-500'>
                         Address
                       </th>
-                      <th
-                        scope='col'
-                        className='px-6 py-3 text-end text-xs font-medium text-gray-500 uppercase dark:text-neutral-500'
-                      >
+                      <th scope='col' className='px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase dark:text-neutral-500'>
+                        Revenue
+                      </th>
+                      <th scope='col' className='px-6 py-3 text-end text-xs font-medium text-gray-500 uppercase dark:text-neutral-500'>
                         Action
                       </th>
                     </tr>
                   </thead>
                   <tbody className='divide-y divide-gray-200 dark:divide-neutral-700'>
-                    {franchiseStores.map((store) => (
-                      <tr key={store.name} className='hover:bg-gray-100 dark:hover:bg-neutral-700'>
-                        <td className='px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-neutral-200'>
-                          {store.name}
-                        </td>
-                        <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200'>
-                          ${store.totalRevenue.toLocaleString()}
-                        </td>
-                        <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200'>
-                          {store.address}
-                        </td>
+                    {franchise.stores?.map((store) => (
+                      <tr key={store.city} className='hover:bg-gray-100 dark:hover:bg-neutral-700'>
+                        <td className='px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-neutral-200'>{store.city}</td>
+                        <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200'>{store.address}</td>
+                        <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200'>${store.totalRevenue.toLocaleString()}</td>
                         <td className='px-6 py-4 whitespace-nowrap text-end text-sm font-medium'>
                           <button
                             type='button'
@@ -103,8 +86,7 @@ export default function FranchiseDashboard({ user }) {
           <div className='relative'>
             <input
               type='text'
-              value={storeName}
-              onChange={(e) => setStoreName(e.target.value)}
+              onChange={(e) => setNewStoreName(e.target.value)}
               className='peer py-3 px-4 ps-11 block w-full bg-gray-100 border-transparent rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-700 dark:border-transparent dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600'
               placeholder='Enter name'
             />
@@ -123,10 +105,7 @@ function whyFranchise() {
   return (
     <View title='So you want a piece of the pie'>
       <div className='text-left py-8 px-4 sm:px-6 lg:px-8'>
-        <div
-          className='my-4 bg-yellow-50 border border-yellow-200 text-sm text-yellow-800 rounded-lg p-4 dark:bg-yellow-800/10 dark:border-yellow-900 dark:text-yellow-500'
-          role='alert'
-        >
+        <div className='my-4 bg-yellow-50 border border-yellow-200 text-sm text-yellow-800 rounded-lg p-4 dark:bg-yellow-800/10 dark:border-yellow-900 dark:text-yellow-500' role='alert'>
           <div className='flex'>
             <div className='flex-shrink-0'>
               <CautionIcon />
@@ -149,20 +128,17 @@ function whyFranchise() {
             To purchase a franchise call <span className='font-semibold text-orange-400'>1-800-555-5555</span>
           </p>
           <p className='py-2 text-white'>
-            Now is the time to get in on the Pizza Shop tsunami. The pizza sells itself. People cannot get enough. Setup
-            your shop and let the pizza fly. Here are all the reasons why you should buy a franchise with the Pizza
-            Shop.
+            Now is the time to get in on the Pizza Shop tsunami. The pizza sells itself. People cannot get enough. Setup your shop and let the pizza fly. Here are all the reasons why you should buy a
+            franchise with the Pizza Shop.
           </p>
           <p className='py-2 text-white'>
-            Owning a franchise with the Pizza Shop can be highly profitable. With our proven business model and strong
-            brand recognition, you can expect to generate significant revenue. Our profit forecasts show consistent
-            growth year after year, making it a lucrative investment opportunity.
+            Owning a franchise with the Pizza Shop can be highly profitable. With our proven business model and strong brand recognition, you can expect to generate significant revenue. Our profit
+            forecasts show consistent growth year after year, making it a lucrative investment opportunity.
           </p>
           <p className='py-2 text-white'>
-            In addition to financial success, owning a franchise also allows you to make a positive impact on your
-            community. By providing delicious pizzas and creating job opportunities, you contribute to the local economy
-            and bring joy to people's lives. It's a rewarding experience that combines entrepreneurship with social
-            responsibility. The following table shows a possible stream of income from your franchise.
+            In addition to financial success, owning a franchise also allows you to make a positive impact on your community. By providing delicious pizzas and creating job opportunities, you
+            contribute to the local economy and bring joy to people's lives. It's a rewarding experience that combines entrepreneurship with social responsibility. The following table shows a possible
+            stream of income from your franchise.
           </p>
           <div className='bg-neutral-100 overflow-clip my-4'>
             <div className='flex flex-col'>
@@ -172,74 +148,38 @@ function whyFranchise() {
                     <table className='min-w-full divide-y divide-gray-200 dark:divide-neutral-700'>
                       <thead>
                         <tr>
-                          <th
-                            scope='col'
-                            className='px-6 text-sm py-3 text-start font-extrabold text-gray-500 uppercase dark:text-neutral-500'
-                          >
+                          <th scope='col' className='px-6 text-sm py-3 text-start font-extrabold text-gray-500 uppercase dark:text-neutral-500'>
                             Year
                           </th>
-                          <th
-                            scope='col'
-                            className='px-6 text-sm py-3 text-start font-extrabold text-gray-500 uppercase dark:text-neutral-500'
-                          >
+                          <th scope='col' className='px-6 text-sm py-3 text-start font-extrabold text-gray-500 uppercase dark:text-neutral-500'>
                             Profit
                           </th>
-                          <th
-                            scope='col'
-                            className='px-6 text-sm py-3 text-start font-extrabold text-gray-500 uppercase dark:text-neutral-500'
-                          >
+                          <th scope='col' className='px-6 text-sm py-3 text-start font-extrabold text-gray-500 uppercase dark:text-neutral-500'>
                             Costs
                           </th>
-                          <th
-                            scope='col'
-                            className='px-6 text-sm py-3 text-start font-extrabold text-gray-500 uppercase dark:text-neutral-500'
-                          >
+                          <th scope='col' className='px-6 text-sm py-3 text-start font-extrabold text-gray-500 uppercase dark:text-neutral-500'>
                             Franchise Fee
                           </th>
                         </tr>
                       </thead>
                       <tbody className='divide-y divide-gray-200 dark:divide-neutral-700'>
                         <tr>
-                          <td className='px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-neutral-200'>
-                            2020
-                          </td>
-                          <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200'>
-                            $500,000
-                          </td>
-                          <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200'>
-                            $400,000
-                          </td>
-                          <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200'>
-                            $50,000
-                          </td>
+                          <td className='px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-neutral-200'>2020</td>
+                          <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200'>$500,000</td>
+                          <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200'>$400,000</td>
+                          <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200'>$50,000</td>
                         </tr>
                         <tr>
-                          <td className='px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-neutral-200'>
-                            2021
-                          </td>
-                          <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200'>
-                            $750,000
-                          </td>
-                          <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200'>
-                            $500,000
-                          </td>
-                          <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200'>
-                            $50,000
-                          </td>
+                          <td className='px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-neutral-200'>2021</td>
+                          <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200'>$750,000</td>
+                          <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200'>$500,000</td>
+                          <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200'>$50,000</td>
                         </tr>
                         <tr>
-                          <td className='px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-neutral-200'>
-                            2022
-                          </td>
-                          <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200'>
-                            $1,000,000
-                          </td>
-                          <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200'>
-                            $600,000
-                          </td>
-                          <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200'>
-                            $50,000
-                          </td>
+                          <td className='px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-neutral-200'>2022</td>
+                          <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200'>$1,000,000</td>
+                          <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200'>$600,000</td>
+                          <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200'>$50,000</td>
                         </tr>
                       </tbody>
                     </table>
@@ -251,17 +191,14 @@ function whyFranchise() {
           <div className='py-4'>
             <h2 className='py-2 text-2xl sm:text-4xl font-thin text-orange-600'>Unleash Your Potential</h2>
             <p className='py-2 text-neutral-100 text-left mx-4 pb-4 first-line:uppercase first-line:tracking-widest  first-letter:text-7xl first-letter:font-bold first-letter:text-orange-800  first-letter:mr-3 first-letter:float-left'>
-              Are you ready to embark on a journey towards unimaginable wealth? Owning a franchise with the Pizza Shop
-              is your ticket to financial success. With our proven business model and strong brand recognition, you have
-              the opportunity to generate substantial revenue. Imagine the thrill of watching your profits soar year
-              after year, as customers flock to your pizza shop, craving our mouthwatering creations.
+              Are you ready to embark on a journey towards unimaginable wealth? Owning a franchise with the Pizza Shop is your ticket to financial success. With our proven business model and strong
+              brand recognition, you have the opportunity to generate substantial revenue. Imagine the thrill of watching your profits soar year after year, as customers flock to your pizza shop,
+              craving our mouthwatering creations.
             </p>
             <p className='py-2 text-white'>
-              But it's not just about the money. By becoming a franchise owner, you become part of a community that is
-              passionate about delivering exceptional pizzas and creating memorable experiences. You'll have the chance
-              to build a team of dedicated employees who share your vision and work together to achieve greatness. And
-              as your business grows, so does your impact on the local economy, creating jobs and bringing joy to
-              countless pizza lovers.
+              But it's not just about the money. By becoming a franchise owner, you become part of a community that is passionate about delivering exceptional pizzas and creating memorable
+              experiences. You'll have the chance to build a team of dedicated employees who share your vision and work together to achieve greatness. And as your business grows, so does your impact
+              on the local economy, creating jobs and bringing joy to countless pizza lovers.
             </p>
           </div>
           <p className='py-2 text-white'>
