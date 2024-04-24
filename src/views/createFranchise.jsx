@@ -1,6 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { StoreIcon } from '../icons';
+import { EmailIcon, StoreIcon } from '../icons';
 import { Api } from '../api/api';
 import View from './view';
 
@@ -8,7 +8,7 @@ import Button from '../components/button';
 
 export default function CreateFranchise() {
   const navigate = useNavigate();
-  const [franchise, setFranchise] = React.useState({});
+  const [franchise, setFranchise] = React.useState({ stores: [] });
 
   async function createFranchise() {
     await Api.createFranchise(franchise);
@@ -31,19 +31,19 @@ export default function CreateFranchise() {
             className='peer py-3 px-4 ps-11 block w-full bg-gray-100 border-transparent rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-700 dark:border-transparent dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600'
             placeholder='franchise name'
           />
-          <div className='absolute   text-orange-800 inset-y-0 start-0 flex items-center pointer-events-none ps-4 peer-disabled:opacity-50 peer-disabled:pointer-events-none'>
+          <div className='absolute text-orange-800 inset-y-0 start-0 flex items-center pointer-events-none ps-4 peer-disabled:opacity-50 peer-disabled:pointer-events-none'>
             <StoreIcon />
           </div>
         </div>
         <div className='relative'>
           <input
             type='text'
-            onChange={(e) => setFranchise({ ...franchise, franchisee: e.target.value })}
+            onChange={(e) => setFranchise({ ...franchise, admin: [e.target.value] })}
             className='peer py-3 px-4 ps-11 block w-full bg-gray-100 border-transparent rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-700 dark:border-transparent dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600'
-            placeholder='franchisee email'
+            placeholder='franchisee admin email'
           />
-          <div className='absolute   text-orange-800 inset-y-0 start-0 flex items-center pointer-events-none ps-4 peer-disabled:opacity-50 peer-disabled:pointer-events-none'>
-            <StoreIcon />
+          <div className='absolute text-orange-800 inset-y-0 start-0 flex items-center pointer-events-none ps-4 peer-disabled:opacity-50 peer-disabled:pointer-events-none'>
+            <EmailIcon />
           </div>
         </div>
       </div>

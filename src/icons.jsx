@@ -10,7 +10,7 @@ function CautionIcon() {
       viewBox='0 0 24 24'
       fill='none'
       stroke='currentColor'
-      strokeWidth='2'
+      strokeWidth='1.5'
       strokeLinecap='round'
       strokeLinejoin='round'
     >
@@ -24,13 +24,14 @@ function CautionIcon() {
 function CloseEyeIcon() {
   return (
     <svg
-      className='flex-shrink-0 size-3.5 text-gray-400 dark:text-neutral-500'
+      className='flex-shrink-0 size-4 mt-0.5'
+      xmlns='http://www.w3.org/2000/svg'
       width='24'
       height='24'
       viewBox='0 0 24 24'
       fill='none'
       stroke='currentColor'
-      strokeWidth='2'
+      strokeWidth='1.5'
       strokeLinecap='round'
       strokeLinejoin='round'
     >
@@ -47,14 +48,14 @@ function CloseEyeIcon() {
 function KeyIcon() {
   return (
     <svg
-      className='flex-shrink-0 size-4 mt-0.5 text-gray-400 dark:text-neutral-500'
+      className='flex-shrink-0 size-4 mt-0.5'
       xmlns='http://www.w3.org/2000/svg'
       width='24'
       height='24'
       viewBox='0 0 24 24'
       fill='none'
       stroke='currentColor'
-      strokeWidth='2'
+      strokeWidth='1.5'
       strokeLinecap='round'
       strokeLinejoin='round'
     >
@@ -66,14 +67,14 @@ function KeyIcon() {
 function PersonIcon() {
   return (
     <svg
-      className='flex-shrink-0 size-4 text-gray-400 dark:text-neutral-500'
+      className='flex-shrink-0 size-4'
       xmlns='http://www.w3.org/2000/svg'
       width='24'
       height='24'
       viewBox='0 0 24 24'
       fill='none'
       stroke='currentColor'
-      strokeWidth='2'
+      strokeWidth='1.5'
       strokeLinecap='round'
       strokeLinejoin='round'
     >
@@ -86,14 +87,14 @@ function PersonIcon() {
 function EmailIcon() {
   return (
     <svg
-      className='flex-shrink-0 size-4 text-gray-400 dark:text-neutral-500'
+      className='flex-shrink-0 size-4'
       xmlns='http://www.w3.org/2000/svg'
       width='24'
       height='24'
       viewBox='0 0 24 24'
       fill='none'
       stroke='currentColor'
-      strokeWidth='2'
+      strokeWidth='1.5'
       strokeLinecap='round'
       strokeLinejoin='round'
     >
@@ -113,7 +114,7 @@ function HouseIcon() {
       viewBox='0 0 24 24'
       fill='none'
       stroke='currentColor'
-      strokeWidth='2'
+      strokeWidth='1.5'
       strokeLinecap='round'
       strokeLinejoin='round'
     >
@@ -125,7 +126,18 @@ function HouseIcon() {
 
 function StoreIcon() {
   return (
-    <svg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' strokeWidth='1.5' stroke='currentColor' className='w-6 h-6'>
+    <svg
+      className='flex-shrink-0 me-3 size-4'
+      xmlns='http://www.w3.org/2000/svg'
+      width='24'
+      height='24'
+      viewBox='0 0 24 24'
+      fill='none'
+      stroke='currentColor'
+      strokeWidth='1.5'
+      strokeLinecap='round'
+      strokeLinejoin='round'
+    >
       <path
         strokeLinecap='round'
         strokeLinejoin='round'
@@ -145,7 +157,7 @@ function HamburgerIcon() {
       viewBox='0 0 24 24'
       fill='none'
       stroke='currentColor'
-      strokeWidth='2'
+      strokeWidth='1.5'
       strokeLinecap='round'
       strokeLinejoin='round'
     >
@@ -166,7 +178,7 @@ function CloseIcon() {
       viewBox='0 0 24 24'
       fill='none'
       stroke='currentColor'
-      strokeWidth='2'
+      strokeWidth='1.5'
       strokeLinecap='round'
       strokeLinejoin='round'
     >
@@ -179,14 +191,14 @@ function CloseIcon() {
 function GreaterThanIcon() {
   return (
     <svg
-      className='flex-shrink-0 mx-2 overflow-visible size-4 text-gray-400 dark:text-neutral-600'
-      xmlns='http://www.w3.org/2000/svg'
-      width='24'
+      className='flex-shrink-0 mx-2 overflow-visible size-4
+      xmlns='
+      http:width='24' //www.w3.org/2000/svg'
       height='24'
       viewBox='0 0 24 24'
       fill='none'
       stroke='currentColor'
-      strokeWidth='2'
+      strokeWidth='1.5'
       strokeLinecap='round'
       strokeLinejoin='round'
     >

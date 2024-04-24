@@ -23,7 +23,7 @@ export default function Header({ user, navItems }) {
             <div className='sm:hidden'>
               <button
                 type='button'
-                className='hs-collapse-toggle p-2 inline-flex justify-center items-center gap-2 rounded-lg border border-gray-700 font-medium bg-gray-800 text-gray-400 shadow-sm align-middle hover:bg-gray-700/[.25] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-blue-600 transition-all text-sm dark:bg-gray-800 dark:hover:bg-slate-800 dark:border-gray-700 dark:text-gray-400 dark:hover:text-white dark:focus:ring-offset-gray-800'
+                className='hs-collapse-toggle p-2 inline-flex justify-center items-center gap-2 rounded-lg border border-gray-700 font-medium bg-gray-800 text-gray-400 shadow-sm align-middle hover:bg-gray-700/[.25] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-blue-600 transition-all text-sm'
                 data-hs-collapse='#navbar-dark'
               >
                 <HamburgerIcon />
@@ -37,11 +37,7 @@ export default function Header({ user, navItems }) {
                 return (
                   item.display.includes('nav') &&
                   (!item.constraints || validateConstraints(item.constraints)) && (
-                    <NavLink
-                      key={item.title}
-                      className='font-medium text-gray-400 hover:text-gray-500 dark:text-gray-500 dark:hover:text-gray-400  focus:text-orange-600'
-                      to={item.to.replace(':subPath?/', '')}
-                    >
+                    <NavLink key={item.title} className='font-medium text-gray-400  focus:text-orange-600' to={item.to.replace(':subPath?/', '')}>
                       {item.title}
                     </NavLink>
                   )
@@ -50,7 +46,7 @@ export default function Header({ user, navItems }) {
             </div>
           </div>
           {user && (
-            <NavLink className='font-medium text-gray-400 hover:text-gray-500 dark:text-gray-500 dark:hover:text-gray-400  focus:text-orange-600' to='diner-dashboard'>
+            <NavLink className='font-medium text-gray-400  focus:text-orange-600' to='diner-dashboard'>
               <div className='hs-tooltip inline-block  [--placement:bottom]'>
                 <div className='hs-tooltip-toggle pl-4 font-semibold text-orange-400'>
                   <span className='inline-flex items-center justify-center size-[30px] rounded-full bg-orange-800 font-semibold text-white leading-none'>{userText}</span>
