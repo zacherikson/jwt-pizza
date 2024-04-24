@@ -20,7 +20,9 @@ export default function Breadcrumb({ location }) {
     <ol className='flex items-center whitespace-nowrap py-2 px-4 bg-gray-300'>
       <li className='inline-flex items-center'>
         <NavLink className='flex items-center text-sm text-gray-500 hover:text-blue-600 focus:outline-none focus:text-blue-600' to='/'>
-          <HouseIcon />
+          <span className='mx-1'>
+            <HouseIcon />
+          </span>
           home
         </NavLink>
       </li>

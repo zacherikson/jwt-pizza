@@ -3,7 +3,7 @@ import React from 'react';
 function TrashIcon() {
   return (
     <svg
-      className='flex-shrink-0 size-4 mt-0.5'
+      className='inline flex-shrink-0 size-4'
       xmlns='http://www.w3.org/2000/svg'
       width='24'
       height='24'
@@ -26,7 +26,7 @@ function TrashIcon() {
 function LocationIcon() {
   return (
     <svg
-      className='flex-shrink-0 size-4 mt-0.5'
+      className='inline flex-shrink-0 size-4'
       xmlns='http://www.w3.org/2000/svg'
       width='24'
       height='24'
@@ -46,7 +46,7 @@ function LocationIcon() {
 function CautionIcon() {
   return (
     <svg
-      className='flex-shrink-0 size-4 mt-0.5'
+      className='inline flex-shrink-0 size-4'
       xmlns='http://www.w3.org/2000/svg'
       width='24'
       height='24'
@@ -67,7 +67,7 @@ function CautionIcon() {
 function CloseEyeIcon() {
   return (
     <svg
-      className='flex-shrink-0 size-4 mt-0.5'
+      className='inline flex-shrink-0 size-4'
       xmlns='http://www.w3.org/2000/svg'
       width='24'
       height='24'
@@ -91,7 +91,7 @@ function CloseEyeIcon() {
 function KeyIcon() {
   return (
     <svg
-      className='flex-shrink-0 size-4 mt-0.5'
+      className='inline flex-shrink-0 size-4'
       xmlns='http://www.w3.org/2000/svg'
       width='24'
       height='24'
@@ -110,7 +110,7 @@ function KeyIcon() {
 function PersonIcon() {
   return (
     <svg
-      className='flex-shrink-0 size-4'
+      className='inline flex-shrink-0 size-4'
       xmlns='http://www.w3.org/2000/svg'
       width='24'
       height='24'
@@ -130,7 +130,7 @@ function PersonIcon() {
 function EmailIcon() {
   return (
     <svg
-      className='flex-shrink-0 size-4'
+      className='inline flex-shrink-0 size-4'
       xmlns='http://www.w3.org/2000/svg'
       width='24'
       height='24'
@@ -150,7 +150,7 @@ function EmailIcon() {
 function HouseIcon() {
   return (
     <svg
-      className='flex-shrink-0 me-3 size-4'
+      className='inline flex-shrink-0 size-4'
       xmlns='http://www.w3.org/2000/svg'
       width='24'
       height='24'
@@ -170,7 +170,7 @@ function HouseIcon() {
 function StoreIcon() {
   return (
     <svg
-      className='flex-shrink-0 me-3 size-4'
+      className='inline flex-shrink-0 size-4'
       xmlns='http://www.w3.org/2000/svg'
       width='24'
       height='24'
@@ -234,7 +234,7 @@ function CloseIcon() {
 function GreaterThanIcon() {
   return (
     <svg
-      className='flex-shrink-0 mx-2 overflow-visible size-4
+      className='inline flex-shrink-0 size-4
       xmlns='
       http:width='24' //www.w3.org/2000/svg'
       height='24'

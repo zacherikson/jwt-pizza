@@ -86,12 +86,12 @@ function whyFranchise() {
       <div className='text-start py-8 px-4 sm:px-6 lg:px-8'>
         <div className='my-4 bg-yellow-50 border border-yellow-200 text-sm text-yellow-800 rounded-lg p-4/10' role='alert'>
           <div className='flex'>
-            <div className='flex-shrink-0'>
-              <CautionIcon />
-            </div>
             <div className='ms-4'>
-              <div className='mt-1 text-sm text-yellow-700'>
-                If you are already a franchiser, please
+              <div className='my-3 text-sm text-yellow-700'>
+                <span className='mx-2'>
+                  <CautionIcon />
+                </span>
+                If you are already a franchisee, please
                 <span className='font-semibold mx-1 text-yellow-800 underline'>
                   <NavLink to='/franchise-dashboard/login'>login</NavLink>
                 </span>
@@ -102,14 +102,12 @@ function whyFranchise() {
         </div>
 
         <div>
-          <img src='/pizza-shop-logo.png' className='border-solid border-2 border-orange-700 w-64 m-4 float-left' />
-          <p className='py-2 text-white'>
-            To purchase a franchise call <span className='font-semibold text-orange-400'>1-800-555-5555</span>
-          </p>
+          <OrderNow />
           <p className='py-2 text-neutral-100 text-start mx-4 pb-4 first-line:uppercase first-line:tracking-widest  first-letter:text-7xl first-letter:font-bold first-letter:text-orange-800  first-letter:mr-3 first-letter:float-left'>
             Now is the time to get in on the NFT Pizza tsunami. The pizza sells itself. People cannot get enough. Setup your shop and let the pizza fly. Here are all the reasons why you should buy a
             franchise with NFT Pizza.
           </p>
+          <img src='/pizza-shop-logo.png' className='border-solid border-2 border-orange-700 w-64 m-4 float-end' />
           <p className='py-2 text-white'>
             Owning a franchise with NFT Pizza can be highly profitable. With our proven business model and strong brand recognition, you can expect to generate significant revenue. Our profit
             forecasts show consistent growth year after year, making it a lucrative investment opportunity.
@@ -118,6 +116,11 @@ function whyFranchise() {
             In addition to financial success, owning a franchise also allows you to make a positive impact on your community. By providing delicious pizzas and creating job opportunities, you
             contribute to the local economy and bring joy to people's lives. It's a rewarding experience that combines entrepreneurship with social responsibility. The following table shows a possible
             stream of income from your franchise.
+          </p>
+          <p className='py-2 text-white'>
+            But it's not just about the money. By becoming a franchise owner, you become part of a community that is passionate about delivering exceptional pizzas and creating memorable experiences.
+            You'll have the chance to build a team of dedicated employees who share your vision and work together to achieve greatness. And as your business grows, so does your impact on the local
+            economy, creating jobs and bringing joy to countless pizza lovers.
           </p>
           <div className='bg-neutral-100 overflow-clip my-4'>
             <div className='flex flex-col'>
@@ -167,17 +170,22 @@ function whyFranchise() {
               recognition, you have the opportunity to generate substantial revenue. Imagine the thrill of watching your profits soar year after year, as customers flock to your NFT Pizza, craving our
               mouthwatering creations.
             </p>
-            <p className='py-2 text-white'>
-              But it's not just about the money. By becoming a franchise owner, you become part of a community that is passionate about delivering exceptional pizzas and creating memorable
-              experiences. You'll have the chance to build a team of dedicated employees who share your vision and work together to achieve greatness. And as your business grows, so does your impact
-              on the local economy, creating jobs and bringing joy to countless pizza lovers.
-            </p>
           </div>
-          <p className='py-2 text-white'>
-            To purchase a franchise call <span className='font-semibold text-orange-400'>1-800-555-5555</span>
-          </p>
         </div>
       </div>
     </View>
+  );
+}
+
+function OrderNow() {
+  return (
+    <p className='py-2 text-white'>
+      Call{' '}
+      <span className='font-semibold text-orange-400 underline'>
+        <a href='tel:800-555-5555'>800-555-5555</a>
+      </span>
+      {'  '}
+      <span className='mx-2 text-yellow-300 inline-block animate-pulse'>NOW</span>
+    </p>
   );
 }
