@@ -8,7 +8,7 @@ import { Api } from '../api/api';
 
 export default function FranchiseDashboard({ user }) {
   const navigate = useNavigate();
-  const [franchise, setFranchise] = React.useState({ name: 'cwd', stores: [] });
+  const [franchise, setFranchise] = React.useState(null);
 
   React.useEffect(() => {
     (async () => {
@@ -26,7 +26,7 @@ export default function FranchiseDashboard({ user }) {
     navigate('/franchise-dashboard/close-store', { state: { franchise: franchise, store: store } });
   }
 
-  if (!Api.isFranchisee(user)) {
+  if (!franchise) {
     return whyFranchise();
   }
 

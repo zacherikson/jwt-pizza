@@ -180,7 +180,7 @@ class ApiFacade {
   }
 
   async getFranchise(franchiseUser) {
-    return new Promise(async (resolve, reject) => {
+    return new Promise(async (resolve) => {
       if (franchiseUser) {
         const user = await this.getUser();
         if (this.isFranchisee(user) || this.isAdmin(user)) {
@@ -191,7 +191,7 @@ class ApiFacade {
           }
         }
       }
-      reject({ code: 404, msg: 'not found' });
+      resolve(null);
     });
   }
 
