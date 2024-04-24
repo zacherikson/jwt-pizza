@@ -6,7 +6,7 @@ import { Api } from '../api/api';
 
 export default function Payment() {
   const location = useLocation();
-  const order = location.state?.order || [];
+  const order = location.state?.order || { pizzas: [] };
   const navigate = useNavigate();
 
   React.useEffect(() => {
@@ -21,8 +21,7 @@ export default function Payment() {
 
   async function processPayment() {
     const confirmation = await Api.purchase(order);
-    alert(`You just bought ${confirmation.length} pizzas!`);
-    navigate('/dinner-dashboard', { state: { order: [] } });
+    navigate('/delivery', { state: { order: confirmation } });
   }
 
   function cancel() {
@@ -31,7 +30,7 @@ export default function Payment() {
 
   return (
     <View title='So worth it'>
-      <div className='text-neutral-100'>Send me those {order.length} pizzas right now!</div>
+      <div className='text-neutral-100'>Send me those {order.pizzas.length} pizzas right now!</div>
       <Button title='Pay now' onPress={processPayment} />
       <Button title='Cancel' onPress={cancel} />
       <div className='bg-neutral-100 overflow-clip my-4'>
@@ -51,7 +50,7 @@ export default function Payment() {
                     </tr>
                   </thead>
                   <tbody className='divide-y divide-gray-200 dark:divide-neutral-700'>
-                    {order.map((pizza, index) => (
+                    {order.pizzas.map((pizza, index) => (
                       <tr key={index} className='hover:bg-gray-100 dark:hover:bg-neutral-700'>
                         <td className='px-6 py-4 whitespace-nowrap text-start text-xs sm:text-sm font-medium text-gray-800 dark:text-neutral-200'>{pizza.title}</td>
                         <td className='px-6 py-4 whitespace-nowrap text-start text-xs sm:text-sm text-gray-800 dark:text-neutral-200'>${pizza.price.toLocaleString()}</td>
@@ -61,9 +60,9 @@ export default function Payment() {
                   <tfoot>
                     <tr className='bg-orange-200 border-t-2 border-red-500'>
                       <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200'>
-                        {order.length} pie{order.length > 1 ? 's' : ''}
+                        {order.pizzas.length} pie{order.pizzas.length > 1 ? 's' : ''}
                       </td>
-                      <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200'>${order.reduce((a, c) => a + c.price, 0).toLocaleString()}</td>
+                      <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200'>${order.pizzas.reduce((a, c) => a + c.price, 0).toLocaleString()}</td>
                     </tr>
                   </tfoot>
                 </table>

@@ -4,7 +4,7 @@ import View from './view';
 import NotFound from './notFound';
 import { Api } from '../api/api';
 
-export default function DinnerDashboard({ user }) {
+export default function DinerDashboard({ user }) {
   const [purchases, setPurchases] = React.useState([]);
 
   React.useEffect(() => {
@@ -55,7 +55,7 @@ export default function DinnerDashboard({ user }) {
                         <thead className='uppercase text-neutral-100 bg-slate-400 border-b-2 border-gray-500'>
                           <tr>
                             <th scope='col' className='px-6 py-3 text-start text-xs sm:text-sm font-medium'>
-                              Pie
+                              ID
                             </th>
                             <th scope='col' className='px-6 py-3 text-start text-xs sm:text-sm font-medium'>
                               Price
@@ -66,11 +66,13 @@ export default function DinnerDashboard({ user }) {
                           </tr>
                         </thead>
                         <tbody className='divide-y divide-gray-200 dark:divide-neutral-700'>
-                          {purchases.map((purchase, index) => (
+                          {purchases.map((order, index) => (
                             <tr key={index} className='hover:bg-gray-100 dark:hover:bg-neutral-700'>
-                              <td className='px-6 py-4 whitespace-nowrap text-start text-xs sm:text-sm font-medium text-gray-800 dark:text-neutral-200'>{purchase.name}</td>
-                              <td className='px-6 py-4 whitespace-nowrap text-start text-xs sm:text-sm text-gray-800 dark:text-neutral-200'>${purchase.price.toLocaleString()}</td>
-                              <td className='px-6 py-4 whitespace-nowrap text-start text-xs sm:text-sm text-gray-800 dark:text-neutral-200'>{purchase.date.toLocaleString()}</td>
+                              <td className='px-6 py-4 whitespace-nowrap text-start text-xs sm:text-sm font-medium text-gray-800 dark:text-neutral-200'>{order.id}</td>
+                              <td className='px-6 py-4 whitespace-nowrap text-start text-xs sm:text-sm text-gray-800 dark:text-neutral-200'>
+                                ${order.pizzas.reduce((a, c) => a + c.price, 0).toLocaleString()}
+                              </td>
+                              <td className='px-6 py-4 whitespace-nowrap text-start text-xs sm:text-sm text-gray-800 dark:text-neutral-200'>{order.date.toLocaleString()}</td>
                             </tr>
                           ))}
                         </tbody>

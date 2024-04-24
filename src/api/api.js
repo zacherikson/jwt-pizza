@@ -29,21 +29,28 @@ const pizzaMenu = [
 const purchaseHistory = [
   {
     email: 'a@ps.com',
-    pizzas: [
-      { name: 'Pepperoni', price: 35, date: new Date('2024-03-10T00:00:00Z') },
-      { name: 'Veggie', price: 50, date: '2024-03-10T00:00:00Z' },
-      { name: 'Margarita', price: 45, date: '2024-03-10T00:00:00Z' },
+    orders: [
+      {
+        id: 'e7b6a8f2-4e1d-4d2d-9e8a-3e9c1a2b6d5f',
+        date: '2024-03-10T00:00:00Z',
+        pizzas: [
+          { name: 'Veggie', price: 50 },
+          { name: 'Margarita', price: 45 },
+        ],
+      },
     ],
   },
   {
     email: 'd@ps.com',
-    pizzas: [
-      { name: 'Pepperoni', price: 35, date: new Date('2024-03-10T00:00:00Z') },
-      { name: 'Pepperoni', price: 50, date: '2024-03-10T00:00:00Z' },
-      { name: 'Crusty', price: 45, date: '2024-03-10T00:00:00Z' },
-      { name: 'Flat', price: 45, date: '2024-03-10T00:00:00Z' },
-      { name: 'Pepperoni', price: 45, date: '2024-03-10T00:00:00Z' },
-      { name: 'Pepperoni', price: 45, date: '2024-03-10T00:00:00Z' },
+    orders: [
+      {
+        id: 'e7b3423f2-4e1d-4d2d-9e8a-3e9c1a2b6d5f',
+        date: '2023-03-10T00:00:00Z',
+        pizzas: [
+          { name: 'Pepperoni', price: 50 },
+          { name: 'Crusty', price: 45 },
+        ],
+      },
     ],
   },
 ];
@@ -140,7 +147,7 @@ class ApiFacade {
         if (user && (this.isAdmin(user) || user.email === purchasingUser.email)) {
           const purchases = purchaseHistory.find((purchase) => purchase.email === purchasingUser.email);
           if (purchases) {
-            result = purchases.pizzas;
+            result = purchases.orders;
           }
         }
       }
@@ -152,18 +159,16 @@ class ApiFacade {
     return new Promise(async (resolve, reject) => {
       const user = await this.getUser();
       if (user) {
-        const purchases = [];
-        order.forEach((pizza) => {
-          purchases.push({ name: pizza.title, price: pizza.price, date: new Date().toISOString() });
-        });
+        order.id = this.generateUUID();
+        order.date = new Date().toISOString();
 
         let userPurchaseHistory = purchaseHistory.find((purchase) => purchase.email === user.email);
         if (!userPurchaseHistory) {
-          userPurchaseHistory = { email: user.email, pizzas: [] };
+          userPurchaseHistory = { email: user.email, orders: [] };
           purchaseHistory.push(userPurchaseHistory);
         }
-        userPurchaseHistory.pizzas = [...purchases, ...userPurchaseHistory.pizzas];
-        resolve(purchases);
+        userPurchaseHistory.orders = [order, ...userPurchaseHistory.orders];
+        resolve(order);
       } else {
         reject({ code: 401, msg: 'unauthorized' });
       }
@@ -216,6 +221,14 @@ class ApiFacade {
         }
       }
       reject({ code: 401, msg: 'unauthorized' });
+    });
+  }
+
+  generateUUID() {
+    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
+      const r = (Math.random() * 16) | 0,
+        v = c === 'x' ? r : (r & 0x3) | 0x8;
+      return v.toString(16);
     });
   }
 }

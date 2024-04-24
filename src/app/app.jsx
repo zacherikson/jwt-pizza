@@ -9,10 +9,11 @@ import Register from '../views/register';
 import Login from '../views/login';
 import Logout from '../views/logout';
 import Menu from '../views/menu';
+import Delivery from '../views/delivery';
 import FranchiseDashboard from '../views/franchiseDashboard';
 import History from '../views/history';
 import AdminDashboard from '../views/adminDashboard';
-import DinnerDashboard from '../views/dinnerDashboard';
+import DinerDashboard from '../views/dinerDashboard';
 import CreateStore from '../views/createStore';
 import CreateFranchise from '../views/createFranchise';
 import CloseStore from '../views/closeStore';
@@ -53,7 +54,7 @@ export default function App() {
 
   const navItems = [
     { title: 'Home', to: '/', component: <Home />, display: [] },
-    { title: 'Dinner', to: '/dinner-dashboard', component: <DinnerDashboard user={user} />, display: [] },
+    { title: 'Diner', to: '/diner-dashboard', component: <DinerDashboard user={user} />, display: [] },
     { title: 'Order', to: '/menu', component: <Menu />, display: ['nav'] },
     { title: 'Franchise', to: '/franchise-dashboard', component: <FranchiseDashboard user={user} />, constraints: [isNotAdmin], display: ['nav', 'footer'] },
     { title: 'About', to: '/about', component: <About />, display: ['footer'] },
@@ -63,10 +64,11 @@ export default function App() {
     { title: 'Create store', to: '/:subPath?/create-store', component: <CreateStore />, display: [] },
     { title: 'Close store', to: '/:subPath?/close-store', component: <CloseStore />, display: [] },
     { title: 'Payment', to: '/payment', component: <Payment />, display: [] },
-    { title: 'Opps', to: '*', component: <NotFound />, display: [] },
+    { title: 'Delivery', to: '/delivery', component: <Delivery />, display: [] },
     { title: 'Login', to: '/:subPath?/login', component: <Login setUser={setUser} />, constraints: [loggedOut], display: ['nav'] },
     { title: 'Register', to: '/:subPath?/register', component: <Register setUser={setUser} />, constraints: [loggedOut], display: ['nav'] },
     { title: 'Logout', to: '/:subPath?/logout', component: <Logout setUser={setUser} />, constraints: [loggedIn], display: ['nav'] },
+    { title: 'Opps', to: '*', component: <NotFound />, display: [] },
   ];
 
   return (
