@@ -28,6 +28,7 @@ export default function Delivery() {
         <div className='my-4 text-lg text-orange-200 text-left grid grid-cols-5 gap-2'>
           <div className='font-semibold text-orange-400'>order ID:</div> <div className='col-span-4'>{order.id}</div>
           <div className='font-semibold text-orange-400'>pie count:</div> <div className='col-span-4'>{order.pizzas.length}</div>
+          <div className='font-semibold text-orange-400'>total:</div> <div className='col-span-4'>${order.pizzas.reduce((a, c) => a + c.price, 0).toLocaleString()}</div>
         </div>
 
         <div className='flex flex-row mt-8'>

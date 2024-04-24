@@ -18,12 +18,12 @@ const users = [
 ];
 
 const pizzaMenu = [
-  { title: 'Veggie', description: 'A garden of delight', image: 'pizza1.png', price: 24 },
-  { title: 'Pepperoni', description: 'Spicy treat', image: 'pizza2.png', price: 33 },
-  { title: 'Margarita', description: 'Essential classic', image: 'pizza3.png', price: 14 },
-  { title: 'Crusty', description: 'A dry mouthed favorite', image: 'pizza4.png', price: 42 },
-  { title: 'Flat', description: 'Something special', image: 'pizza5.png', price: 29 },
-  { title: 'Chared Leopard', description: 'For those with a darker side', image: 'pizza6.png', price: 10 },
+  { title: 'Veggie', description: 'A garden of delight', image: 'pizza1.png', price: 24.34 },
+  { title: 'Pepperoni', description: 'Spicy treat', image: 'pizza2.png', price: 33.99 },
+  { title: 'Margarita', description: 'Essential classic', image: 'pizza3.png', price: 14.25 },
+  { title: 'Crusty', description: 'A dry mouthed favorite', image: 'pizza4.png', price: 42.25 },
+  { title: 'Flat', description: 'Something special', image: 'pizza5.png', price: 29.99 },
+  { title: 'Chared Leopard', description: 'For those with a darker side', image: 'pizza6.png', price: 10.99 },
 ];
 
 const purchaseHistory = [

@@ -42,7 +42,11 @@ export default function Menu() {
               type='button'
               onClick={(e) => {
                 e.preventDefault();
+                e.currentTarget.classList.add('animate-wobble');
                 selectPizza(pizza);
+              }}
+              onAnimationEnd={(e) => {
+                e.currentTarget.classList.remove('animate-wobble');
               }}
             >
               <Card title={pizza.title} description={pizza.description} image={pizza.image} />
