@@ -1,8 +1,27 @@
-# PizzaShop
+# NFT Pizza
+
+A non-fungible token (NFT) is a unique digital identifier that is backed by a digital signature and recorded on a blockchain. This guarantees its ownership and authenticity.
+
+`NFT Pizza` takes the next stage of blockchain evolution by allowing you to buy pizzas that you can never actually eat. Not only does NFT exchange bitcoin and give you nothing in return, it also allows for you to be come a franchisee and turn the whole vapor company into an MLM.
+
+## Running locally
+
+1. Clone this repository
+   ```sh
+   git clone https://github.com/devops329/nft-pizza.git
+   ```
+2. Install the dependencies
+   ```sh
+   npm install
+   ```
+3. Run vite
+   ```sh
+   npm run dev
+   ```
 
 ## Development notes
 
-We use Vite, React, and Tailwind.
+NFT Pizza uses Vite, React, and Tailwind.
 
 ### Vite
 
