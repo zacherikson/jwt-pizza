@@ -57,7 +57,7 @@ export default function Payment() {
                       {order.pizzas.map((pizza, index) => (
                         <tr key={index} className='hover:bg-gray-100'>
                           <td className='px-6 py-4 whitespace-nowrap text-start text-xs sm:text-sm font-medium text-gray-800'>{pizza.title}</td>
-                          <td className='px-6 py-4 whitespace-nowrap text-start text-xs sm:text-sm text-gray-800'>${pizza.price.toLocaleString()}</td>
+                          <td className='px-6 py-4 whitespace-nowrap text-start text-xs sm:text-sm text-gray-800'>{pizza.price.toLocaleString()} ₿</td>
                         </tr>
                       ))}
                     </tbody>
@@ -66,7 +66,7 @@ export default function Payment() {
                         <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-800'>
                           {order.pizzas.length} pie{order.pizzas.length > 1 ? 's' : ''}
                         </td>
-                        <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-800'>${order.pizzas.reduce((a, c) => a + c.price, 0).toLocaleString()}</td>
+                        <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-800'>{order.pizzas.reduce((a, c) => a + c.price, 0).toLocaleString()} ₿</td>
                       </tr>
                     </tfoot>
                   </table>

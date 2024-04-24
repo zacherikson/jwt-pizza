@@ -55,7 +55,7 @@ export default function AdminDashboard({ user }) {
                           <th scope='col' className='px-6 py-3 text-center text-xs font-medium'>
                             Location
                           </th>
-                          <th scope='col' className='px-6 py-3 text-center text-xs font-medium'>
+                          <th scope='col' className='px-6 py-3 text-right text-xs font-medium'>
                             Revenue
                           </th>
                           <th scope='col' className='px-6 py-3 text-center text-xs font-medium'>
@@ -89,8 +89,8 @@ export default function AdminDashboard({ user }) {
                                   <td className='text-right px-2 whitespace-nowrap text-sm text-gray-800' colSpan={3}>
                                     {store.name}
                                   </td>
-                                  <td className='text-left px-2 whitespace-nowrap text-sm text-gray-800'>{store.location}</td>
-                                  <td className='text-left px-2 whitespace-nowrap text-sm text-gray-800'>${store.totalRevenue.toLocaleString()}</td>
+                                  <td className='text-center px-2 whitespace-nowrap text-sm text-gray-800'>{store.location}</td>
+                                  <td className='text-right px-2 whitespace-nowrap text-sm text-gray-800'>{store.totalRevenue.toLocaleString()} ₿</td>
                                   <td className='px-6 py-4 whitespace-nowrap text-end text-sm font-medium'>
                                     <button
                                       type='button'

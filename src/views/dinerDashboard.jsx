@@ -69,7 +69,7 @@ export default function DinerDashboard({ user }) {
                           {purchases.map((order, index) => (
                             <tr key={index} className='hover:bg-gray-100'>
                               <td className='px-6 py-4 whitespace-nowrap text-start text-xs sm:text-sm font-medium text-gray-800'>{order.id}</td>
-                              <td className='px-6 py-4 whitespace-nowrap text-start text-xs sm:text-sm text-gray-800'>${order.pizzas.reduce((a, c) => a + c.price, 0).toLocaleString()}</td>
+                              <td className='px-6 py-4 whitespace-nowrap text-start text-xs sm:text-sm text-gray-800'>{order.pizzas.reduce((a, c) => a + c.price, 0).toLocaleString()} ₿</td>
                               <td className='px-6 py-4 whitespace-nowrap text-start text-xs sm:text-sm text-gray-800'>{order.date.toLocaleString()}</td>
                             </tr>
                           ))}

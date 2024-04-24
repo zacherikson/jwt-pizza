@@ -12,7 +12,7 @@ export default function Menu() {
 
   useEffect(() => {
     (async () => {
-      const menu = await Api.getPizzaMenu();
+      const menu = await Api.getMenu();
       setPizzas(menu);
     })();
   }, []);

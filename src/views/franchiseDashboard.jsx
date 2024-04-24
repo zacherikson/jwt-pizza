@@ -61,7 +61,7 @@ export default function FranchiseDashboard({ user }) {
                       <tr key={store.location} className='hover:bg-gray-100'>
                         <td className='px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800'>{store.name}</td>
                         <td className='px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800'>{store.location}</td>
-                        <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-800'>${store.totalRevenue.toLocaleString()}</td>
+                        <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-800'>{store.totalRevenue.toLocaleString()} ₿</td>
                         <td className='px-6 py-4 whitespace-nowrap text-end text-sm font-medium'>
                           <button
                             type='button'
