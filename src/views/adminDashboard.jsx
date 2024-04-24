@@ -43,24 +43,11 @@ export default function AdminDashboard({ user }) {
                     <table className='min-w-full divide-y divide-gray-200'>
                       <thead className='uppercase text-neutral-100 bg-slate-400 border-b-2 border-gray-500'>
                         <tr>
-                          <th scope='col' className='px-6 py-3 text-center text-xs font-medium'>
-                            Franchise
-                          </th>
-                          <th scope='col' className='px-6 py-3 text-center text-xs font-medium'>
-                            Franchisee
-                          </th>
-                          <th scope='col' className='px-6 py-3 text-end text-xs font-medium'>
-                            Store
-                          </th>
-                          <th scope='col' className='px-6 py-3 text-center text-xs font-medium'>
-                            Location
-                          </th>
-                          <th scope='col' className='px-6 py-3 text-end text-xs font-medium'>
-                            Revenue
-                          </th>
-                          <th scope='col' className='px-6 py-3 text-center text-xs font-medium'>
-                            Action
-                          </th>
+                          {['Franchise', 'Franchisee', 'Store', 'Location', 'Revenue', 'Action'].map((header) => (
+                            <th key={header} scope='col' className='px-6 py-3 text-center text-xs font-medium'>
+                              {header}
+                            </th>
+                          ))}
                         </tr>
                       </thead>
                       {franchises.map((franchise, findex) => {

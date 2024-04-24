@@ -42,27 +42,20 @@ export default function FranchiseDashboard({ user }) {
                 <table className='min-w-full divide-y divide-gray-200'>
                   <thead className='uppercase text-neutral-100 bg-slate-400 border-b-2 border-gray-500'>
                     <tr>
-                      <th scope='col' className='px-6 py-3 text-start text-xs font-medium'>
-                        Name
-                      </th>
-                      <th scope='col' className='px-6 py-3 text-start text-xs font-medium'>
-                        Location
-                      </th>
-                      <th scope='col' className='px-6 py-3 text-end text-xs font-medium'>
-                        Revenue
-                      </th>
-                      <th scope='col' className='px-6 py-3 text-end text-xs font-medium'>
-                        Action
-                      </th>
+                      {['Name', 'Location', 'Revenue', 'Action'].map((header) => (
+                        <th key={header} scope='col' className='px-6 py-3 text-center text-xs font-medium'>
+                          {header}
+                        </th>
+                      ))}
                     </tr>
                   </thead>
                   <tbody className='divide-y divide-gray-200'>
                     {franchise.stores?.map((store) => (
                       <tr key={store.location} className='hover:bg-gray-100'>
-                        <td className='px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800'>{store.name}</td>
-                        <td className='px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800'>{store.location}</td>
-                        <td className='px-6 py-4 whitespace-nowrap text-end text-sm text-gray-800'>{store.totalRevenue.toLocaleString()} ₿</td>
-                        <td className='px-6 py-4 whitespace-nowrap text-end text-sm font-medium'>
+                        <td className='px-6 py-4 text-sm text-center font-medium text-gray-800'>{store.name}</td>
+                        <td className='px-6 py-4 text-sm text-center font-medium text-gray-800'>{store.location}</td>
+                        <td className='px-6 py-4 text-end text-sm text-gray-800'>{store.totalRevenue.toLocaleString()} ₿</td>
+                        <td className='px-6 py-4 text-end text-sm font-medium'>
                           <button
                             type='button'
                             className='px-2 py-1 inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-1 border-orange-400 text-orange-400 hover:border-orange-800 hover:text-orange-800'
@@ -113,7 +106,7 @@ function whyFranchise() {
           <p className='py-2 text-white'>
             To purchase a franchise call <span className='font-semibold text-orange-400'>1-800-555-5555</span>
           </p>
-          <p className='py-2 text-white'>
+          <p className='py-2 text-neutral-100 text-start mx-4 pb-4 first-line:uppercase first-line:tracking-widest  first-letter:text-7xl first-letter:font-bold first-letter:text-orange-800  first-letter:mr-3 first-letter:float-left'>
             Now is the time to get in on the NFT Pizza tsunami. The pizza sells itself. People cannot get enough. Setup your shop and let the pizza fly. Here are all the reasons why you should buy a
             franchise with NFT Pizza.
           </p>
@@ -134,38 +127,31 @@ function whyFranchise() {
                     <table className='min-w-full divide-y divide-gray-200'>
                       <thead className='uppercase text-neutral-100 bg-slate-400 border-b-2 border-gray-500'>
                         <tr>
-                          <th scope='col' className='px-6 text-sm py-3 text-start font-medium'>
-                            Year
-                          </th>
-                          <th scope='col' className='px-6 text-sm py-3 text-start font-medium'>
-                            Profit
-                          </th>
-                          <th scope='col' className='px-6 text-sm py-3 text-start font-medium'>
-                            Costs
-                          </th>
-                          <th scope='col' className='px-6 text-sm py-3 text-start font-medium'>
-                            Franchise Fee
-                          </th>
+                          {['Year', 'Profit', 'Costs', 'Franchise Fee'].map((header) => (
+                            <th key={header} scope='col' className='px-6 py-3 text-center text-xs font-medium'>
+                              {header}
+                            </th>
+                          ))}
                         </tr>
                       </thead>
                       <tbody className='divide-y divide-gray-200'>
                         <tr>
-                          <td className='px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800'>2020</td>
-                          <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-800'>$500,000</td>
-                          <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-800'>$400,000</td>
-                          <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-800'>$50,000</td>
+                          <td className='px-6 py-4 text-sm text-center font-medium text-cyan-800'>2020</td>
+                          <td className='px-6 py-4 text-sm text-center text-gray-800'>50 ₿</td>
+                          <td className='px-6 py-4 text-sm text-center text-gray-800'>400 ₿</td>
+                          <td className='px-6 py-4 text-sm text-center text-gray-800'>50 ₿</td>
                         </tr>
                         <tr>
-                          <td className='px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800'>2021</td>
-                          <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-800'>$750,000</td>
-                          <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-800'>$500,000</td>
-                          <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-800'>$50,000</td>
+                          <td className='px-6 py-4 text-sm text-center font-medium text-cyan-800'>2021</td>
+                          <td className='px-6 py-4 text-sm text-center text-gray-800'>150 ₿</td>
+                          <td className='px-6 py-4 text-sm text-center text-gray-800'>500 ₿</td>
+                          <td className='px-6 py-4 text-sm text-center text-gray-800'>50 ₿</td>
                         </tr>
                         <tr>
-                          <td className='px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800'>2022</td>
-                          <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-800'>$1,000,000</td>
-                          <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-800'>$600,000</td>
-                          <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-800'>$50,000</td>
+                          <td className='px-6 py-4 text-sm text-center font-medium text-cyan-800'>2022</td>
+                          <td className='px-6 py-4 text-sm text-center text-gray-800'>300 ₿</td>
+                          <td className='px-6 py-4 text-sm text-center text-gray-800'>600 ₿</td>
+                          <td className='px-6 py-4 text-sm text-center text-gray-800'>50 ₿</td>
                         </tr>
                       </tbody>
                     </table>
