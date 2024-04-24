@@ -1,5 +1,25 @@
 import React from 'react';
 
+function LocationIcon() {
+  return (
+    <svg
+      className='flex-shrink-0 size-4 mt-0.5'
+      xmlns='http://www.w3.org/2000/svg'
+      width='24'
+      height='24'
+      viewBox='0 0 24 24'
+      fill='none'
+      stroke='currentColor'
+      strokeWidth='1.5'
+      strokeLinecap='round'
+      strokeLinejoin='round'
+    >
+      <path strokeLinecap='round' strokeLinejoin='round' d='M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z' />
+      <path strokeLinecap='round' strokeLinejoin='round' d='M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z' />
+    </svg>
+  );
+}
+
 function CautionIcon() {
   return (
     <svg
@@ -207,4 +227,4 @@ function GreaterThanIcon() {
   );
 }
 
-export { KeyIcon, CautionIcon, CloseEyeIcon, PersonIcon, EmailIcon, StoreIcon, CloseIcon, HouseIcon, HamburgerIcon, GreaterThanIcon };
+export { LocationIcon, KeyIcon, CautionIcon, CloseEyeIcon, PersonIcon, EmailIcon, StoreIcon, CloseIcon, HouseIcon, HamburgerIcon, GreaterThanIcon };

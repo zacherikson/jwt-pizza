@@ -8,16 +8,18 @@ import { Api } from '../api/api';
 
 export default function FranchiseDashboard({ user }) {
   const navigate = useNavigate();
-  const [franchise, setFranchise] = React.useState([]);
+  const [franchise, setFranchise] = React.useState({ name: 'cwd', stores: [] });
 
   React.useEffect(() => {
     (async () => {
-      setFranchise(await Api.getFranchise(user));
+      if (user) {
+        setFranchise(await Api.getFranchise(user));
+      }
     })();
   }, [user]);
 
   function createStore() {
-    navigate('/franchise-dashboard/create-store');
+    navigate('/franchise-dashboard/create-store', { state: { franchise: franchise } });
   }
 
   function closeStore(franchise, store) {
@@ -29,7 +31,7 @@ export default function FranchiseDashboard({ user }) {
   }
 
   return (
-    <View title='Franchise central'>
+    <View title={franchise.name}>
       <div className='text-neutral-100'>Everything you need to run an NFT Pizza franchise. Your gateway to success.</div>
 
       <div className='bg-neutral-100 overflow-clip my-4'>
@@ -41,10 +43,10 @@ export default function FranchiseDashboard({ user }) {
                   <thead className='uppercase text-neutral-100 bg-slate-400 border-b-2 border-gray-500'>
                     <tr>
                       <th scope='col' className='px-6 py-3 text-start text-xs font-medium'>
-                        City
+                        Name
                       </th>
                       <th scope='col' className='px-6 py-3 text-start text-xs font-medium'>
-                        Address
+                        Location
                       </th>
                       <th scope='col' className='px-6 py-3 text-start text-xs font-medium'>
                         Revenue
@@ -56,9 +58,9 @@ export default function FranchiseDashboard({ user }) {
                   </thead>
                   <tbody className='divide-y divide-gray-200 dark:divide-neutral-700'>
                     {franchise.stores?.map((store) => (
-                      <tr key={store.city} className='hover:bg-gray-100 dark:hover:bg-neutral-700'>
-                        <td className='px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-neutral-200'>{store.city}</td>
-                        <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200'>{store.address}</td>
+                      <tr key={store.location} className='hover:bg-gray-100 dark:hover:bg-neutral-700'>
+                        <td className='px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-neutral-200'>{store.name}</td>
+                        <td className='px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-neutral-200'>{store.location}</td>
                         <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200'>${store.totalRevenue.toLocaleString()}</td>
                         <td className='px-6 py-4 whitespace-nowrap text-end text-sm font-medium'>
                           <button

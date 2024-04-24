@@ -39,10 +39,13 @@ export default function AdminDashboard({ user }) {
                       <thead className='uppercase text-neutral-100 bg-slate-400 border-b-2 border-gray-500'>
                         <tr>
                           <th scope='col' className='px-6 py-3 text-start text-xs font-medium'>
-                            Name
+                            Franchise
                           </th>
                           <th scope='col' className='px-6 py-3 text-start text-xs font-medium'>
                             Franchisee
+                          </th>
+                          <th scope='col' className='px-6 py-3 text-start text-xs font-medium'>
+                            Store
                           </th>
                           <th scope='col' className='px-6 py-3 text-start text-xs font-medium'>
                             Location
@@ -60,20 +63,19 @@ export default function AdminDashboard({ user }) {
                           <tbody key={findex} className='divide-y divide-gray-200 dark:divide-neutral-700'>
                             <tr className='bg-neutral-300'>
                               <td className='text-left px-2 whitespace-nowrap text-sm font-medium text-slate-600 dark:text-neutral-200'>{franchise.name}</td>
-                              <td className='text-left px-2 whitespace-nowrap text-sm font-normal text-gray-800 dark:text-neutral-200'>{franchise.admin.join(',')}</td>
-                              <td className='text-left px-2 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200'></td>
-                              <td className='text-left px-2 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200'></td>
-                              <td className='px-6 py-4 whitespace-nowrap text-end text-sm font-medium'></td>
+                              <td className='text-left px-2 whitespace-nowrap text-sm font-normal text-gray-800 dark:text-neutral-200' colSpan={4}>
+                                {franchise.admin.join(', ')}
+                              </td>
+                              <td className='px-6 py-4 whitespace-nowrap text-end text-sm font-medium'>Delete</td>
                             </tr>
 
                             {franchise.stores.map((store, sindex) => {
                               return (
                                 <tr key={sindex} className='bg-neutral-100'>
-                                  <td className='text-left px-2 whitespace-nowrap text-sm font-medium text-orange-600 dark:text-neutral-200'></td>
-                                  <td className='text-left px-2 whitespace-nowrap text-sm font-semibold text-gray-800 dark:text-neutral-200'></td>
-                                  <td className='text-left px-2 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200'>
-                                    {store.address}, {store.city}
+                                  <td className='text-left px-2 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200' colSpan={3}>
+                                    {store.name}
                                   </td>
+                                  <td className='text-left px-2 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200'>{store.location}</td>
                                   <td className='text-left px-2 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200'>${store.totalRevenue.toLocaleString()}</td>
                                   <td className='px-6 py-4 whitespace-nowrap text-end text-sm font-medium'>
                                     <button

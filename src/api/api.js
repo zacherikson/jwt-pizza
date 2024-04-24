@@ -28,7 +28,7 @@ const pizzaMenu = [
 
 const purchaseHistory = [
   {
-    email: 'a@ps.com',
+    email: 'a@ntf.com',
     orders: [
       {
         id: 'e7b6a8f2-4e1d-4d2d-9e8a-3e9c1a2b6d5f',
@@ -41,7 +41,7 @@ const purchaseHistory = [
     ],
   },
   {
-    email: 'd@ps.com',
+    email: 'd@ntf.com',
     orders: [
       {
         id: 'e7b3423f2-4e1d-4d2d-9e8a-3e9c1a2b6d5f',
@@ -58,25 +58,25 @@ const purchaseHistory = [
 const franchises = [
   {
     name: 'SuperPie',
-    admin: ['f@ps.com'],
+    admin: ['f@ntf.com'],
     id: 'e7b6a8f2-4e1d-4d2d-9e8a-3e9c1a2b6d5f',
     stores: [
-      { city: 'Orem', totalRevenue: 3000000, address: '234 N 300 S' },
-      { city: 'Provo', totalRevenue: 53000, address: '234 N 300 S' },
-      { city: 'Payson', totalRevenue: 458767832, address: '234 N 300 S' },
+      { id: '12345678-1234-4abc-9def-123456789abc', name: 'online', location: 'Orem', totalRevenue: 3000000 },
+      { id: '87654321-4321-4def-9abc-987654321def', name: 'online', location: 'Provo', totalRevenue: 53000 },
+      { id: 'abcdef12-34ab-4def-9abc-abcdef123456', name: 'online', location: 'Payson', totalRevenue: 458767832 },
     ],
   },
   {
     name: 'LotaPizza',
-    admin: ['luna@example.com'],
+    admin: ['luna@ntf.com', 'nikolai@ntf.com'],
     id: 'abb3423f2-4e1d-4d2d-9e8a-3e9c1a2b6d77',
     stores: [
-      { city: 'Lehi', totalRevenue: 3000000, address: '234 N 300 S' },
-      { city: 'Springville', totalRevenue: 53000, address: '234 N 300 S' },
-      { city: 'American Fork', totalRevenue: 458767832, address: '234 N 300 S' },
+      { id: 'aabbccdd-eeff-4a4a-9a9a-bbccddeeff00', name: 'online', location: 'Lehi', totalRevenue: 3000000 },
+      { id: '11223344-5566-4b4b-9b9b-ccddeeff0011', name: 'online', location: 'Springville', totalRevenue: 53000 },
+      { id: '99887766-5544-4c4c-9c9c-bbaa99887766', name: 'online', location: 'American Fork', totalRevenue: 458767832 },
     ],
   },
-  { name: 'PizzaCorp', admin: ['nikolai@example.com'], stores: [{ city: 'Spanish Fork', totalRevenue: 3000000, address: '234 N 300 S' }] },
+  { name: 'PizzaCorp', admin: ['nikolai@ntf.com'], stores: [{ id: '44556677-3322-4d4d-9d9d-ccbbaa445566', name: 'online', location: 'Spanish Fork', totalRevenue: 3000000 }] },
 ];
 
 class ApiFacade {
@@ -86,6 +86,12 @@ class ApiFacade {
 
   isFranchisee(user) {
     return user?.roles.includes(Role.Franchisee);
+  }
+
+  async getMenu() {
+    return new Promise((resolve) => {
+      resolve(pizzaMenu);
+    });
   }
 
   async login(email, password) {
@@ -136,10 +142,6 @@ class ApiFacade {
     });
   }
 
-  async getPizzaMenu() {
-    return pizzaMenu;
-  }
-
   async getPurchases(purchasingUser) {
     return new Promise(async (resolve) => {
       let result = [];
@@ -178,31 +180,37 @@ class ApiFacade {
   }
 
   async getFranchise(franchiseUser) {
-    let result = {};
-
-    if (franchiseUser) {
-      const user = await this.getUser();
-      if (this.isFranchisee(user) || this.isAdmin(user)) {
-        const franchise = franchises.find((franchise) => franchise.admin.includes(franchiseUser.email));
-        if (franchise) {
-          result = franchise;
+    return new Promise(async (resolve, reject) => {
+      if (franchiseUser) {
+        const user = await this.getUser();
+        if (this.isFranchisee(user) || this.isAdmin(user)) {
+          const franchise = franchises.find((franchise) => franchise.admin.includes(franchiseUser.email));
+          if (franchise) {
+            resolve(franchise);
+            return;
+          }
         }
       }
-    }
-    return result;
+      reject({ code: 404, msg: 'not found' });
+    });
   }
 
-  async createFranchise(newFranchise) {
+  async createFranchise(franchise) {
     return new Promise((resolve, reject) => {
-      if (newFranchise?.name && newFranchise?.admin.length > 0) {
-        const user = users.find((user) => user.email === newFranchise.admin[0]);
+      if (franchise?.name && franchise?.admin.length > 0) {
+        const user = users.find((user) => user.email === franchise.admin[0]);
         if (user) {
-          user.roles.push(Role.Franchisee);
-          newFranchise.totalRevenue = 0;
-          newFranchise.id = this.generateUUID();
-          franchises.push(newFranchise);
+          if (franchises.find((candidate) => candidate.name === franchise.name)) {
+            reject({ code: 409, msg: 'franchise already exists' });
+            return;
+          }
 
-          resolve(newFranchise);
+          if (!user.roles.includes(Role.Franchisee)) {
+            user.roles.push(Role.Franchisee);
+          }
+          franchise.id = this.generateUUID();
+          franchises.push(franchise);
+          resolve(franchise);
           return;
         }
       }
@@ -221,13 +229,36 @@ class ApiFacade {
     });
   }
 
+  async createStore(franchise, store) {
+    return new Promise(async (resolve, reject) => {
+      if (store?.name) {
+        const user = await this.getUser();
+        if (this.isFranchisee(user) || this.isAdmin(user)) {
+          const dbFranchise = franchises.find((candidate) => candidate.name === franchise.name);
+          if (dbFranchise) {
+            if (dbFranchise.stores.find((candidate) => candidate.name === store.name)) {
+              reject({ code: 409, msg: 'store already exists' });
+              return;
+            }
+            store.totalRevenue = 0;
+            store.id = this.generateUUID();
+            dbFranchise.stores.push(store);
+            resolve(dbFranchise);
+            return;
+          }
+        }
+      }
+      reject({ code: 400, msg: 'invalid' });
+    });
+  }
+
   async closeStore(franchise, store) {
     return new Promise(async (resolve, reject) => {
       const user = await this.getUser();
-      if (this.isRole.Franchisee(user) || this.isAdmin(user)) {
-        const match = franchises.find((candidate) => candidate.name === franchise.name);
-        if (match) {
-          match.stores = match.stores.filter((s) => s.city !== store.city);
+      if (this.isFranchisee(user) || this.isAdmin(user)) {
+        const dbFranchise = franchises.find((candidate) => candidate.name === franchise.name);
+        if (dbFranchise) {
+          dbFranchise.stores = dbFranchise.stores.filter((s) => s.location !== store.location);
           resolve({ code: 200, msg: 'store closed' });
           return;
         }
