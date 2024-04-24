@@ -1,26 +1,27 @@
 import React, { useEffect } from 'react';
-import { CloseEyeIcon, KeyIcon, EmailIcon } from '../icons';
+import { KeyIcon, CloseEyeIcon, PersonIcon, EmailIcon } from '../icons';
 import Button from '../components/button';
 import { Api } from '../api/api';
 import { useBreadcrumb } from '../hooks/appNavigation';
 import View from './view';
 
-export default function Login({ setUser }) {
+export default function Register({ setUser }) {
+  const [name, setName] = React.useState('');
   const [password, setPassword] = React.useState('');
   const [email, setEmail] = React.useState('');
   const [message, setMessage] = React.useState('');
 
   const navigateToParentPath = useBreadcrumb();
-  const emailRef = React.useRef();
+  const nameRef = React.useRef();
 
   useEffect(() => {
-    emailRef.current.focus();
+    nameRef.current.focus();
   }, []);
 
-  async function submit(event) {
+  async function register(event) {
     event.preventDefault();
     try {
-      setUser(await Api.login(email, password));
+      setUser(await Api.register(name, email, password));
       navigateToParentPath();
     } catch (error) {
       displayMessage(JSON.stringify(error));
@@ -32,11 +33,11 @@ export default function Login({ setUser }) {
   }
 
   return (
-    <View title='Welcome back'>
+    <View title='Welcome to the party'>
       <div className='my-4 flex  justify-center items-center flex-col'>
         <div className='h-4 text-yellow-200 font-normal'>{message}</div>
 
-        <form onSubmit={submit}>
+        <form onSubmit={register}>
           <div className='flex  justify-center items-center flex-col mt-8 space-y-4'>
             <div>
               <label htmlFor='email' className='sr-only'>
@@ -44,18 +45,32 @@ export default function Login({ setUser }) {
               </label>
               <div className='relative'>
                 <input
-                  type='email'
-                  value={email}
-                  ref={emailRef}
+                  type='name'
+                  value={name}
+                  ref={nameRef}
                   required
-                  onChange={(e) => setEmail(e.target.value)}
-                  id='email'
+                  onChange={(e) => setName(e.target.value)}
+                  id='name'
                   className='py-3 ps-11 pe-4 block w-full bg-white/10 border-white/20 text-white placeholder:text-white rounded-lg text-sm focus:border-white/30 focus:ring-white/30 sm:p-4 sm:ps-11'
-                  placeholder='Email address'
+                  placeholder='Full name'
                 />
                 <div className='absolute inset-y-0 start-0 flex items-center pointer-events-none z-20 ps-4'>
-                  <EmailIcon />
+                  <PersonIcon />
                 </div>
+              </div>
+            </div>
+            <div className='relative'>
+              <input
+                type='email'
+                value={email}
+                required
+                onChange={(e) => setEmail(e.target.value)}
+                id='email'
+                className='py-3 ps-11 pe-4 block w-full bg-white/10 border-white/20 text-white placeholder:text-white rounded-lg text-sm focus:border-white/30 focus:ring-white/30 sm:p-4 sm:ps-11'
+                placeholder='Email address'
+              />
+              <div className='absolute inset-y-0 start-0 flex items-center pointer-events-none z-20 ps-4'>
+                <EmailIcon />
               </div>
             </div>
             <div>
@@ -83,7 +98,7 @@ export default function Login({ setUser }) {
             </div>
 
             <div className='flex flex-row mt-8'>
-              <Button title='Login' submit />
+              <Button title='Register' submit />
             </div>
           </div>
         </form>

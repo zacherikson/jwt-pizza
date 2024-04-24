@@ -28,13 +28,10 @@ export default function DinnerDashboard({ user }) {
           />
         </div>
 
-        <div className='my-4 text-lg text-orange-200 text-left'>
-          <div>
-            <span className='font-semibold text-orange-400'>email:</span> {user.email}
-          </div>
-          <div>
-            <span className='font-semibold text-orange-400'>role:</span> {user.roles.join(',')}
-          </div>
+        <div className='my-4 text-lg text-orange-200 text-left grid grid-cols-5 gap-2'>
+          <div className='font-semibold text-orange-400'>name:</div> <div className='col-span-4'>{user.name}</div>
+          <div className='font-semibold text-orange-400'>email:</div> <div className='col-span-4'>{user.email}</div>
+          <div className='font-semibold text-orange-400'>role:</div> <div className='col-span-4'>{user.roles.join(',')}</div>
         </div>
 
         {purchases?.length === 0 && (

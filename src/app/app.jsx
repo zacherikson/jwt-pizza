@@ -5,6 +5,7 @@ import Header from './header';
 import Footer from './footer';
 import Home from '../views/home';
 import About from '../views/about';
+import Register from '../views/register';
 import Login from '../views/login';
 import Logout from '../views/logout';
 import Menu from '../views/menu';
@@ -64,6 +65,7 @@ export default function App() {
     { title: 'Payment', to: '/payment', component: <Payment />, display: [] },
     { title: 'Opps', to: '*', component: <NotFound />, display: [] },
     { title: 'Login', to: '/:subPath?/login', component: <Login setUser={setUser} />, constraints: [loggedOut], display: ['nav'] },
+    { title: 'Register', to: '/:subPath?/register', component: <Register setUser={setUser} />, constraints: [loggedOut], display: ['nav'] },
     { title: 'Logout', to: '/:subPath?/logout', component: <Logout setUser={setUser} />, constraints: [loggedIn], display: ['nav'] },
   ];
 
