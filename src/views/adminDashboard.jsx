@@ -56,40 +56,38 @@ export default function AdminDashboard({ user }) {
                           </th>
                         </tr>
                       </thead>
-                      <tbody className='divide-y divide-gray-200 dark:divide-neutral-700'>
-                        {franchises.map((franchise) => {
-                          return franchise.stores.map((store, sindex) => (
-                            <>
-                              {sindex === 0 && (
-                                <tr key={c++} className='bg-neutral-300'>
-                                  <td className='text-left px-2 whitespace-nowrap text-sm font-medium text-slate-600 dark:text-neutral-200'>{franchise.name}</td>
-                                  <td className='text-left px-2 whitespace-nowrap text-sm font-normal text-gray-800 dark:text-neutral-200'>{franchise.admin.join(',')}</td>
-                                  <td className='text-left px-2 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200'></td>
-                                  <td className='text-left px-2 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200'>{c}</td>
-                                  <td className='px-6 py-4 whitespace-nowrap text-end text-sm font-medium'></td>
-                                </tr>
-                              )}
-                              <tr key={c++} className='bg-neutral-100'>
-                                <td className='text-left px-2 whitespace-nowrap text-sm font-medium text-orange-600 dark:text-neutral-200'></td>
-                                <td className='text-left px-2 whitespace-nowrap text-sm font-semibold text-gray-800 dark:text-neutral-200'>{c}</td>
-                                <td className='text-left px-2 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200'>
-                                  {store.address}, {store.city}
-                                </td>
-                                <td className='text-left px-2 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200'>${store.totalRevenue.toLocaleString()}</td>
-                                <td className='px-6 py-4 whitespace-nowrap text-end text-sm font-medium'>
-                                  <button
-                                    type='button'
-                                    className='inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent text-blue-600 hover:text-blue-800 disabled:opacity-50 disabled:pointer-events-none dark:text-blue-500 dark:hover:text-blue-400'
-                                    onClick={() => closeStore(franchise, store)}
-                                  >
-                                    Close
-                                  </button>
-                                </td>
+                      {franchises.map((franchise) => {
+                        return franchise.stores.map((store, sindex) => (
+                          <tbody key={c++} className='divide-y divide-gray-200 dark:divide-neutral-700'>
+                            {sindex === 0 && (
+                              <tr className='bg-neutral-300'>
+                                <td className='text-left px-2 whitespace-nowrap text-sm font-medium text-slate-600 dark:text-neutral-200'>{franchise.name}</td>
+                                <td className='text-left px-2 whitespace-nowrap text-sm font-normal text-gray-800 dark:text-neutral-200'>{franchise.admin.join(',')}</td>
+                                <td className='text-left px-2 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200'></td>
+                                <td className='text-left px-2 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200'>{c}</td>
+                                <td className='px-6 py-4 whitespace-nowrap text-end text-sm font-medium'></td>
                               </tr>
-                            </>
-                          ));
-                        })}
-                      </tbody>
+                            )}
+                            <tr className='bg-neutral-100'>
+                              <td className='text-left px-2 whitespace-nowrap text-sm font-medium text-orange-600 dark:text-neutral-200'></td>
+                              <td className='text-left px-2 whitespace-nowrap text-sm font-semibold text-gray-800 dark:text-neutral-200'>{c}</td>
+                              <td className='text-left px-2 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200'>
+                                {store.address}, {store.city}
+                              </td>
+                              <td className='text-left px-2 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200'>${store.totalRevenue.toLocaleString()}</td>
+                              <td className='px-6 py-4 whitespace-nowrap text-end text-sm font-medium'>
+                                <button
+                                  type='button'
+                                  className='inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent text-blue-600 hover:text-blue-800 disabled:opacity-50 disabled:pointer-events-none dark:text-blue-500 dark:hover:text-blue-400'
+                                  onClick={() => closeStore(franchise, store)}
+                                >
+                                  Close
+                                </button>
+                              </td>
+                            </tr>
+                          </tbody>
+                        ));
+                      })}
                     </table>
                   </div>
                 </div>
