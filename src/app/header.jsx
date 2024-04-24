@@ -15,11 +15,11 @@ export default function Header({ user, navItems }) {
   const userText = generateUserText(user);
   return (
     <div className='space-y-4'>
-      <header className='flex flex-wrap sm:justify-start sm:flex-nowrap w-full bg-gray-800 text-sm py-4 dark:bg-white'>
+      <header className='flex flex-wrap sm:justify-start sm:flex-nowrap w-full bg-gray-800 text-sm py-4'>
         <nav className='max-w-[85rem] w-full mx-auto px-4 sm:flex sm:items-center sm:justify-between' aria-label='Global'>
           <div className='flex items-center justify-between'>
             <img className='w-10 m-3' src='/pizza-shop-icon.png' />
-            <span className='font-normal flex-none text-4xl dark:text-gray-800 bg-clip-text bg-gradient-to-tr from-orange-500 to-orange-300 text-transparent'>NFT Pizza</span>
+            <span className='font-normal flex-none text-4xl bg-clip-text bg-gradient-to-tr from-orange-500 to-orange-300 text-transparent'>NFT Pizza</span>
             <div className='sm:hidden'>
               <button
                 type='button'

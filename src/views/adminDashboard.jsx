@@ -35,7 +35,7 @@ export default function AdminDashboard({ user }) {
               <div className='-m-1.5 overflow-x-auto'>
                 <div className='p-1.5 min-w-full inline-block align-middle'>
                   <div className='overflow-hidden'>
-                    <table className='min-w-full divide-y divide-gray-200 dark:divide-neutral-700'>
+                    <table className='min-w-full divide-y divide-gray-200'>
                       <thead className='uppercase text-neutral-100 bg-slate-400 border-b-2 border-gray-500'>
                         <tr>
                           <th scope='col' className='px-6 py-3 text-start text-xs font-medium'>
@@ -60,10 +60,10 @@ export default function AdminDashboard({ user }) {
                       </thead>
                       {franchises.map((franchise, findex) => {
                         return (
-                          <tbody key={findex} className='divide-y divide-gray-200 dark:divide-neutral-700'>
+                          <tbody key={findex} className='divide-y divide-gray-200'>
                             <tr className='bg-neutral-300'>
-                              <td className='text-left px-2 whitespace-nowrap text-sm font-medium text-slate-600 dark:text-neutral-200'>{franchise.name}</td>
-                              <td className='text-left px-2 whitespace-nowrap text-sm font-normal text-gray-800 dark:text-neutral-200' colSpan={4}>
+                              <td className='text-left px-2 whitespace-nowrap text-sm font-medium text-slate-600'>{franchise.name}</td>
+                              <td className='text-left px-2 whitespace-nowrap text-sm font-normal text-gray-800' colSpan={4}>
                                 {franchise.admin.join(', ')}
                               </td>
                               <td className='px-6 py-4 whitespace-nowrap text-end text-sm font-medium'>Delete</td>
@@ -72,15 +72,15 @@ export default function AdminDashboard({ user }) {
                             {franchise.stores.map((store, sindex) => {
                               return (
                                 <tr key={sindex} className='bg-neutral-100'>
-                                  <td className='text-left px-2 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200' colSpan={3}>
+                                  <td className='text-left px-2 whitespace-nowrap text-sm text-gray-800' colSpan={3}>
                                     {store.name}
                                   </td>
-                                  <td className='text-left px-2 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200'>{store.location}</td>
-                                  <td className='text-left px-2 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200'>${store.totalRevenue.toLocaleString()}</td>
+                                  <td className='text-left px-2 whitespace-nowrap text-sm text-gray-800'>{store.location}</td>
+                                  <td className='text-left px-2 whitespace-nowrap text-sm text-gray-800'>${store.totalRevenue.toLocaleString()}</td>
                                   <td className='px-6 py-4 whitespace-nowrap text-end text-sm font-medium'>
                                     <button
                                       type='button'
-                                      className='inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent text-blue-600 hover:text-blue-800 disabled:opacity-50 disabled:pointer-events-none dark:text-blue-500 dark:hover:text-blue-400'
+                                      className='inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent text-blue-600 hover:text-blue-800 disabled:opacity-50 disabled:pointer-events-none'
                                       onClick={() => closeStore(franchise, store)}
                                     >
                                       Close

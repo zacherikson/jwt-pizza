@@ -22,7 +22,7 @@ export default function DinerDashboard({ user }) {
       <div className='text-left py-8 px-4 sm:px-6 lg:px-8'>
         <div className='hs-tooltip inline-block'>
           <img
-            className='hs-tooltip-toggle relative inline-block size-[96px] rounded-full ring-2 ring-white hover:z-10 dark:ring-neutral-900'
+            className='hs-tooltip-toggle relative inline-block size-[96px] rounded-full ring-2 ring-white hover:z-10'
             src='https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=facearea&facepad=2&w=300&h=300&q=80'
             alt='Employee stock photo'
           />
@@ -51,7 +51,7 @@ export default function DinerDashboard({ user }) {
                 <div className='-m-1.5 overflow-x-auto'>
                   <div className='p-1.5 min-w-full inline-block align-middle'>
                     <div className='overflow-hidden'>
-                      <table className='min-w-full divide-y divide-gray-200 dark:divide-neutral-700'>
+                      <table className='min-w-full divide-y divide-gray-200'>
                         <thead className='uppercase text-neutral-100 bg-slate-400 border-b-2 border-gray-500'>
                           <tr>
                             <th scope='col' className='px-6 py-3 text-start text-xs sm:text-sm font-medium'>
@@ -65,14 +65,12 @@ export default function DinerDashboard({ user }) {
                             </th>
                           </tr>
                         </thead>
-                        <tbody className='divide-y divide-gray-200 dark:divide-neutral-700'>
+                        <tbody className='divide-y divide-gray-200'>
                           {purchases.map((order, index) => (
-                            <tr key={index} className='hover:bg-gray-100 dark:hover:bg-neutral-700'>
-                              <td className='px-6 py-4 whitespace-nowrap text-start text-xs sm:text-sm font-medium text-gray-800 dark:text-neutral-200'>{order.id}</td>
-                              <td className='px-6 py-4 whitespace-nowrap text-start text-xs sm:text-sm text-gray-800 dark:text-neutral-200'>
-                                ${order.pizzas.reduce((a, c) => a + c.price, 0).toLocaleString()}
-                              </td>
-                              <td className='px-6 py-4 whitespace-nowrap text-start text-xs sm:text-sm text-gray-800 dark:text-neutral-200'>{order.date.toLocaleString()}</td>
+                            <tr key={index} className='hover:bg-gray-100'>
+                              <td className='px-6 py-4 whitespace-nowrap text-start text-xs sm:text-sm font-medium text-gray-800'>{order.id}</td>
+                              <td className='px-6 py-4 whitespace-nowrap text-start text-xs sm:text-sm text-gray-800'>${order.pizzas.reduce((a, c) => a + c.price, 0).toLocaleString()}</td>
+                              <td className='px-6 py-4 whitespace-nowrap text-start text-xs sm:text-sm text-gray-800'>{order.date.toLocaleString()}</td>
                             </tr>
                           ))}
                         </tbody>

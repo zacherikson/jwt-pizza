@@ -4,7 +4,7 @@ import { NavLink } from 'react-router-dom';
 export default function Footer({ navItems }) {
   return (
     <footer className='m-8 flex justify-center'>
-      <div className='container border-t-2 border-gray-200 dark:border-gray-700 max-w-3xl'>
+      <div className='container border-t-2 border-gray-200 max-w-3xl'>
         <nav className='-mb-0.5 flex space-x-6 justify-between'>
           {navItems.map(
             (item) =>

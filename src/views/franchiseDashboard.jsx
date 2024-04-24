@@ -39,7 +39,7 @@ export default function FranchiseDashboard({ user }) {
           <div className='-m-1.5 overflow-x-auto'>
             <div className='p-1.5 min-w-full inline-block align-middle'>
               <div className='overflow-hidden'>
-                <table className='min-w-full divide-y divide-gray-200 dark:divide-neutral-700'>
+                <table className='min-w-full divide-y divide-gray-200'>
                   <thead className='uppercase text-neutral-100 bg-slate-400 border-b-2 border-gray-500'>
                     <tr>
                       <th scope='col' className='px-6 py-3 text-start text-xs font-medium'>
@@ -56,16 +56,16 @@ export default function FranchiseDashboard({ user }) {
                       </th>
                     </tr>
                   </thead>
-                  <tbody className='divide-y divide-gray-200 dark:divide-neutral-700'>
+                  <tbody className='divide-y divide-gray-200'>
                     {franchise.stores?.map((store) => (
-                      <tr key={store.location} className='hover:bg-gray-100 dark:hover:bg-neutral-700'>
-                        <td className='px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-neutral-200'>{store.name}</td>
-                        <td className='px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-neutral-200'>{store.location}</td>
-                        <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200'>${store.totalRevenue.toLocaleString()}</td>
+                      <tr key={store.location} className='hover:bg-gray-100'>
+                        <td className='px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800'>{store.name}</td>
+                        <td className='px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800'>{store.location}</td>
+                        <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-800'>${store.totalRevenue.toLocaleString()}</td>
                         <td className='px-6 py-4 whitespace-nowrap text-end text-sm font-medium'>
                           <button
                             type='button'
-                            className='inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent text-blue-600 hover:text-blue-800 disabled:opacity-50 disabled:pointer-events-none dark:text-blue-500 dark:hover:text-blue-400'
+                            className='inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent text-blue-600 hover:text-blue-800 disabled:opacity-50 disabled:pointer-events-none'
                             onClick={() => closeStore(franchise, store)}
                           >
                             close
@@ -90,7 +90,7 @@ function whyFranchise() {
   return (
     <View title='So you want a piece of the pie'>
       <div className='text-left py-8 px-4 sm:px-6 lg:px-8'>
-        <div className='my-4 bg-yellow-50 border border-yellow-200 text-sm text-yellow-800 rounded-lg p-4 dark:bg-yellow-800/10 dark:border-yellow-900 dark:text-yellow-500' role='alert'>
+        <div className='my-4 bg-yellow-50 border border-yellow-200 text-sm text-yellow-800 rounded-lg p-4/10' role='alert'>
           <div className='flex'>
             <div className='flex-shrink-0'>
               <CautionIcon />
@@ -130,7 +130,7 @@ function whyFranchise() {
               <div className='-m-1.5 overflow-x-auto'>
                 <div className='p-1.5 min-w-full inline-block align-middle'>
                   <div className='overflow-hidden'>
-                    <table className='min-w-full divide-y divide-gray-200 dark:divide-neutral-700'>
+                    <table className='min-w-full divide-y divide-gray-200'>
                       <thead className='uppercase text-neutral-100 bg-slate-400 border-b-2 border-gray-500'>
                         <tr>
                           <th scope='col' className='px-6 text-sm py-3 text-start font-medium'>
@@ -147,24 +147,24 @@ function whyFranchise() {
                           </th>
                         </tr>
                       </thead>
-                      <tbody className='divide-y divide-gray-200 dark:divide-neutral-700'>
+                      <tbody className='divide-y divide-gray-200'>
                         <tr>
-                          <td className='px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-neutral-200'>2020</td>
-                          <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200'>$500,000</td>
-                          <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200'>$400,000</td>
-                          <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200'>$50,000</td>
+                          <td className='px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800'>2020</td>
+                          <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-800'>$500,000</td>
+                          <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-800'>$400,000</td>
+                          <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-800'>$50,000</td>
                         </tr>
                         <tr>
-                          <td className='px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-neutral-200'>2021</td>
-                          <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200'>$750,000</td>
-                          <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200'>$500,000</td>
-                          <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200'>$50,000</td>
+                          <td className='px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800'>2021</td>
+                          <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-800'>$750,000</td>
+                          <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-800'>$500,000</td>
+                          <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-800'>$50,000</td>
                         </tr>
                         <tr>
-                          <td className='px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-neutral-200'>2022</td>
-                          <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200'>$1,000,000</td>
-                          <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200'>$600,000</td>
-                          <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200'>$50,000</td>
+                          <td className='px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800'>2022</td>
+                          <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-800'>$1,000,000</td>
+                          <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-800'>$600,000</td>
+                          <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-800'>$50,000</td>
                         </tr>
                       </tbody>
                     </table>
