@@ -98,8 +98,8 @@ export default function AdminDashboard({ user }) {
           </div>
         </div>
 
-        <div className='flex'>
-          <Button className='flex-none' title='Franchise!' onPress={createFranchise} />
+        <div>
+          <Button className='w-36 text-xs sm:text-sm sm:w-64' title='Add Franchise' onPress={createFranchise} />
         </div>
       </View>
     );

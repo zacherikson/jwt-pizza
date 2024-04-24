@@ -17,7 +17,7 @@ export default function Login({ setUser }) {
     emailRef.current.focus();
   }, []);
 
-  async function submit(event) {
+  async function login(event) {
     event.preventDefault();
     try {
       setUser(await Api.login(email, password));
@@ -36,7 +36,7 @@ export default function Login({ setUser }) {
       <div className='my-4 flex  justify-center items-center flex-col'>
         <div className='h-4 text-yellow-200 font-normal'>{message}</div>
 
-        <form onSubmit={submit}>
+        <form onSubmit={login}>
           <div className='flex  justify-center items-center flex-col mt-8 space-y-4'>
             <div>
               <label htmlFor='email' className='sr-only'>

@@ -2,13 +2,12 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { NavLink } from 'react-router-dom';
 import View from './view';
-import { CautionIcon, StoreIcon } from '../icons';
+import { CautionIcon } from '../icons';
 import Button from '../components/button';
 import { Api } from '../api/api';
 
 export default function FranchiseDashboard({ user }) {
   const navigate = useNavigate();
-  const [newStoreName, setNewStoreName] = React.useState('');
   const [franchise, setFranchise] = React.useState([]);
 
   React.useEffect(() => {
@@ -18,7 +17,7 @@ export default function FranchiseDashboard({ user }) {
   }, [user]);
 
   function createStore() {
-    navigate('/franchise-dashboard/create-store', { state: { store: newStoreName } });
+    navigate('/franchise-dashboard/create-store');
   }
 
   function closeStore(franchise, store) {
@@ -29,7 +28,6 @@ export default function FranchiseDashboard({ user }) {
     return whyFranchise();
   }
 
-  console.log(franchise);
   return (
     <View title='Franchise central'>
       <div className='text-neutral-100'>Everything you need to run an NFT Pizza franchise. Your gateway to success.</div>
@@ -81,22 +79,7 @@ export default function FranchiseDashboard({ user }) {
         </div>
       </div>
 
-      <div className='flex'>
-        <div className='max-w-sm space-y-3 py-4  flex-1'>
-          <div className='relative'>
-            <input
-              type='text'
-              onChange={(e) => setNewStoreName(e.target.value)}
-              className='peer py-3 px-4 ps-11 block w-full bg-gray-100 border-transparent rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-700 dark:border-transparent dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600'
-              placeholder='Enter name'
-            />
-            <div className='absolute   text-orange-800 inset-y-0 start-0 flex items-center pointer-events-none ps-4 peer-disabled:opacity-50 peer-disabled:pointer-events-none'>
-              <StoreIcon />
-            </div>
-          </div>
-        </div>
-        <Button className='flex-none' title='Create store' onPress={createStore} />
-      </div>
+      <Button className='flex-none' title='Create store' onPress={createStore} />
     </View>
   );
 }

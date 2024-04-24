@@ -1,31 +1,57 @@
 import React from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useBreadcrumb } from '../hooks/appNavigation';
+import { StoreIcon } from '../icons';
 import View from './view';
 
 import Button from '../components/button';
 
 export default function CreateStore() {
-  const store = useLocation().state?.store || 'all';
-  const navigate = useNavigate();
+  const navigateToParentPath = useBreadcrumb();
+  const [store, setStore] = React.useState({});
 
-  function createStore() {
-    alert(`Created store ${store}!`);
-    const locationText = location.pathname.substring(0, location.pathname.lastIndexOf('/') + 1);
-    navigate(locationText);
-  }
-
-  function cancel() {
-    const locationText = location.pathname.substring(0, location.pathname.lastIndexOf('/') + 1);
-    navigate(locationText);
+  function createStore(event) {
+    event.preventDefault();
+    alert(`Created store ${store.name}!`);
+    navigateToParentPath();
   }
 
   return (
     <View title='Create store'>
-      <div className='text-neutral-100'>
-        Would you create the store <span className='font-bold text-yellow-300'>{store}</span>?
+      <div className='text-left py-8 px-4 sm:px-6 lg:px-8'>
+        <form onSubmit={createStore}>
+          <div className='flex'>
+            <div className='max-w-sm space-y-3 py-4  flex-1'>
+              <div className='relative'>
+                <input
+                  type='text'
+                  required
+                  onChange={(e) => setStore({ ...store, name: e.target.value })}
+                  className='peer py-3 px-4 ps-11 block w-full bg-gray-100 border-transparent rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-700 dark:border-transparent dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600'
+                  placeholder='Store name'
+                />
+                <div className='absolute   text-orange-800 inset-y-0 start-0 flex items-center pointer-events-none ps-4 peer-disabled:opacity-50 peer-disabled:pointer-events-none'>
+                  <StoreIcon />
+                </div>
+              </div>
+              <div className='relative'>
+                <input
+                  type='text'
+                  required
+                  onChange={(e) => setStore({ ...store, address: e.target.value })}
+                  className='peer py-3 px-4 ps-11 block w-full bg-gray-100 border-transparent rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-700 dark:border-transparent dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600'
+                  placeholder='Store name'
+                />
+                <div className='absolute   text-orange-800 inset-y-0 start-0 flex items-center pointer-events-none ps-4 peer-disabled:opacity-50 peer-disabled:pointer-events-none'>
+                  <StoreIcon />
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <Button title='Create' submit />
+          <Button title='Cancel' onPress={navigateToParentPath} className='bg-transparent border-neutral-300' />
+        </form>
       </div>
-      <Button title='Create' onPress={createStore} />
-      <Button title='Cancel' onPress={cancel} />
     </View>
   );
 }

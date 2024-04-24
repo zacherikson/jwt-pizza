@@ -5,16 +5,16 @@ const Role = {
 };
 
 const users = [
-  { name: 'Rajah Singh', email: 'f@ps.com', roles: [Role.Franchisee] },
-  { name: 'Zara Ahmed', email: 'a@ps.com', roles: [Role.Admin] },
-  { name: 'Kai Chen', email: 'd@ps.com', roles: [Role.Diner] },
-  { name: 'Lila Patel', email: 'lila@example.com', roles: [Role.Diner] },
-  { name: 'Aiden Kim', email: 'aiden@example.com', roles: [Role.Diner] },
-  { name: 'Sofia Nguyen', email: 'sofia@example.com', roles: [Role.Diner] },
-  { name: 'Emilio Costa', email: 'emilio@example.com', roles: [Role.Diner] },
-  { name: 'Amara Ali', email: 'amara@example.com', roles: [Role.Diner] },
-  { name: 'Nikolai Petrov', email: 'nikolai@example.com', roles: [Role.Franchisee] },
-  { name: 'Luna Santos', email: 'luna@example.com', roles: [Role.Franchisee] },
+  { id: '12345678-1234-4abc-9def-123456789abc', name: 'Rajah Singh', email: 'f@ntf.com', password: 'a', roles: [Role.Franchisee] },
+  { id: '87654321-4321-4def-9abc-987654321def', name: 'Zara Ahmed', email: 'a@ntf.com', password: 'a', roles: [Role.Admin] },
+  { id: 'abcdef12-34ab-4def-9abc-abcdef123456', name: 'Kai Chen', email: 'd@ntf.com', password: 'a', roles: [Role.Diner] },
+  { id: 'fedcba21-43ba-4fed-9cba-fedcba987654', name: 'Lila Patel', email: 'lila@ntf.com', password: 'a', roles: [Role.Diner] },
+  { id: 'aabbccdd-eeff-4a4a-9a9a-bbccddeeff00', name: 'Aiden Kim', email: 'aiden@ntf.com', password: 'a', roles: [Role.Diner] },
+  { id: '11223344-5566-4b4b-9b9b-ccddeeff0011', name: 'Sofia Nguyen', email: 'sofia@ntf.com', password: 'a', roles: [Role.Diner] },
+  { id: '99887766-5544-4c4c-9c9c-bbaa99887766', name: 'Emilio Costa', email: 'emilio@ntf.com', password: 'a', roles: [Role.Diner] },
+  { id: '44556677-3322-4d4d-9d9d-ccbbaa445566', name: 'Amara Ali', email: 'amara@ntf.com', password: 'a', roles: [Role.Diner] },
+  { id: '65432109-8765-4e4e-9e9e-0123456789ab', name: 'Nikolai Petrov', email: 'nikolai@ntf.com', password: 'a', roles: [Role.Franchisee] },
+  { id: '01234567-8901-4f4f-9f9f-9876543210ab', name: 'Luna Santos', email: 'luna@ntf.com', password: 'a', roles: [Role.Franchisee] },
 ];
 
 const pizzaMenu = [
@@ -59,6 +59,7 @@ const franchises = [
   {
     name: 'SuperPie',
     admin: ['f@ps.com'],
+    id: 'e7b6a8f2-4e1d-4d2d-9e8a-3e9c1a2b6d5f',
     stores: [
       { city: 'Orem', totalRevenue: 3000000, address: '234 N 300 S' },
       { city: 'Provo', totalRevenue: 53000, address: '234 N 300 S' },
@@ -68,6 +69,7 @@ const franchises = [
   {
     name: 'LotaPizza',
     admin: ['luna@example.com'],
+    id: 'abb3423f2-4e1d-4d2d-9e8a-3e9c1a2b6d77',
     stores: [
       { city: 'Lehi', totalRevenue: 3000000, address: '234 N 300 S' },
       { city: 'Springville', totalRevenue: 53000, address: '234 N 300 S' },
@@ -89,7 +91,7 @@ class ApiFacade {
   async login(email, password) {
     return new Promise((resolve, reject) => {
       if (!!email && !!password) {
-        const user = users.find((user) => user.email === email);
+        const user = users.find((user) => user.email === email && user.password === password);
         if (user) {
           localStorage.setItem('user', JSON.stringify(user));
           resolve(user);
@@ -107,7 +109,7 @@ class ApiFacade {
         if (user) {
           reject({ code: 409, msg: 'user already exists' });
         }
-        user = { name: name, email: email, roles: [Role.Diner] };
+        user = { id: this.generateUUID(), name: name, email: email, password: password, roles: [Role.Diner] };
         users.push(user);
         await this.login(email, password);
         resolve(user);
@@ -180,7 +182,7 @@ class ApiFacade {
 
     if (franchiseUser) {
       const user = await this.getUser();
-      if (this.isRole.Franchisee(user) || this.isAdmin(user)) {
+      if (this.isFranchisee(user) || this.isAdmin(user)) {
         const franchise = franchises.find((franchise) => franchise.admin.includes(franchiseUser.email));
         if (franchise) {
           result = franchise;
@@ -191,10 +193,20 @@ class ApiFacade {
   }
 
   async createFranchise(newFranchise) {
-    return new Promise((resolve) => {
-      newFranchise.totalRevenue = 0;
-      franchises.push(newFranchise);
-      resolve(franchises);
+    return new Promise((resolve, reject) => {
+      if (newFranchise?.name && newFranchise?.admin.length > 0) {
+        const user = users.find((user) => user.email === newFranchise.admin[0]);
+        if (user) {
+          user.roles.push(Role.Franchisee);
+          newFranchise.totalRevenue = 0;
+          newFranchise.id = this.generateUUID();
+          franchises.push(newFranchise);
+
+          resolve(newFranchise);
+          return;
+        }
+      }
+      reject({ code: 400, msg: 'invalid' });
     });
   }
 

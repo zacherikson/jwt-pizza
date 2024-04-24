@@ -25,7 +25,7 @@ export default function CloseStore() {
           Are you sure you want to close the {state.franchise.name} store in {state.store.city}? This cannot be restored. All outstanding revenue with not be refunded.
         </div>
         <Button title='Close' onPress={close} />
-        <Button title='Cancel' onPress={cancel} />
+        <Button title='Cancel' onPress={cancel} className='bg-transparent border-neutral-300' />
       </div>
     </View>
   );

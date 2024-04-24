@@ -35,7 +35,7 @@ export default function Payment() {
         {order.pizzas.length > 1 && <div className='text-neutral-100'>Send me those {order.pizzas.length} pizzas right now!</div>}
         <div>
           <Button title='Pay now' onPress={processPayment} />
-          <Button title='Cancel' onPress={cancel} />
+          <Button title='Cancel' onPress={cancel} className='bg-transparent border-neutral-300' />
         </div>
         <div className='bg-neutral-100 overflow-clip my-4'>
           <div className='flex flex-col'>
