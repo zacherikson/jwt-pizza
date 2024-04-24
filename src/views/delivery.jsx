@@ -9,8 +9,8 @@ export default function Delivery() {
   const order = location.state?.order || { pizzas: [] };
 
   return (
-    <View title='Pizza is on the way!'>
-      <div className='my-4 flex  justify-center items-center flex-col'>
+    <View title='Here is your NFT Pizza!'>
+      <div className='my-4 flex  justify-center items-center flex-col  py-8 px-4 sm:px-6 lg:px-8'>
         <svg
           xmlns='http://www.w3.org/2000/svg'
           viewBox='0 0 24 24'
