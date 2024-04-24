@@ -29,8 +29,8 @@ export default function Menu() {
 
   return (
     <View title='Awesome is a click away'>
-      <div className='flow flow-col text-center justify-center text-neutral-100'>
-        <div className='my-2 sm:my-8'>Pick your pizza from below. Remember to order extra for a midnight party.</div>
+      <div className='flow flow-col text-center justify-center text-neutral-100  py-8 px-4 sm:px-6 lg:px-8'>
+        <div className='my-2 sm:my-8'>Pick your pizzas from below. Remember to order extra for a midnight party.</div>
 
         <div className='text-yellow-200'>{order.pizzas.length > 0 ? 'Selected pizzas: ' + order.pizzas.length : 'What are you waiting for? Pick a pizza!'}</div>
         <Button title='Checkout' onPress={checkout} disabled={order.length <= 0} className='disabled' />
