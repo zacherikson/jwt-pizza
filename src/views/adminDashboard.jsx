@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import NotFound from './notFound';
 import Button from '../components/button';
 import { Api } from '../api/api';
+import { TrashIcon } from '../icons';
 
 export default function AdminDashboard({ user }) {
   const navigate = useNavigate();
@@ -17,6 +18,10 @@ export default function AdminDashboard({ user }) {
 
   function createFranchise() {
     navigate('/admin-dashboard/create-franchise');
+  }
+
+  function closeFranchise(franchise) {
+    navigate('/admin-dashboard/close-franchise', { state: { franchise: franchise } });
   }
 
   function closeStore(franchise, store) {
@@ -38,22 +43,22 @@ export default function AdminDashboard({ user }) {
                     <table className='min-w-full divide-y divide-gray-200'>
                       <thead className='uppercase text-neutral-100 bg-slate-400 border-b-2 border-gray-500'>
                         <tr>
-                          <th scope='col' className='px-6 py-3 text-start text-xs font-medium'>
+                          <th scope='col' className='px-6 py-3 text-center text-xs font-medium'>
                             Franchise
                           </th>
-                          <th scope='col' className='px-6 py-3 text-start text-xs font-medium'>
+                          <th scope='col' className='px-6 py-3 text-center text-xs font-medium'>
                             Franchisee
                           </th>
-                          <th scope='col' className='px-6 py-3 text-start text-xs font-medium'>
+                          <th scope='col' className='px-6 py-3 text-right text-xs font-medium'>
                             Store
                           </th>
-                          <th scope='col' className='px-6 py-3 text-start text-xs font-medium'>
+                          <th scope='col' className='px-6 py-3 text-center text-xs font-medium'>
                             Location
                           </th>
-                          <th scope='col' className='px-6 py-3 text-start text-xs font-medium'>
+                          <th scope='col' className='px-6 py-3 text-center text-xs font-medium'>
                             Revenue
                           </th>
-                          <th scope='col' className='px-6 py-3 text-end text-xs font-medium'>
+                          <th scope='col' className='px-6 py-3 text-center text-xs font-medium'>
                             Action
                           </th>
                         </tr>
@@ -61,18 +66,27 @@ export default function AdminDashboard({ user }) {
                       {franchises.map((franchise, findex) => {
                         return (
                           <tbody key={findex} className='divide-y divide-gray-200'>
-                            <tr className='bg-neutral-300'>
-                              <td className='text-left px-2 whitespace-nowrap text-sm font-medium text-slate-600'>{franchise.name}</td>
+                            <tr className='border-neutral-500 border-t-2'>
+                              <td className='text-left px-2 whitespace-nowrap text-l font-mono text-orange-600'>{franchise.name}</td>
                               <td className='text-left px-2 whitespace-nowrap text-sm font-normal text-gray-800' colSpan={4}>
                                 {franchise.admin.join(', ')}
                               </td>
-                              <td className='px-6 py-4 whitespace-nowrap text-end text-sm font-medium'>Delete</td>
+                              <td className='px-6 py-4 whitespace-nowrap text-end text-sm font-medium'>
+                                <button
+                                  type='button'
+                                  className='px-2 py-1 inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-1 border-orange-400 text-orange-400  hover:border-orange-800 hover:text-orange-800'
+                                  onClick={() => closeFranchise(franchise)}
+                                >
+                                  <TrashIcon />
+                                  Close
+                                </button>
+                              </td>
                             </tr>
 
                             {franchise.stores.map((store, sindex) => {
                               return (
                                 <tr key={sindex} className='bg-neutral-100'>
-                                  <td className='text-left px-2 whitespace-nowrap text-sm text-gray-800' colSpan={3}>
+                                  <td className='text-right px-2 whitespace-nowrap text-sm text-gray-800' colSpan={3}>
                                     {store.name}
                                   </td>
                                   <td className='text-left px-2 whitespace-nowrap text-sm text-gray-800'>{store.location}</td>
@@ -80,9 +94,10 @@ export default function AdminDashboard({ user }) {
                                   <td className='px-6 py-4 whitespace-nowrap text-end text-sm font-medium'>
                                     <button
                                       type='button'
-                                      className='inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent text-blue-600 hover:text-blue-800 disabled:opacity-50 disabled:pointer-events-none'
+                                      className='px-2 py-1 inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-1 border-orange-400 text-orange-400 hover:border-orange-800 hover:text-orange-800'
                                       onClick={() => closeStore(franchise, store)}
                                     >
+                                      <TrashIcon />
                                       Close
                                     </button>
                                   </td>
@@ -99,7 +114,6 @@ export default function AdminDashboard({ user }) {
             </div>
           </div>
         </div>
-
         <div>
           <Button className='w-36 text-xs sm:text-sm sm:w-64' title='Add Franchise' onPress={createFranchise} />
         </div>

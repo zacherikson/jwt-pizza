@@ -26,60 +26,60 @@ const pizzaMenu = [
   { title: 'Chared Leopard', description: 'For those with a darker side', image: 'pizza6.png', price: 10.99 },
 ];
 
-const purchaseHistory = [
-  {
-    email: 'a@ntf.com',
-    orders: [
-      {
-        id: 'e7b6a8f2-4e1d-4d2d-9e8a-3e9c1a2b6d5f',
-        date: '2024-03-10T00:00:00Z',
-        pizzas: [
-          { name: 'Veggie', price: 50 },
-          { name: 'Margarita', price: 45 },
-        ],
-      },
-    ],
-  },
-  {
-    email: 'd@ntf.com',
-    orders: [
-      {
-        id: 'e7b3423f2-4e1d-4d2d-9e8a-3e9c1a2b6d5f',
-        date: '2023-03-10T00:00:00Z',
-        pizzas: [
-          { name: 'Pepperoni', price: 50 },
-          { name: 'Crusty', price: 45 },
-        ],
-      },
-    ],
-  },
-];
-
-const franchises = [
-  {
-    name: 'SuperPie',
-    admin: ['f@ntf.com'],
-    id: 'e7b6a8f2-4e1d-4d2d-9e8a-3e9c1a2b6d5f',
-    stores: [
-      { id: '12345678-1234-4abc-9def-123456789abc', name: 'online', location: 'Orem', totalRevenue: 3000000 },
-      { id: '87654321-4321-4def-9abc-987654321def', name: 'online', location: 'Provo', totalRevenue: 53000 },
-      { id: 'abcdef12-34ab-4def-9abc-abcdef123456', name: 'online', location: 'Payson', totalRevenue: 458767832 },
-    ],
-  },
-  {
-    name: 'LotaPizza',
-    admin: ['luna@ntf.com', 'nikolai@ntf.com'],
-    id: 'abb3423f2-4e1d-4d2d-9e8a-3e9c1a2b6d77',
-    stores: [
-      { id: 'aabbccdd-eeff-4a4a-9a9a-bbccddeeff00', name: 'online', location: 'Lehi', totalRevenue: 3000000 },
-      { id: '11223344-5566-4b4b-9b9b-ccddeeff0011', name: 'online', location: 'Springville', totalRevenue: 53000 },
-      { id: '99887766-5544-4c4c-9c9c-bbaa99887766', name: 'online', location: 'American Fork', totalRevenue: 458767832 },
-    ],
-  },
-  { name: 'PizzaCorp', admin: ['nikolai@ntf.com'], stores: [{ id: '44556677-3322-4d4d-9d9d-ccbbaa445566', name: 'online', location: 'Spanish Fork', totalRevenue: 3000000 }] },
-];
-
 class ApiFacade {
+  franchises = [
+    {
+      name: 'SuperPie',
+      admin: ['f@ntf.com'],
+      id: 'e7b6a8f2-4e1d-4d2d-9e8a-3e9c1a2b6d5f',
+      stores: [
+        { id: '12345678-1234-4abc-9def-123456789abc', name: 'online', location: 'Orem', totalRevenue: 3000000 },
+        { id: '87654321-4321-4def-9abc-987654321def', name: 'online', location: 'Provo', totalRevenue: 53000 },
+        { id: 'abcdef12-34ab-4def-9abc-abcdef123456', name: 'online', location: 'Payson', totalRevenue: 458767832 },
+      ],
+    },
+    {
+      name: 'LotaPizza',
+      admin: ['luna@ntf.com', 'nikolai@ntf.com'],
+      id: 'abb3423f2-4e1d-4d2d-9e8a-3e9c1a2b6d77',
+      stores: [
+        { id: 'aabbccdd-eeff-4a4a-9a9a-bbccddeeff00', name: 'online', location: 'Lehi', totalRevenue: 3000000 },
+        { id: '11223344-5566-4b4b-9b9b-ccddeeff0011', name: 'online', location: 'Springville', totalRevenue: 53000 },
+        { id: '99887766-5544-4c4c-9c9c-bbaa99887766', name: 'online', location: 'American Fork', totalRevenue: 458767832 },
+      ],
+    },
+    { name: 'PizzaCorp', admin: ['nikolai@ntf.com'], stores: [{ id: '44556677-3322-4d4d-9d9d-ccbbaa445566', name: 'online', location: 'Spanish Fork', totalRevenue: 3000000 }] },
+  ];
+
+  purchaseHistory = [
+    {
+      email: 'a@ntf.com',
+      orders: [
+        {
+          id: 'e7b6a8f2-4e1d-4d2d-9e8a-3e9c1a2b6d5f',
+          date: '2024-03-10T00:00:00Z',
+          pizzas: [
+            { name: 'Veggie', price: 50 },
+            { name: 'Margarita', price: 45 },
+          ],
+        },
+      ],
+    },
+    {
+      email: 'd@ntf.com',
+      orders: [
+        {
+          id: 'e7b3423f2-4e1d-4d2d-9e8a-3e9c1a2b6d5f',
+          date: '2023-03-10T00:00:00Z',
+          pizzas: [
+            { name: 'Pepperoni', price: 50 },
+            { name: 'Crusty', price: 45 },
+          ],
+        },
+      ],
+    },
+  ];
+
   isAdmin(user) {
     return user?.roles.includes(Role.Admin);
   }
@@ -149,7 +149,7 @@ class ApiFacade {
       if (purchasingUser) {
         const user = await this.getUser();
         if (user && (this.isAdmin(user) || user.email === purchasingUser.email)) {
-          const purchases = purchaseHistory.find((purchase) => purchase.email === purchasingUser.email);
+          const purchases = this.purchaseHistory.find((purchase) => purchase.email === purchasingUser.email);
           if (purchases) {
             result = purchases.orders;
           }
@@ -166,10 +166,10 @@ class ApiFacade {
         order.id = this.generateUUID();
         order.date = new Date().toISOString();
 
-        let userPurchaseHistory = purchaseHistory.find((purchase) => purchase.email === user.email);
+        let userPurchaseHistory = this.purchaseHistory.find((purchase) => purchase.email === user.email);
         if (!userPurchaseHistory) {
           userPurchaseHistory = { email: user.email, orders: [] };
-          purchaseHistory.push(userPurchaseHistory);
+          this.purchaseHistory.push(userPurchaseHistory);
         }
         userPurchaseHistory.orders = [order, ...userPurchaseHistory.orders];
         resolve(order);
@@ -184,7 +184,7 @@ class ApiFacade {
       if (franchiseUser) {
         const user = await this.getUser();
         if (this.isFranchisee(user) || this.isAdmin(user)) {
-          const franchise = franchises.find((franchise) => franchise.admin.includes(franchiseUser.email));
+          const franchise = this.franchises.find((franchise) => franchise.admin.includes(franchiseUser.email));
           if (franchise) {
             resolve(franchise);
             return;
@@ -200,7 +200,7 @@ class ApiFacade {
       if (franchise?.name && franchise?.admin.length > 0) {
         const user = users.find((user) => user.email === franchise.admin[0]);
         if (user) {
-          if (franchises.find((candidate) => candidate.name === franchise.name)) {
+          if (this.franchises.find((candidate) => candidate.name === franchise.name)) {
             reject({ code: 409, msg: 'franchise already exists' });
             return;
           }
@@ -209,7 +209,7 @@ class ApiFacade {
             user.roles.push(Role.Franchisee);
           }
           franchise.id = this.generateUUID();
-          franchises.push(franchise);
+          this.franchises.push(franchise);
           resolve(franchise);
           return;
         }
@@ -222,10 +222,22 @@ class ApiFacade {
     return new Promise(async (resolve, reject) => {
       const user = await this.getUser();
       if (this.isAdmin(user)) {
-        resolve(franchises);
+        resolve(this.franchises);
       } else {
         reject({ code: 401, msg: 'unauthorized' });
       }
+    });
+  }
+
+  async closeFranchise(franchise) {
+    return new Promise(async (resolve, reject) => {
+      const user = await this.getUser();
+      if (this.isAdmin(user)) {
+        this.franchises = this.franchises.filter((f) => f.id !== franchise.id);
+        resolve({ code: 200, msg: 'store closed' });
+        return;
+      }
+      reject({ code: 401, msg: 'unauthorized' });
     });
   }
 
@@ -234,7 +246,7 @@ class ApiFacade {
       if (store?.name) {
         const user = await this.getUser();
         if (this.isFranchisee(user) || this.isAdmin(user)) {
-          const dbFranchise = franchises.find((candidate) => candidate.name === franchise.name);
+          const dbFranchise = this.franchises.find((candidate) => candidate.name === franchise.name);
           if (dbFranchise) {
             if (dbFranchise.stores.find((candidate) => candidate.name === store.name)) {
               reject({ code: 409, msg: 'store already exists' });
@@ -256,9 +268,9 @@ class ApiFacade {
     return new Promise(async (resolve, reject) => {
       const user = await this.getUser();
       if (this.isFranchisee(user) || this.isAdmin(user)) {
-        const dbFranchise = franchises.find((candidate) => candidate.name === franchise.name);
+        const dbFranchise = this.franchises.find((candidate) => candidate.name === franchise.name);
         if (dbFranchise) {
-          dbFranchise.stores = dbFranchise.stores.filter((s) => s.location !== store.location);
+          dbFranchise.stores = dbFranchise.stores.filter((s) => s.id !== store.id);
           resolve({ code: 200, msg: 'store closed' });
           return;
         }
