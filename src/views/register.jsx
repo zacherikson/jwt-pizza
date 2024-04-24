@@ -12,6 +12,7 @@ export default function Register({ setUser }) {
   const [message, setMessage] = React.useState('');
 
   const navigateToParentPath = useBreadcrumb();
+  const navigateToLogin = useBreadcrumb('login');
   const nameRef = React.useRef();
 
   useEffect(() => {
@@ -99,6 +100,13 @@ export default function Register({ setUser }) {
 
             <div className='flex flex-row mt-8'>
               <Button title='Register' submit />
+            </div>
+            <div className='text-white italic'>
+              Already have an account?{' '}
+              <span className='underline hover:text-orange-400' onClick={navigateToLogin}>
+                Login
+              </span>{' '}
+              instead.
             </div>
           </div>
         </form>

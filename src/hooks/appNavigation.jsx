@@ -1,15 +1,20 @@
 import { useLocation, useNavigate } from 'react-router-dom';
 
-function useBreadcrumb() {
+function useBreadcrumb(sibling) {
   const location = useLocation();
   const navigate = useNavigate();
 
-  const navigateToParentPath = () => {
-    const locationText = location.pathname.substring(0, location.pathname.lastIndexOf('/') + 1);
-    navigate(locationText, { state: location.state });
+  const navigateByBreadcrumb = () => {
+    let newPath = location.pathname.substring(0, location.pathname.lastIndexOf('/'));
+    if (sibling) {
+      newPath = newPath + '/' + sibling;
+    } else if (newPath === '') {
+      newPath = '/';
+    }
+    navigate(newPath, { state: location.state });
   };
 
-  return navigateToParentPath;
+  return navigateByBreadcrumb;
 }
 
 export { useBreadcrumb };

@@ -1,21 +1,15 @@
 import React from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useBreadcrumb } from '../hooks/appNavigation';
 import { Api } from '../api/api';
 import View from './view';
 import Button from '../components/button';
 
 export default function CloseStore() {
-  const state = useLocation().state;
-  const navigate = useNavigate();
+  const navigateToParent = useBreadcrumb();
 
   function close() {
     Api.closeStore(state.franchise, state.store);
-    cancel();
-  }
-
-  function cancel() {
-    const locationText = location.pathname.substring(0, location.pathname.lastIndexOf('/') + 1);
-    navigate(locationText);
+    navigateToParent();
   }
 
   return (
@@ -26,7 +20,7 @@ export default function CloseStore() {
           be refunded.
         </div>
         <Button title='Close' onPress={close} />
-        <Button title='Cancel' onPress={cancel} className='bg-transparent border-neutral-300' />
+        <Button title='Cancel' onPress={navigateToParent} className='bg-transparent border-neutral-300' />
       </div>
     </View>
   );

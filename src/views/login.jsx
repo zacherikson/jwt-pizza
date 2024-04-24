@@ -10,7 +10,8 @@ export default function Login({ setUser }) {
   const [email, setEmail] = React.useState('');
   const [message, setMessage] = React.useState('');
 
-  const navigateToParentPath = useBreadcrumb();
+  const navigateToParent = useBreadcrumb();
+  const navigateToRegistration = useBreadcrumb('register');
   const emailRef = React.useRef();
 
   useEffect(() => {
@@ -21,7 +22,7 @@ export default function Login({ setUser }) {
     event.preventDefault();
     try {
       setUser(await Api.login(email, password));
-      navigateToParentPath();
+      navigateToParent();
     } catch (error) {
       displayMessage(JSON.stringify(error));
     }
@@ -84,6 +85,13 @@ export default function Login({ setUser }) {
 
             <div className='flex flex-row mt-8'>
               <Button title='Login' submit />
+            </div>
+            <div className='text-white italic'>
+              Are you new?{' '}
+              <span className='underline hover:text-orange-400' onClick={navigateToRegistration}>
+                Register
+              </span>{' '}
+              instead.
             </div>
           </div>
         </form>
