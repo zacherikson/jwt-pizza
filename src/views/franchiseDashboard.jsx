@@ -32,7 +32,7 @@ export default function FranchiseDashboard({ user }) {
   console.log(franchise);
   return (
     <View title='Franchise central'>
-      <div className='text-neutral-100'>Everything you need to run a Pizza Shop. Your gateway to success.</div>
+      <div className='text-neutral-100'>Everything you need to run an NFT Pizza franchise. Your gateway to success.</div>
 
       <div className='bg-neutral-100 overflow-clip my-4'>
         <div className='flex flex-col'>
@@ -128,11 +128,11 @@ function whyFranchise() {
             To purchase a franchise call <span className='font-semibold text-orange-400'>1-800-555-5555</span>
           </p>
           <p className='py-2 text-white'>
-            Now is the time to get in on the Pizza Shop tsunami. The pizza sells itself. People cannot get enough. Setup your shop and let the pizza fly. Here are all the reasons why you should buy a
-            franchise with the Pizza Shop.
+            Now is the time to get in on the NFT Pizza tsunami. The pizza sells itself. People cannot get enough. Setup your shop and let the pizza fly. Here are all the reasons why you should buy a
+            franchise with NFT Pizza.
           </p>
           <p className='py-2 text-white'>
-            Owning a franchise with the Pizza Shop can be highly profitable. With our proven business model and strong brand recognition, you can expect to generate significant revenue. Our profit
+            Owning a franchise with NFT Pizza can be highly profitable. With our proven business model and strong brand recognition, you can expect to generate significant revenue. Our profit
             forecasts show consistent growth year after year, making it a lucrative investment opportunity.
           </p>
           <p className='py-2 text-white'>
@@ -191,9 +191,9 @@ function whyFranchise() {
           <div className='py-4'>
             <h2 className='py-2 text-2xl sm:text-4xl font-thin text-orange-600'>Unleash Your Potential</h2>
             <p className='py-2 text-neutral-100 text-left mx-4 pb-4 first-line:uppercase first-line:tracking-widest  first-letter:text-7xl first-letter:font-bold first-letter:text-orange-800  first-letter:mr-3 first-letter:float-left'>
-              Are you ready to embark on a journey towards unimaginable wealth? Owning a franchise with the Pizza Shop is your ticket to financial success. With our proven business model and strong
-              brand recognition, you have the opportunity to generate substantial revenue. Imagine the thrill of watching your profits soar year after year, as customers flock to your pizza shop,
-              craving our mouthwatering creations.
+              Are you ready to embark on a journey towards unimaginable wealth? Owning a franchise with NFT Pizza is your ticket to financial success. With our proven business model and strong brand
+              recognition, you have the opportunity to generate substantial revenue. Imagine the thrill of watching your profits soar year after year, as customers flock to your NFT Pizza, craving our
+              mouthwatering creations.
             </p>
             <p className='py-2 text-white'>
               But it's not just about the money. By becoming a franchise owner, you become part of a community that is passionate about delivering exceptional pizzas and creating memorable

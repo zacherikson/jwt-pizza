@@ -1,7 +1,7 @@
 {
   "name": "pizzashop",
   "version": "1.0.0",
-  "description": "The world's best pizza shop",
+  "description": "The world's first NFT NFT Pizza",
   "main": "index.js",
   "scripts": {
     "dev": "vite",
