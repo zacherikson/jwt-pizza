@@ -7,7 +7,12 @@ export default function Header({ user, navItems }) {
     return constraints.every((c) => c());
   }
 
-  const userText = user ? (user.email.charAt(0) + user.email.split('@')[1].charAt(0)).toUpperCase() : '?';
+  function generateUserText(user) {
+    const names = user?.name.split(' ') || ['?'];
+    return names.length > 1 ? names[0].charAt(0) + names[names.length - 1].charAt(0) : names[0].charAt(0);
+  }
+
+  const userText = generateUserText(user);
   return (
     <div className='space-y-4'>
       <header className='flex flex-wrap sm:justify-start sm:flex-nowrap w-full bg-gray-800 text-sm py-4 dark:bg-white'>
