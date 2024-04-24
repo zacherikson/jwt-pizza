@@ -19,7 +19,7 @@ export default function DinerDashboard({ user }) {
 
   return (
     <View title='Your pizza kitchen'>
-      <div className='text-left py-8 px-4 sm:px-6 lg:px-8'>
+      <div className='text-start py-8 px-4 sm:px-6 lg:px-8'>
         <div className='hs-tooltip inline-block'>
           <img
             className='hs-tooltip-toggle relative inline-block size-[96px] rounded-full ring-2 ring-white hover:z-10'
@@ -28,7 +28,7 @@ export default function DinerDashboard({ user }) {
           />
         </div>
 
-        <div className='my-4 text-lg text-orange-200 text-left grid grid-cols-5 gap-2'>
+        <div className='my-4 text-lg text-orange-200 text-start grid grid-cols-5 gap-2'>
           <div className='font-semibold text-orange-400'>name:</div> <div className='col-span-4'>{user.name}</div>
           <div className='font-semibold text-orange-400'>email:</div> <div className='col-span-4'>{user.email}</div>
           <div className='font-semibold text-orange-400'>role:</div> <div className='col-span-4'>{user.roles.join(',')}</div>

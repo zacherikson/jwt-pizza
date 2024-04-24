@@ -2,7 +2,7 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { NavLink } from 'react-router-dom';
 import View from './view';
-import { CautionIcon } from '../icons';
+import { TrashIcon, CautionIcon } from '../icons';
 import Button from '../components/button';
 import { Api } from '../api/api';
 
@@ -48,7 +48,7 @@ export default function FranchiseDashboard({ user }) {
                       <th scope='col' className='px-6 py-3 text-start text-xs font-medium'>
                         Location
                       </th>
-                      <th scope='col' className='px-6 py-3 text-start text-xs font-medium'>
+                      <th scope='col' className='px-6 py-3 text-end text-xs font-medium'>
                         Revenue
                       </th>
                       <th scope='col' className='px-6 py-3 text-end text-xs font-medium'>
@@ -61,14 +61,15 @@ export default function FranchiseDashboard({ user }) {
                       <tr key={store.location} className='hover:bg-gray-100'>
                         <td className='px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800'>{store.name}</td>
                         <td className='px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800'>{store.location}</td>
-                        <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-800'>{store.totalRevenue.toLocaleString()} ₿</td>
+                        <td className='px-6 py-4 whitespace-nowrap text-end text-sm text-gray-800'>{store.totalRevenue.toLocaleString()} ₿</td>
                         <td className='px-6 py-4 whitespace-nowrap text-end text-sm font-medium'>
                           <button
                             type='button'
-                            className='inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent text-blue-600 hover:text-blue-800 disabled:opacity-50 disabled:pointer-events-none'
+                            className='px-2 py-1 inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-1 border-orange-400 text-orange-400 hover:border-orange-800 hover:text-orange-800'
                             onClick={() => closeStore(franchise, store)}
                           >
-                            close
+                            <TrashIcon />
+                            Close
                           </button>
                         </td>
                       </tr>
@@ -89,7 +90,7 @@ export default function FranchiseDashboard({ user }) {
 function whyFranchise() {
   return (
     <View title='So you want a piece of the pie'>
-      <div className='text-left py-8 px-4 sm:px-6 lg:px-8'>
+      <div className='text-start py-8 px-4 sm:px-6 lg:px-8'>
         <div className='my-4 bg-yellow-50 border border-yellow-200 text-sm text-yellow-800 rounded-lg p-4/10' role='alert'>
           <div className='flex'>
             <div className='flex-shrink-0'>
@@ -175,7 +176,7 @@ function whyFranchise() {
           </div>
           <div className='py-4'>
             <h2 className='py-2 text-2xl sm:text-4xl font-thin text-orange-600'>Unleash Your Potential</h2>
-            <p className='py-2 text-neutral-100 text-left mx-4 pb-4 first-line:uppercase first-line:tracking-widest  first-letter:text-7xl first-letter:font-bold first-letter:text-orange-800  first-letter:mr-3 first-letter:float-left'>
+            <p className='py-2 text-neutral-100 text-start mx-4 pb-4 first-line:uppercase first-line:tracking-widest  first-letter:text-7xl first-letter:font-bold first-letter:text-orange-800  first-letter:mr-3 first-letter:float-left'>
               Are you ready to embark on a journey towards unimaginable wealth? Owning a franchise with NFT Pizza is your ticket to financial success. With our proven business model and strong brand
               recognition, you have the opportunity to generate substantial revenue. Imagine the thrill of watching your profits soar year after year, as customers flock to your NFT Pizza, craving our
               mouthwatering creations.

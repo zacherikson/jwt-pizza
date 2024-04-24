@@ -20,7 +20,7 @@ export default function CreateStore() {
 
   return (
     <View title='Create store'>
-      <div className='text-left py-8 px-4 sm:px-6 lg:px-8'>
+      <div className='text-start py-8 px-4 sm:px-6 lg:px-8'>
         <form onSubmit={createStore}>
           <div className='flex'>
             <div className='max-w-sm space-y-3 py-4  flex-1'>

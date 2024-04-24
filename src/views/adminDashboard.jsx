@@ -32,7 +32,7 @@ export default function AdminDashboard({ user }) {
   if (Api.isAdmin(user)) {
     response = (
       <View title="Mama Ricci's kitchen">
-        <div className='text-left py-8 px-4 sm:px-6 lg:px-8'>
+        <div className='text-start py-8 px-4 sm:px-6 lg:px-8'>
           <div className='text-neutral-100'>Keep the dough rolling and the franchises signing up.</div>
 
           <div className='bg-neutral-100 overflow-clip my-4'>
@@ -49,13 +49,13 @@ export default function AdminDashboard({ user }) {
                           <th scope='col' className='px-6 py-3 text-center text-xs font-medium'>
                             Franchisee
                           </th>
-                          <th scope='col' className='px-6 py-3 text-right text-xs font-medium'>
+                          <th scope='col' className='px-6 py-3 text-end text-xs font-medium'>
                             Store
                           </th>
                           <th scope='col' className='px-6 py-3 text-center text-xs font-medium'>
                             Location
                           </th>
-                          <th scope='col' className='px-6 py-3 text-right text-xs font-medium'>
+                          <th scope='col' className='px-6 py-3 text-end text-xs font-medium'>
                             Revenue
                           </th>
                           <th scope='col' className='px-6 py-3 text-center text-xs font-medium'>
@@ -67,8 +67,8 @@ export default function AdminDashboard({ user }) {
                         return (
                           <tbody key={findex} className='divide-y divide-gray-200'>
                             <tr className='border-neutral-500 border-t-2'>
-                              <td className='text-left px-2 whitespace-nowrap text-l font-mono text-orange-600'>{franchise.name}</td>
-                              <td className='text-left px-2 whitespace-nowrap text-sm font-normal text-gray-800' colSpan={4}>
+                              <td className='text-start px-2 whitespace-nowrap text-l font-mono text-orange-600'>{franchise.name}</td>
+                              <td className='text-start px-2 whitespace-nowrap text-sm font-normal text-gray-800' colSpan={4}>
                                 {franchise.admin.join(', ')}
                               </td>
                               <td className='px-6 py-4 whitespace-nowrap text-end text-sm font-medium'>
@@ -86,11 +86,11 @@ export default function AdminDashboard({ user }) {
                             {franchise.stores.map((store, sindex) => {
                               return (
                                 <tr key={sindex} className='bg-neutral-100'>
-                                  <td className='text-right px-2 whitespace-nowrap text-sm text-gray-800' colSpan={3}>
+                                  <td className='text-end px-2 whitespace-nowrap text-sm text-gray-800' colSpan={3}>
                                     {store.name}
                                   </td>
                                   <td className='text-center px-2 whitespace-nowrap text-sm text-gray-800'>{store.location}</td>
-                                  <td className='text-right px-2 whitespace-nowrap text-sm text-gray-800'>{store.totalRevenue.toLocaleString()} ₿</td>
+                                  <td className='text-end px-2 whitespace-nowrap text-sm text-gray-800'>{store.totalRevenue.toLocaleString()} ₿</td>
                                   <td className='px-6 py-4 whitespace-nowrap text-end text-sm font-medium'>
                                     <button
                                       type='button'

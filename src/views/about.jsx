@@ -4,9 +4,9 @@ import View from './view';
 export default function About() {
   return (
     <View title='The secret sauce'>
-      <div className='text-left py-8 px-4 sm:px-6 lg:px-8'>
+      <div className='text-start py-8 px-4 sm:px-6 lg:px-8'>
         <img src='/pizza-shop-logo.png' className='border-solid border-2 border-orange-700 w-64 m-4 float-left' />
-        <p className='py-2 text-neutral-100 text-left mx-4 pb-4 first-line:uppercase first-line:tracking-widest  first-letter:text-7xl first-letter:font-bold first-letter:text-orange-800  first-letter:mr-3 first-letter:float-left'>
+        <p className='py-2 text-neutral-100 text-start mx-4 pb-4 first-line:uppercase first-line:tracking-widest  first-letter:text-7xl first-letter:font-bold first-letter:text-orange-800  first-letter:mr-3 first-letter:float-left'>
           At NFT Pizza, our amazing employees are the secret behind our delicious pizzas. They are passionate about their craft and spend every waking moment dreaming about how to make our pizzas even
           better. From selecting the finest ingredients to perfecting the dough and sauce recipes, our employees go above and beyond to ensure the highest quality and taste in every bite. Their
           dedication and attention to detail make all the difference in creating a truly exceptional pizza experience for our customers. We take pride in our team and their commitment to delivering
