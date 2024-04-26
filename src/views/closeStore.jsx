@@ -1,10 +1,12 @@
 import React from 'react';
+import { useLocation } from 'react-router-dom';
 import { useBreadcrumb } from '../hooks/appNavigation';
 import { Api } from '../api/api';
 import View from './view';
 import Button from '../components/button';
 
 export default function CloseStore() {
+  const state = useLocation().state;
   const navigateToParent = useBreadcrumb();
 
   function close() {
