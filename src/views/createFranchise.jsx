@@ -1,7 +1,7 @@
 import React from 'react';
 import { useBreadcrumb } from '../hooks/appNavigation';
 import { EmailIcon, StoreIcon } from '../icons';
-import { Api } from '../api/api';
+import { pizzaService } from '../service/service';
 import View from './view';
 
 import Button from '../components/button';
@@ -12,7 +12,7 @@ export default function CreateFranchise() {
 
   async function createFranchise(event) {
     event.preventDefault();
-    await Api.createFranchise(franchise);
+    await pizzaService.createFranchise(franchise);
     navigateToParentPath();
   }
 

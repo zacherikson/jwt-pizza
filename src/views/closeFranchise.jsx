@@ -1,6 +1,6 @@
 import React from 'react';
 import { useLocation } from 'react-router-dom';
-import { Api } from '../api/api';
+import { pizzaService } from '../service/service';
 import View from './view';
 import Button from '../components/button';
 import { useBreadcrumb } from '../hooks/appNavigation';
@@ -10,7 +10,7 @@ export default function CloseFranchise() {
   const navigateToParentPath = useBreadcrumb();
 
   function close() {
-    Api.closeFranchise(state.franchise);
+    pizzaService.closeFranchise(state.franchise);
     navigateToParentPath();
   }
 

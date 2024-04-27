@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { CloseEyeIcon, KeyIcon, EmailIcon } from '../icons';
 import Button from '../components/button';
-import { Api } from '../api/api';
+import { pizzaService } from '../service/service';
 import { useBreadcrumb } from '../hooks/appNavigation';
 import View from './view';
 
@@ -21,7 +21,7 @@ export default function Login({ setUser }) {
   async function login(event) {
     event.preventDefault();
     try {
-      setUser(await Api.login(email, password));
+      setUser(await pizzaService.login(email, password));
       navigateToParent();
     } catch (error) {
       displayMessage(JSON.stringify(error));

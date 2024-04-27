@@ -3,7 +3,7 @@ import View from './view';
 import { useNavigate } from 'react-router-dom';
 import NotFound from './notFound';
 import Button from '../components/button';
-import { Api } from '../api/api';
+import { pizzaService } from '../service/service';
 import { TrashIcon } from '../icons';
 
 export default function AdminDashboard({ user }) {
@@ -12,7 +12,7 @@ export default function AdminDashboard({ user }) {
 
   React.useEffect(() => {
     (async () => {
-      setFranchises(await Api.getFranchises());
+      setFranchises(await pizzaService.getFranchises());
     })();
   }, [user]);
 
@@ -29,7 +29,7 @@ export default function AdminDashboard({ user }) {
   }
 
   let response = <NotFound />;
-  if (Api.isAdmin(user)) {
+  if (pizzaService.isAdmin(user)) {
     response = (
       <View title="Mama Ricci's kitchen">
         <div className='text-start py-8 px-4 sm:px-6 lg:px-8'>

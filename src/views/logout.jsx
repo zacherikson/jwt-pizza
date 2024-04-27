@@ -1,6 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Api } from '../api/api';
+import { pizzaService } from '../service/service';
 import View from './view';
 
 export default function Logout({ setUser }) {
@@ -8,7 +8,7 @@ export default function Logout({ setUser }) {
 
   React.useEffect(() => {
     (async () => {
-      await Api.logout();
+      await pizzaService.logout();
       setUser(null);
       navigate('/');
     })();

@@ -2,7 +2,7 @@ import React from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import View from './view';
 import Button from '../components/button';
-import { Api } from '../api/api';
+import { pizzaService } from '../service/service';
 
 export default function Payment() {
   const location = useLocation();
@@ -11,7 +11,7 @@ export default function Payment() {
 
   React.useEffect(() => {
     (async () => {
-      const user = await Api.getUser();
+      const user = await pizzaService.getUser();
       if (!user) {
         const loginPath = location.pathname + '/login';
         navigate(loginPath, { state: location.state });
@@ -20,7 +20,7 @@ export default function Payment() {
   }, []);
 
   async function processPayment() {
-    const confirmation = await Api.purchase(order);
+    const confirmation = await pizzaService.purchase(order);
     navigate('/delivery', { state: { order: confirmation } });
   }
 

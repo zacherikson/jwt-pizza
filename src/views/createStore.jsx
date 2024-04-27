@@ -5,7 +5,7 @@ import { StoreIcon, LocationIcon } from '../icons';
 import View from './view';
 
 import Button from '../components/button';
-import { Api } from '../api/api';
+import { pizzaService } from '../service/service';
 
 export default function CreateStore() {
   const state = useLocation().state;
@@ -14,7 +14,7 @@ export default function CreateStore() {
 
   function createStore(event) {
     event.preventDefault();
-    Api.createStore(state.franchise, store);
+    pizzaService.createStore(state.franchise, store);
     navigateToParentPath();
   }
 

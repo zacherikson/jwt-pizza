@@ -2,14 +2,14 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import View from './view';
 import NotFound from './notFound';
-import { Api } from '../api/api';
+import { pizzaService } from '../service/service';
 
 export default function DinerDashboard({ user }) {
   const [purchases, setPurchases] = React.useState([]);
 
   React.useEffect(() => {
     (async () => {
-      setPurchases(await Api.getPurchases(user));
+      setPurchases(await pizzaService.getPurchases(user));
     })();
   }, [user]);
 

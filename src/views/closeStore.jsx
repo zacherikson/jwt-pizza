@@ -1,7 +1,7 @@
 import React from 'react';
 import { useLocation } from 'react-router-dom';
 import { useBreadcrumb } from '../hooks/appNavigation';
-import { Api } from '../api/api';
+import { pizzaService } from '../service/service';
 import View from './view';
 import Button from '../components/button';
 
@@ -10,7 +10,7 @@ export default function CloseStore() {
   const navigateToParent = useBreadcrumb();
 
   function close() {
-    Api.closeStore(state.franchise, state.store);
+    pizzaService.closeStore(state.franchise, state.store);
     navigateToParent();
   }
 

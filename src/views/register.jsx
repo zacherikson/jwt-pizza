@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { KeyIcon, CloseEyeIcon, PersonIcon, EmailIcon } from '../icons';
 import Button from '../components/button';
-import { Api } from '../api/api';
+import { pizzaService } from '../service/service';
 import { useBreadcrumb } from '../hooks/appNavigation';
 import View from './view';
 
@@ -22,7 +22,7 @@ export default function Register({ setUser }) {
   async function register(event) {
     event.preventDefault();
     try {
-      setUser(await Api.register(name, email, password));
+      setUser(await pizzaService.register(name, email, password));
       navigateToParentPath();
     } catch (error) {
       displayMessage(JSON.stringify(error));

@@ -1,6 +1,6 @@
-import { ApiNewInterface, Franchise, Store, OrderItem, User, Menu, Purchase, Order } from './apiInterface';
+import { PizzaService, Franchise, Store, User, Menu, Order } from './pizzaService';
 
-class ServiceApi implements ApiNewInterface {
+class HttpPizzaService implements PizzaService {
   isAdmin(user: User): boolean {
     return false;
   }
@@ -27,31 +27,31 @@ class ServiceApi implements ApiNewInterface {
     });
   }
 
-  async logout(): Promise<null> {
+  async logout(): Promise<void> {
     return new Promise((resolve) => {
-      resolve(null);
+      resolve();
     });
   }
 
-  async getUser(): Promise<User> {
+  async getUser(): Promise<User | null> {
     return new Promise((resolve) => {
       resolve({} as User);
     });
   }
 
-  async getPurchases(user: User): Promise<Purchase[]> {
+  async getPurchases(user: User): Promise<Order[]> {
     return new Promise((resolve) => {
-      resolve([] as Purchase[]);
+      resolve([] as Order[]);
     });
   }
 
-  async purchase(order: Order): Promise<Purchase[]> {
+  async purchase(order: Order): Promise<Order> {
     return new Promise((resolve) => {
-      resolve([] as Purchase[]);
+      resolve({} as Order);
     });
   }
 
-  async getFranchise(user: User): Promise<Franchise> {
+  async getFranchise(user: User): Promise<Franchise | null> {
     return new Promise((resolve) => {
       resolve({} as Franchise);
     });
@@ -69,9 +69,9 @@ class ServiceApi implements ApiNewInterface {
     });
   }
 
-  async closeFranchise(franchise: Franchise): Promise<string> {
+  async closeFranchise(franchise: Franchise): Promise<void> {
     return new Promise((resolve) => {
-      resolve('');
+      resolve();
     });
   }
 
@@ -88,5 +88,5 @@ class ServiceApi implements ApiNewInterface {
   }
 }
 
-const api = new ServiceApi();
-export default api;
+const httpPizzaService = new HttpPizzaService();
+export default httpPizzaService;

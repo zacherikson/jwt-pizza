@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Api } from '../api/api';
+import { pizzaService } from '../service/service';
 import View from './view';
 import Card from '../components/card';
 import Button from '../components/button';
@@ -13,9 +13,9 @@ export default function Menu() {
 
   useEffect(() => {
     (async () => {
-      const menu = await Api.getMenu();
+      const menu = await pizzaService.getMenu();
       setPizzas(menu);
-      const franchises = await Api.getFranchises();
+      const franchises = await pizzaService.getFranchises();
       const newStoreMap = {};
       franchises.forEach((franchise) => franchise.stores.forEach((store) => (newStoreMap[store.id] = { store, franchise })));
       setStoreMap(newStoreMap);

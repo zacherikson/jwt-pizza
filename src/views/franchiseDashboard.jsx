@@ -4,7 +4,7 @@ import { NavLink } from 'react-router-dom';
 import View from './view';
 import { TrashIcon, CautionIcon } from '../icons';
 import Button from '../components/button';
-import { Api } from '../api/api';
+import { pizzaService } from '../service/service';
 
 export default function FranchiseDashboard({ user }) {
   const navigate = useNavigate();
@@ -13,7 +13,7 @@ export default function FranchiseDashboard({ user }) {
   React.useEffect(() => {
     (async () => {
       if (user) {
-        setFranchise(await Api.getFranchise(user));
+        setFranchise(await pizzaService.getFranchise(user));
       }
     })();
   }, [user]);

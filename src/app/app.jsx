@@ -21,7 +21,7 @@ import CloseStore from '../views/closeStore';
 import Payment from '../views/payment';
 import NotFound from '../views/notFound';
 import Breadcrumb from '../components/breadcrumb';
-import { Api } from '../api/api';
+import { pizzaService } from '../service/service';
 import 'preline/preline';
 
 export default function App() {
@@ -30,7 +30,7 @@ export default function App() {
 
   useEffect(() => {
     (async () => {
-      const user = await Api.getUser();
+      const user = await pizzaService.getUser();
       setUser(user);
     })();
   }, []);
@@ -47,10 +47,10 @@ export default function App() {
     return !loggedIn();
   }
   function isAdmin() {
-    return Api.isAdmin(user);
+    return pizzaService.isAdmin(user);
   }
   function isNotAdmin() {
-    return !Api.isAdmin(user);
+    return !pizzaService.isAdmin(user);
   }
 
   const navItems = [
