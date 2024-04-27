@@ -6,7 +6,7 @@ import { Api } from '../api/api';
 
 export default function Payment() {
   const location = useLocation();
-  const order = location.state?.order || { pizzas: [] };
+  const order = location.state?.order || { items: [] };
   const navigate = useNavigate();
 
   React.useEffect(() => {
@@ -31,8 +31,8 @@ export default function Payment() {
   return (
     <View title='So worth it'>
       <div className='flex flex-col justify-center items-center py-8 px-4 sm:px-6 lg:px-8'>
-        {order.pizzas.length === 1 && <div className='text-neutral-100'>Send me that pizza right now!</div>}
-        {order.pizzas.length > 1 && <div className='text-neutral-100'>Send me those {order.pizzas.length} pizzas right now!</div>}
+        {order.items.length === 1 && <div className='text-neutral-100'>Send me that pizza right now!</div>}
+        {order.items.length > 1 && <div className='text-neutral-100'>Send me those {order.items.length} pizzas right now!</div>}
         <div>
           <Button title='Pay now' onPress={processPayment} />
           <Button title='Cancel' onPress={cancel} className='bg-transparent border-neutral-300' />
@@ -54,19 +54,19 @@ export default function Payment() {
                       </tr>
                     </thead>
                     <tbody className='divide-y divide-gray-200'>
-                      {order.pizzas.map((pizza, index) => (
+                      {order.items.map((item, index) => (
                         <tr key={index} className='hover:bg-gray-100'>
-                          <td className='px-6 py-4 whitespace-nowrap text-start text-xs sm:text-sm font-medium text-gray-800'>{pizza.title}</td>
-                          <td className='px-6 py-4 whitespace-nowrap text-start text-xs sm:text-sm text-gray-800'>{pizza.price.toLocaleString()} ₿</td>
+                          <td className='px-6 py-4 whitespace-nowrap text-start text-xs sm:text-sm font-medium text-gray-800'>{item.description}</td>
+                          <td className='px-6 py-4 whitespace-nowrap text-start text-xs sm:text-sm text-gray-800'>{item.price.toLocaleString()} ₿</td>
                         </tr>
                       ))}
                     </tbody>
                     <tfoot>
                       <tr className='bg-orange-200 border-t-2 border-red-500'>
                         <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-800'>
-                          {order.pizzas.length} pie{order.pizzas.length > 1 ? 's' : ''}
+                          {order.items.length} pie{order.items.length > 1 ? 's' : ''}
                         </td>
-                        <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-800'>{order.pizzas.reduce((a, c) => a + c.price, 0).toLocaleString()} ₿</td>
+                        <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-800'>{order.items.reduce((a, c) => a + c.price, 0).toLocaleString()} ₿</td>
                       </tr>
                     </tfoot>
                   </table>

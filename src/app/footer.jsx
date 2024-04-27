@@ -15,7 +15,7 @@ export default function Footer({ navItems }) {
               )
           )}
         </nav>
-        <p className='text-sm text-center italic text-gray-400'>© 2024 NFT Pizza LTD. All rights reserved.</p>
+        <p className='text-sm text-center italic text-gray-400'>© 2024 JWT Pizza LTD. All rights reserved.</p>
       </div>
     </footer>
   );

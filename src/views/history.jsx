@@ -22,7 +22,7 @@ export default function History() {
           </p>
           <p className='py-2'>
             It gained popularity in cities like New York and Chicago, where pizzerias started popping up. Today, pizza is enjoyed worldwide and comes in countless variations and flavors. However, the
-            classic Neapolitan pizza is still a favorite among many pizza enthusiasts. This is especially true if it comes from NFT Pizza!
+            classic Neapolitan pizza is still a favorite among many pizza enthusiasts. This is especially true if it comes from JWT Pizza!
           </p>
         </div>
       </div>

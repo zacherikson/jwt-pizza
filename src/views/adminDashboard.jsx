@@ -56,7 +56,7 @@ export default function AdminDashboard({ user }) {
                             <tr className='border-neutral-500 border-t-2'>
                               <td className='text-start px-2 whitespace-nowrap text-l font-mono text-orange-600'>{franchise.name}</td>
                               <td className='text-start px-2 whitespace-nowrap text-sm font-normal text-gray-800' colSpan={4}>
-                                {franchise.admin.join(', ')}
+                                {franchise.admins.join(', ')}
                               </td>
                               <td className='px-6 py-4 whitespace-nowrap text-end text-sm font-medium'>
                                 <button

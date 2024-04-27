@@ -19,7 +19,7 @@ export default function Header({ user, navItems }) {
         <nav className='max-w-[85rem] w-full mx-auto px-4 sm:flex sm:items-center sm:justify-between' aria-label='Global'>
           <div className='flex items-center justify-between'>
             <img className='w-10 m-3' src='/pizza-shop-icon.png' />
-            <span className='font-normal flex-none text-4xl bg-clip-text bg-gradient-to-tr from-orange-500 to-orange-300 text-transparent'>NFT Pizza</span>
+            <span className='font-normal flex-none text-4xl bg-clip-text bg-gradient-to-tr from-orange-500 to-orange-300 text-transparent'>JWT Pizza</span>
             <div className='sm:hidden'>
               <button
                 type='button'

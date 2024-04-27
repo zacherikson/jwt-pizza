@@ -6,7 +6,7 @@ import Button from '../components/button';
 import { useNavigate, useLocation } from 'react-router-dom';
 
 export default function Menu() {
-  const [order, setOrder] = useState(useLocation().state?.order || { pizzas: [] });
+  const [order, setOrder] = useState(useLocation().state?.order || { items: [] });
   const [pizzas, setPizzas] = useState([]);
   const navigate = useNavigate();
 
@@ -18,11 +18,11 @@ export default function Menu() {
   }, []);
 
   function selectPizza(pizza) {
-    setOrder({ pizzas: [...order.pizzas, pizza] });
+    setOrder({ items: [...order.items, { id: pizza.id, description: pizza.title, price: pizza.price }] });
   }
 
   function checkout() {
-    if (order.pizzas.length > 0) {
+    if (order.items.length > 0) {
       navigate('/payment', { state: { order: order } });
     }
   }
@@ -32,7 +32,7 @@ export default function Menu() {
       <div className='flow flow-col text-center justify-center text-neutral-100  py-8 px-4 sm:px-6 lg:px-8'>
         <div className='my-2 sm:my-8'>Pick your pizzas from below. Remember to order extra for a midnight party.</div>
 
-        <div className='text-yellow-200'>{order.pizzas.length > 0 ? 'Selected pizzas: ' + order.pizzas.length : 'What are you waiting for? Pick a pizza!'}</div>
+        <div className='text-yellow-200'>{order.items.length > 0 ? 'Selected pizzas: ' + order.items.length : 'What are you waiting for? Pick a pizza!'}</div>
         <Button title='Checkout' onPress={checkout} disabled={order.length <= 0} className='disabled' />
 
         <div className='m-4 grid gap-x-8 gap-y-4 sm:gird-cols-1 md:grid-cols-2 lg:grid-cols-4 xlg:grid-cols-5'>
