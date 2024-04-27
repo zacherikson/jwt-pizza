@@ -16,14 +16,46 @@ class HttpPizzaService implements PizzaService {
   }
 
   async login(email: string, password: string): Promise<User> {
-    return new Promise((resolve) => {
-      resolve({} as User);
+    return new Promise(async (resolve, reject) => {
+      try {
+        const r = await fetch('http://localhost:3000/api/auth', {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ email, password }),
+        });
+        const j = await r.json();
+        if (r.ok) {
+          resolve(j as User);
+        } else {
+          reject({ code: r.status, message: j.message });
+        }
+      } catch (e) {
+        reject({ code: 500, message: e.message });
+      }
     });
   }
 
   async register(name: string, email: string, password: string): Promise<User> {
-    return new Promise((resolve) => {
-      resolve({} as User);
+    return new Promise(async (resolve, reject) => {
+      try {
+        const r = await fetch('http://localhost:3000/api/auth', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ name, email, password }),
+        });
+        const j = await r.json();
+        if (r.ok) {
+          resolve(j as User);
+        } else {
+          reject({ code: r.status, message: j.message });
+        }
+      } catch (e) {
+        reject({ code: 500, message: e.message });
+      }
     });
   }
 
@@ -35,7 +67,7 @@ class HttpPizzaService implements PizzaService {
 
   async getUser(): Promise<User | null> {
     return new Promise((resolve) => {
-      resolve({} as User);
+      resolve(null);
     });
   }
 
@@ -53,7 +85,7 @@ class HttpPizzaService implements PizzaService {
 
   async getFranchise(user: User): Promise<Franchise | null> {
     return new Promise((resolve) => {
-      resolve({} as Franchise);
+      resolve(null);
     });
   }
 
