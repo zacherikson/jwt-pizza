@@ -43,7 +43,7 @@ export default function AdminDashboard({ user }) {
                     <table className='min-w-full divide-y divide-gray-200'>
                       <thead className='uppercase text-neutral-100 bg-slate-400 border-b-2 border-gray-500'>
                         <tr>
-                          {['Franchise', 'Franchisee', 'Store', 'Location', 'Revenue', 'Action'].map((header) => (
+                          {['Franchise', 'Franchisee', 'Store', 'Revenue', 'Action'].map((header) => (
                             <th key={header} scope='col' className='px-6 py-3 text-center text-xs font-medium'>
                               {header}
                             </th>
@@ -76,7 +76,6 @@ export default function AdminDashboard({ user }) {
                                   <td className='text-end px-2 whitespace-nowrap text-sm text-gray-800' colSpan={3}>
                                     {store.name}
                                   </td>
-                                  <td className='text-center px-2 whitespace-nowrap text-sm text-gray-800'>{store.location}</td>
                                   <td className='text-end px-2 whitespace-nowrap text-sm text-gray-800'>{store.totalRevenue.toLocaleString()} ₿</td>
                                   <td className='px-6 py-4 whitespace-nowrap text-end text-sm font-medium'>
                                     <button

@@ -33,9 +33,9 @@ class ApiMock extends ApiInterface {
       admins: ['12345678-1234-4abc-9def-123456789abc'],
       id: 'e7b6a8f2-4e1d-4d2d-9e8a-3e9c1a2b6d5f',
       stores: [
-        { id: '12345678-1234-4abc-9def-123456789abc', name: 'online', location: 'Orem', totalRevenue: 3.0 },
-        { id: '87654321-4321-4def-9abc-987654321def', name: 'online', location: 'Provo', totalRevenue: 5.3 },
-        { id: 'abcdef12-34ab-4def-9abc-abcdef123456', name: 'online', location: 'Payson', totalRevenue: 23.2 },
+        { id: '12345678-1234-4abc-9def-123456789abc', name: 'Orem', totalRevenue: 3.0 },
+        { id: '87654321-4321-4def-9abc-987654321def', name: 'Provo', totalRevenue: 5.3 },
+        { id: 'abcdef12-34ab-4def-9abc-abcdef123456', name: 'Payson', totalRevenue: 23.2 },
       ],
     },
     {
@@ -43,9 +43,9 @@ class ApiMock extends ApiInterface {
       admins: ['01234567-8901-4f4f-9f9f-9876543210ab', '65432109-8765-4e4e-9e9e-0123456789ab'],
       id: 'abb3423f2-4e1d-4d2d-9e8a-3e9c1a2b6d77',
       stores: [
-        { id: 'aabbccdd-eeff-4a4a-9a9a-bbccddeeff00', name: 'online', location: 'Lehi', totalRevenue: 0.25 },
-        { id: '11223344-5566-4b4b-9b9b-ccddeeff0011', name: 'online', location: 'Springville', totalRevenue: 1.9 },
-        { id: '99887766-5544-4c4c-9c9c-bbaa99887766', name: 'online', location: 'American Fork', totalRevenue: 4.802 },
+        { id: 'aabbccdd-eeff-4a4a-9a9a-bbccddeeff00', name: 'Lehi', totalRevenue: 0.25 },
+        { id: '11223344-5566-4b4b-9b9b-ccddeeff0011', name: 'Springville', totalRevenue: 1.9 },
+        { id: '99887766-5544-4c4c-9c9c-bbaa99887766', name: 'American Fork', totalRevenue: 4.802 },
       ],
     },
     { name: 'PizzaCorp', admins: ['nikolai@jwt.com'], stores: [{ id: '44556677-3322-4d4d-9d9d-ccbbaa445566', name: 'online', location: 'Spanish Fork', totalRevenue: 3000000 }] },
@@ -58,6 +58,8 @@ class ApiMock extends ApiInterface {
       orders: [
         {
           id: 'e7b6a8f2-4e1d-4d2d-9e8a-3e9c1a2b6d5f',
+          franchiseId: 'e7b6a8f2-4e1d-4d2d-9e8a-3e9c1a2b6d5f',
+          storeId: '12345678-1234-4abc-9def-123456789abc',
           date: '2024-03-10T00:00:00Z',
           items: [
             { id: 'a11111111-1111-1111-1111-111111111111', description: 'Veggie', price: 0.05 },
@@ -69,6 +71,8 @@ class ApiMock extends ApiInterface {
     {
       id: 'ph2',
       diner: 'abcdef12-34ab-4def-9abc-abcdef123456',
+      franchiseId: 'e7b6a8f2-4e1d-4d2d-9e8a-3e9c1a2b6d5f',
+      storeId: '12345678-1234-4abc-9def-123456789abc',
       orders: [
         {
           id: 'e7b3423f2-4e1d-4d2d-9e8a-3e9c1a2b6d5f',
@@ -174,6 +178,15 @@ class ApiMock extends ApiInterface {
           this.purchaseHistory.push(userPurchaseHistory);
         }
         userPurchaseHistory.orders = [order, ...userPurchaseHistory.orders];
+
+        this.franchises.find((franchise) => {
+          const store = franchise.stores.find((store) => store.id === order.storeId);
+          if (store) {
+            store.totalRevenue += order.items.reduce((total, item) => total + item.price, 0);
+            return true;
+          }
+          return false;
+        });
         resolve(order);
       } else {
         reject({ code: 401, msg: 'unauthorized' });
@@ -226,7 +239,17 @@ class ApiMock extends ApiInterface {
       if (this.isAdmin(user)) {
         resolve(this.franchises);
       } else {
-        reject({ code: 401, msg: 'unauthorized' });
+        resolve(
+          this.franchises.map((franchise) => {
+            return {
+              name: franchise.name,
+              id: franchise.id,
+              stores: franchise.stores.map((store) => {
+                return { id: store.id, name: store.name, location: store.location };
+              }),
+            };
+          })
+        );
       }
     });
   }

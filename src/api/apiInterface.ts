@@ -22,11 +22,13 @@ type OrderItem = {
 
 type Order = {
   id: string;
+  franchiseId: string;
+  storeId: string;
   date: string;
   items: OrderItem[];
 };
 
-type Purchase = {
+type PurchaseHistory = {
   id: string;
   diner: string;
   orders: Order[];
@@ -43,7 +45,6 @@ type User = {
 type Store = {
   id: string;
   name: string;
-  location: string;
   totalRevenue: number;
 };
 
@@ -62,8 +63,8 @@ interface ApiNewInterface {
   register(email: string, password: string, role: string): Promise<User>;
   logout(): Promise<null>;
   getUser(): Promise<User>;
-  getPurchases(user: User): Promise<Purchase[]>;
-  purchase(order: Order): Promise<Purchase[]>;
+  getPurchases(user: User): Promise<Order[]>;
+  purchase(order: Order): Promise<Order>;
   getFranchise(user: User): Promise<Franchise>;
   createFranchise(franchise: Franchise): Promise<Franchise>;
   getFranchises(): Promise<Franchise[]>;
@@ -92,4 +93,4 @@ function ApiInterface() {
   if (this.closeStore === undefined) throw new Error('not implemented');
 }
 
-export { ApiInterface, Role, ApiNewInterface, User, Menu, Pizza, Purchase, Order, Franchise, Store, OrderItem };
+export { ApiInterface, Role, ApiNewInterface, User, Menu, Pizza, PurchaseHistory as Purchase, Order, Franchise, Store, OrderItem };
