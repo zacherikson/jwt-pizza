@@ -7,14 +7,14 @@ import { useNavigate, useLocation } from 'react-router-dom';
 
 export default function Menu() {
   const [order, setOrder] = useState(useLocation().state?.order || { items: [] });
-  const [pizzas, setPizzas] = useState([]);
+  const [menu, setMenu] = useState([]);
   const [storeMap, setStoreMap] = useState([]);
   const navigate = useNavigate();
 
   useEffect(() => {
     (async () => {
       const menu = await pizzaService.getMenu();
-      setPizzas(menu);
+      setMenu(menu);
       const franchises = await pizzaService.getFranchises();
       const newStoreMap = {};
       franchises.forEach((franchise) => franchise.stores.forEach((store) => (newStoreMap[store.id] = { store, franchise })));
@@ -60,7 +60,7 @@ export default function Menu() {
         <Button title='Checkout' onPress={checkout} disabled={order.length <= 0} className='disabled' />
 
         <div className='m-4 grid gap-x-8 gap-y-4 sm:gird-cols-1 md:grid-cols-2 lg:grid-cols-4 xlg:grid-cols-5'>
-          {pizzas.map((pizza) => (
+          {menu.map((pizza) => (
             <button
               key={pizza.title}
               type='button'

@@ -1,17 +1,27 @@
-import { PizzaService, Franchise, Store, User, Menu, Order } from './pizzaService';
+import { PizzaService, Franchise, Store, User, Menu, Order, Role } from './pizzaService';
 
 class HttpPizzaService implements PizzaService {
-  isAdmin(user: User): boolean {
-    return false;
+  isAdmin(user: User | null): boolean {
+    return user != null && !!user.roles.find((r) => r.role === Role.Admin);
   }
 
-  isFranchisee(user: User): boolean {
-    return false;
+  isFranchisee(user: User | null): boolean {
+    return user != null && !!user.roles.find((r) => r.role === Role.Franchisee);
   }
 
   async getMenu(): Promise<Menu> {
-    return new Promise((resolve) => {
-      resolve({} as Menu);
+    return new Promise(async (resolve, reject) => {
+      try {
+        const r = await fetch('http://localhost:3000/api/pizza/menu');
+        const j = await r.json();
+        if (r.ok) {
+          resolve(j as Menu);
+        } else {
+          reject({ code: r.status, message: j.message });
+        }
+      } catch (e) {
+        reject({ code: 500, message: e.message });
+      }
     });
   }
 
@@ -27,6 +37,7 @@ class HttpPizzaService implements PizzaService {
         });
         const j = await r.json();
         if (r.ok) {
+          localStorage.setItem('user', JSON.stringify(j));
           resolve(j as User);
         } else {
           reject({ code: r.status, message: j.message });
@@ -49,6 +60,7 @@ class HttpPizzaService implements PizzaService {
         });
         const j = await r.json();
         if (r.ok) {
+          localStorage.setItem('user', JSON.stringify(j));
           resolve(j as User);
         } else {
           reject({ code: r.status, message: j.message });
@@ -67,7 +79,8 @@ class HttpPizzaService implements PizzaService {
 
   async getUser(): Promise<User | null> {
     return new Promise((resolve) => {
-      resolve(null);
+      let user: User | null = JSON.parse(localStorage.getItem('user') || 'null');
+      return resolve(user);
     });
   }
 

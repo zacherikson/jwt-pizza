@@ -30,8 +30,13 @@ type Order = {
 
 type PurchaseHistory = {
   id: string;
-  diner: string;
+  dinerId: string;
   orders: Order[];
+};
+
+type UserRole = {
+  role: Role;
+  objectId?: string;
 };
 
 type User = {
@@ -39,7 +44,7 @@ type User = {
   name: string;
   email: string;
   password: string;
-  roles: string[];
+  roles: UserRole[];
 };
 
 type Store = {

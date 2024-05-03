@@ -11,16 +11,16 @@ const pizzaMenu: Menu = [
 
 class MemoryPizzaService implements PizzaService {
   users: User[] = [
-    { id: '12345678-1234-4abc-9def-123456789abc', name: 'Rajah Singh', email: 'f@jwt.com', password: 'a', roles: [Role.Franchisee] },
-    { id: '87654321-4321-4def-9abc-987654321def', name: 'Zara Ahmed', email: 'a@jwt.com', password: 'a', roles: [Role.Admin] },
-    { id: 'abcdef12-34ab-4def-9abc-abcdef123456', name: 'Kai Chen', email: 'd@jwt.com', password: 'a', roles: [Role.Diner] },
-    { id: 'fedcba21-43ba-4fed-9cba-fedcba987654', name: 'Lila Patel', email: 'lila@jwt.com', password: 'a', roles: [Role.Diner] },
-    { id: 'aabbccdd-eeff-4a4a-9a9a-bbccddeeff00', name: 'Aiden Kim', email: 'aiden@jwt.com', password: 'a', roles: [Role.Diner] },
-    { id: '11223344-5566-4b4b-9b9b-ccddeeff0011', name: 'Sofia Nguyen', email: 'sofia@jwt.com', password: 'a', roles: [Role.Diner] },
-    { id: '99887766-5544-4c4c-9c9c-bbaa99887766', name: 'Emilio Costa', email: 'emilio@jwt.com', password: 'a', roles: [Role.Diner] },
-    { id: '44556677-3322-4d4d-9d9d-ccbbaa445566', name: 'Amara Ali', email: 'amara@jwt.com', password: 'a', roles: [Role.Diner] },
-    { id: '65432109-8765-4e4e-9e9e-0123456789ab', name: 'Nikolai Petrov', email: 'nikolai@jwt.com', password: 'a', roles: [Role.Franchisee] },
-    { id: '01234567-8901-4f4f-9f9f-9876543210ab', name: 'Luna Santos', email: 'luna@jwt.com', password: 'a', roles: [Role.Franchisee] },
+    { id: '12345678-1234-4abc-9def-123456789abc', name: 'Rajah Singh', email: 'f@jwt.com', password: 'a', roles: [{ objectId: 'e7b6a8f2-4e1d-4d2d-9e8a-3e9c1a2b6d5f', role: Role.Franchisee }] },
+    { id: '87654321-4321-4def-9abc-987654321def', name: 'Zara Ahmed', email: 'a@jwt.com', password: 'a', roles: [{ role: Role.Admin }] },
+    { id: 'abcdef12-34ab-4def-9abc-abcdef123456', name: 'Kai Chen', email: 'd@jwt.com', password: 'a', roles: [{ role: Role.Diner }] },
+    { id: 'fedcba21-43ba-4fed-9cba-fedcba987654', name: 'Lila Patel', email: 'lila@jwt.com', password: 'a', roles: [{ role: Role.Diner }] },
+    { id: 'aabbccdd-eeff-4a4a-9a9a-bbccddeeff00', name: 'Aiden Kim', email: 'aiden@jwt.com', password: 'a', roles: [{ role: Role.Diner }] },
+    { id: '11223344-5566-4b4b-9b9b-ccddeeff0011', name: 'Sofia Nguyen', email: 'sofia@jwt.com', password: 'a', roles: [{ role: Role.Diner }] },
+    { id: '99887766-5544-4c4c-9c9c-bbaa99887766', name: 'Emilio Costa', email: 'emilio@jwt.com', password: 'a', roles: [{ role: Role.Diner }] },
+    { id: '44556677-3322-4d4d-9d9d-ccbbaa445566', name: 'Amara Ali', email: 'amara@jwt.com', password: 'a', roles: [{ role: Role.Diner }] },
+    { id: '65432109-8765-4e4e-9e9e-0123456789ab', name: 'Niki Petrov', email: 'niki@jwt.com', password: 'a', roles: [{ objectId: 'abb3423f2-4e1d-4d2d-9e8a-3e9c1a2b6d77', role: Role.Franchisee }] },
+    { id: '01234567-8901-4f4f-9f9f-9876543210ab', name: 'Luna Santos', email: 'luna@jwt.com', password: 'a', roles: [{ objectId: 'abb3423f2-4e1d-4d2d-9e8a-3e9c1a2b6d77', role: Role.Franchisee }] },
   ];
 
   franchises: Franchise[] = [
@@ -55,7 +55,7 @@ class MemoryPizzaService implements PizzaService {
   purchaseHistory: PurchaseHistory[] = [
     {
       id: 'ph1',
-      diner: '87654321-4321-4def-9abc-987654321def',
+      dinerId: '87654321-4321-4def-9abc-987654321def',
       orders: [
         {
           id: 'e7b6a8f2-4e1d-4d2d-9e8a-3e9c1a2b6d5f',
@@ -71,7 +71,7 @@ class MemoryPizzaService implements PizzaService {
     },
     {
       id: 'ph2',
-      diner: 'abcdef12-34ab-4def-9abc-abcdef123456',
+      dinerId: 'abcdef12-34ab-4def-9abc-abcdef123456',
       orders: [
         {
           id: 'e7b3423f2-4e1d-4d2d-9e8a-3e9c1a2b6d5f',
@@ -87,12 +87,12 @@ class MemoryPizzaService implements PizzaService {
     },
   ];
 
-  isAdmin(user) {
-    return user?.roles.includes(Role.Admin);
+  isAdmin(user: User | null): boolean {
+    return user != null && !!user.roles.find((r) => r.role === Role.Admin);
   }
 
-  isFranchisee(user) {
-    return user?.roles.includes(Role.Franchisee);
+  isFranchisee(user: User | null): boolean {
+    return user != null && !!user.roles.find((r) => r.role === Role.Franchisee);
   }
 
   async getMenu(): Promise<Menu> {
@@ -122,7 +122,7 @@ class MemoryPizzaService implements PizzaService {
         if (user) {
           reject({ code: 409, msg: 'user already exists' });
         }
-        user = { id: this.generateUUID(), name: name, email: email, password: password, roles: [Role.Diner] };
+        user = { id: this.generateUUID(), name: name, email: email, password: password, roles: [{ role: Role.Diner }] };
         this.users.push(user);
         await this.login(email, password);
         resolve(user);
@@ -153,7 +153,7 @@ class MemoryPizzaService implements PizzaService {
       if (purchasingUser) {
         const user = await this.getUser();
         if (user && (this.isAdmin(user) || user.id === purchasingUser.id)) {
-          const purchases = this.purchaseHistory.find((purchase) => purchase.diner === purchasingUser.id) as PurchaseHistory;
+          const purchases = this.purchaseHistory.find((purchase) => purchase.dinerId === purchasingUser.id) as PurchaseHistory;
           if (purchases) {
             result = purchases.orders;
           }
@@ -172,7 +172,7 @@ class MemoryPizzaService implements PizzaService {
 
         let userPurchaseHistory: PurchaseHistory = this.purchaseHistory.find((purchase) => purchase.id === user.id) as PurchaseHistory;
         if (!userPurchaseHistory) {
-          userPurchaseHistory = { id: this.generateUUID(), diner: user.id, orders: [] };
+          userPurchaseHistory = { id: this.generateUUID(), dinerId: user.id, orders: [] };
           this.purchaseHistory.push(userPurchaseHistory);
         }
         userPurchaseHistory.orders = [order, ...userPurchaseHistory.orders];
@@ -196,7 +196,7 @@ class MemoryPizzaService implements PizzaService {
     return new Promise(async (resolve) => {
       if (franchiseUser) {
         const user = await this.getUser();
-        if (this.isFranchisee(user) || this.isAdmin(user)) {
+        if (user != null && (this.isFranchisee(user) || this.isAdmin(user))) {
           const franchise = this.franchises.find((franchise) => (franchise.admins ?? []).includes(franchiseUser.id));
           if (franchise) {
             resolve(franchise);
@@ -211,16 +211,14 @@ class MemoryPizzaService implements PizzaService {
   async createFranchise(franchise: Franchise): Promise<Franchise> {
     return new Promise((resolve, reject) => {
       if (franchise && franchise.name && (franchise.admins ?? []).length > 0) {
-        const user = this.users.find((user) => user.id === (franchise.admins ?? [])[0]);
-        if (user) {
+        const franchiseAdmin = this.users.find((user) => user.id === (franchise.admins ?? [])[0]);
+        if (franchiseAdmin) {
           if (this.franchises.find((candidate) => candidate.name === franchise.name)) {
             reject({ code: 409, msg: 'franchise already exists' });
             return;
           }
 
-          if (!user.roles.includes(Role.Franchisee)) {
-            user.roles.push(Role.Franchisee);
-          }
+          franchiseAdmin.roles.push({ role: Role.Franchisee, objectId: franchise.id });
           franchise.id = this.generateUUID();
           this.franchises.push(franchise);
           resolve(franchise);
