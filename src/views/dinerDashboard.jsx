@@ -34,7 +34,9 @@ export default function DinerDashboard({ user }) {
           <div className='font-semibold text-orange-400'>role:</div>{' '}
           <div className='col-span-4'>
             {user.roles.map((role, index) => (
-              <span key={index}>{role.role}</span>
+              <span key={index}>
+                {index === 0 ? '' : ', '} {role.role} on {role.objectId}
+              </span>
             ))}
           </div>
         </div>

@@ -41,49 +41,15 @@ class HttpPizzaService implements PizzaService {
   }
 
   async login(email: string, password: string): Promise<User> {
-    return new Promise(async (resolve, reject) => {
-      try {
-        const r = await fetch('http://localhost:3000/api/auth', {
-          method: 'PUT',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({ email, password }),
-        });
-        const j = await r.json();
-        if (r.ok) {
-          localStorage.setItem('user', JSON.stringify(j));
-          resolve(j as User);
-        } else {
-          reject({ code: r.status, message: j.message });
-        }
-      } catch (e) {
-        reject({ code: 500, message: e.message });
-      }
-    });
+    const user = await this.callEndpoint('/api/auth', 'PUT', { email, password });
+    localStorage.setItem('user', JSON.stringify(user));
+    return Promise.resolve(user);
   }
 
   async register(name: string, email: string, password: string): Promise<User> {
-    return new Promise(async (resolve, reject) => {
-      try {
-        const r = await fetch('http://localhost:3000/api/auth', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({ name, email, password }),
-        });
-        const j = await r.json();
-        if (r.ok) {
-          localStorage.setItem('user', JSON.stringify(j));
-          resolve(j as User);
-        } else {
-          reject({ code: r.status, message: j.message });
-        }
-      } catch (e) {
-        reject({ code: 500, message: e.message });
-      }
-    });
+    const user = this.callEndpoint('/api/auth', 'POST', { name, email, password });
+    localStorage.setItem('user', JSON.stringify(user));
+    return Promise.resolve(user);
   }
 
   async logout(): Promise<void> {
@@ -125,9 +91,7 @@ class HttpPizzaService implements PizzaService {
   }
 
   async getFranchises(): Promise<Franchise[]> {
-    return new Promise((resolve) => {
-      resolve([] as Franchise[]);
-    });
+    return this.callEndpoint('/api/franchise');
   }
 
   async closeFranchise(franchise: Franchise): Promise<void> {
