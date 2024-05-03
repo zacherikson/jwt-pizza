@@ -72,7 +72,8 @@ class HttpPizzaService implements PizzaService {
   }
 
   async logout(): Promise<void> {
-    return new Promise((resolve) => {
+    return new Promise(async (resolve) => {
+      localStorage.removeItem('user');
       resolve();
     });
   }
