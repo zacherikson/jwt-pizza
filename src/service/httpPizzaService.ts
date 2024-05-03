@@ -9,13 +9,24 @@ class HttpPizzaService implements PizzaService {
     return user != null && !!user.roles.find((r) => r.role === Role.Franchisee);
   }
 
-  async getMenu(): Promise<Menu> {
+  async callEndpoint(path: string, method: string = 'GET', body?: any): Promise<any> {
     return new Promise(async (resolve, reject) => {
       try {
-        const r = await fetch('http://localhost:3000/api/pizza/menu');
+        const options: any = {
+          method: method,
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        };
+
+        if (body) {
+          options.body = JSON.stringify(body);
+        }
+
+        const r = await fetch('http://localhost:3000' + path, options);
         const j = await r.json();
         if (r.ok) {
-          resolve(j as Menu);
+          resolve(j);
         } else {
           reject({ code: r.status, message: j.message });
         }
@@ -23,6 +34,10 @@ class HttpPizzaService implements PizzaService {
         reject({ code: 500, message: e.message });
       }
     });
+  }
+
+  async getMenu(): Promise<Menu> {
+    return this.callEndpoint('/api/pizza/menu');
   }
 
   async login(email: string, password: string): Promise<User> {
