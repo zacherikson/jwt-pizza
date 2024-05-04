@@ -9,8 +9,8 @@ export default function CloseStore() {
   const state = useLocation().state;
   const navigateToParent = useBreadcrumb();
 
-  function close() {
-    pizzaService.closeStore(state.franchise, state.store);
+  async function close() {
+    await pizzaService.closeStore(state.franchise, state.store);
     navigateToParent();
   }
 
