@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import View from './view';
 import NotFound from './notFound';
 import { pizzaService } from '../service/service';
+import { Role } from '../service/pizzaService';
 
 export default function DinerDashboard({ user }) {
   const [purchases, setPurchases] = React.useState([]);
@@ -13,6 +14,13 @@ export default function DinerDashboard({ user }) {
     })();
   }, [user]);
 
+  function formatRole(role) {
+    if (role.role === Role.Franchisee) {
+      return `Franchisee on ${role.objectId}`;
+    }
+
+    return role.role;
+  }
   if (!user) {
     return <NotFound />;
   }
@@ -35,7 +43,7 @@ export default function DinerDashboard({ user }) {
           <div className='col-span-4'>
             {user.roles.map((role, index) => (
               <span key={index}>
-                {index === 0 ? '' : ', '} {role.role} on {role.objectId}
+                {index === 0 ? '' : ', '} {formatRole(role)}
               </span>
             ))}
           </div>
