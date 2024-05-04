@@ -149,16 +149,16 @@ class MemoryPizzaService implements PizzaService {
     });
   }
 
-  async getOrders(requestUser): Promise<Order[]> {
+  async getOrders(requestUser): Promise<OrderHistory> {
     return new Promise(async (resolve) => {
-      let result: Order[] = [];
+      let result: OrderHistory = {} as OrderHistory;
 
       if (requestUser) {
         const user = await this.getUser();
         if (user && (this.isAdmin(user) || user.id === requestUser.id)) {
-          const orders = this.orderHistory.find((order) => order.dinerId === requestUser.id) as OrderHistory;
-          if (orders) {
-            result = orders.orders;
+          const orderHistory: OrderHistory | undefined = this.orderHistory.find((order) => order.dinerId === requestUser.id);
+          if (orderHistory) {
+            result = orderHistory;
           }
         }
       }
@@ -173,7 +173,7 @@ class MemoryPizzaService implements PizzaService {
         order.id = this.generateUUID();
         order.date = new Date().toISOString();
 
-        let userOrderHistory: OrderHistory = this.orderHistory.find((order) => order.id === user.id) as OrderHistory;
+        let userOrderHistory: OrderHistory | undefined = this.orderHistory.find((order) => order.id === user.id);
         if (!userOrderHistory) {
           userOrderHistory = { id: this.generateUUID(), dinerId: user.id, orders: [] };
           this.orderHistory.push(userOrderHistory);

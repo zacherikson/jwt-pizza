@@ -68,7 +68,7 @@ interface PizzaService {
   logout(): Promise<void>;
   getUser(): Promise<User | null>;
   getMenu(): Promise<Menu>;
-  getOrders(user: User): Promise<Order[]>;
+  getOrders(user: User): Promise<OrderHistory>;
   order(order: Order): Promise<Order>;
   getFranchise(user: User): Promise<Franchise | null>;
   createFranchise(franchise: Franchise): Promise<Franchise>;

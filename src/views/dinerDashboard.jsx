@@ -10,7 +10,10 @@ export default function DinerDashboard({ user }) {
 
   React.useEffect(() => {
     (async () => {
-      setOrders(await pizzaService.getOrders(user));
+      if (user) {
+        const r = await pizzaService.getOrders(user);
+        setOrders(r.orders);
+      }
     })();
   }, [user]);
 

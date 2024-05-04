@@ -1,4 +1,4 @@
-import { PizzaService, Franchise, Store, User, Menu, Order, Role } from './pizzaService';
+import { PizzaService, Franchise, Store, OrderHistory, User, Menu, Order, Role } from './pizzaService';
 
 class HttpPizzaService implements PizzaService {
   isAdmin(user: User | null): boolean {
@@ -69,7 +69,7 @@ class HttpPizzaService implements PizzaService {
     return this.callEndpoint('/api/order/menu');
   }
 
-  async getOrders(user: User): Promise<Order[]> {
+  async getOrders(user: User): Promise<OrderHistory> {
     return this.callEndpoint('/api/order');
   }
 
