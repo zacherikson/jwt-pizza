@@ -1,7 +1,7 @@
 import React from 'react';
 import { useLocation } from 'react-router-dom';
 import { useBreadcrumb } from '../hooks/appNavigation';
-import { StoreIcon, LocationIcon } from '../icons';
+import { StoreIcon } from '../icons';
 import View from './view';
 
 import Button from '../components/button';
