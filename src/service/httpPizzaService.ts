@@ -17,6 +17,7 @@ class HttpPizzaService implements PizzaService {
           headers: {
             'Content-Type': 'application/json',
           },
+          credentials: 'include',
         };
 
         if (body) {
@@ -55,6 +56,7 @@ class HttpPizzaService implements PizzaService {
   async logout(): Promise<void> {
     return new Promise(async (resolve) => {
       localStorage.removeItem('user');
+      await this.callEndpoint('/api/auth', 'DELETE');
       resolve();
     });
   }
@@ -62,6 +64,7 @@ class HttpPizzaService implements PizzaService {
   async getUser(): Promise<User | null> {
     return new Promise((resolve) => {
       let user: User | null = JSON.parse(localStorage.getItem('user') || 'null');
+
       return resolve(user);
     });
   }
@@ -73,15 +76,11 @@ class HttpPizzaService implements PizzaService {
   }
 
   async purchase(order: Order): Promise<Order> {
-    return new Promise((resolve) => {
-      resolve({} as Order);
-    });
+    return this.callEndpoint('/api/pizza/order', 'POST', order);
   }
 
   async getFranchise(user: User): Promise<Franchise | null> {
-    return new Promise((resolve) => {
-      resolve(null);
-    });
+    return this.callEndpoint(`/api/franchise/${user.id}`);
   }
 
   async createFranchise(franchise: Franchise): Promise<Franchise> {

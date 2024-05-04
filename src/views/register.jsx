@@ -49,6 +49,7 @@ export default function Register({ setUser }) {
                   type='name'
                   value={name}
                   ref={nameRef}
+                  autoComplete='name'
                   required
                   onChange={(e) => setName(e.target.value)}
                   id='name'
@@ -64,6 +65,7 @@ export default function Register({ setUser }) {
               <input
                 type='email'
                 value={email}
+                autoComplete='email'
                 required
                 onChange={(e) => setEmail(e.target.value)}
                 id='email'
@@ -83,6 +85,7 @@ export default function Register({ setUser }) {
                   id='password'
                   type='password'
                   value={password}
+                  autoComplete='new-password'
                   required
                   onChange={(e) => setPassword(e.target.value)}
                   className='py-3 ps-11 pe-4 block w-full bg-white/10 border-white/20 text-white placeholder:text-white rounded-lg text-sm focus:border-white/30 focus:ring-white/30 sm:p-4 sm:ps-11'

@@ -15,7 +15,7 @@ type Pizza = {
 };
 
 type OrderItem = {
-  id: string;
+  menuId: string;
   description: string;
   price: number;
 };

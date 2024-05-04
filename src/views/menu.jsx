@@ -23,7 +23,7 @@ export default function Menu() {
   }, []);
 
   function selectPizza(pizza) {
-    setOrder({ items: [...order.items, { id: pizza.id, description: pizza.title, price: pizza.price }] });
+    setOrder({ items: [...order.items, { menuId: pizza.id, description: pizza.title, price: pizza.price }] });
   }
 
   function checkout() {
