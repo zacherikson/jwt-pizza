@@ -92,9 +92,7 @@ class HttpPizzaService implements PizzaService {
   }
 
   async closeStore(franchise: Franchise, store: Store): Promise<null> {
-    return new Promise((resolve) => {
-      resolve(null);
-    });
+    return this.callEndpoint(`/api/franchise/${franchise.id}/store/${store.id}`, 'DELETE');
   }
 }
 
