@@ -1,9 +1,9 @@
 import React from 'react';
 
-export default function Button({ title, onPress, submit, className }) {
+export default function Button({ title, onPress, disabled = false, submit, className }) {
   const finalClassname = `w-32 m-4 py-3 px-4 text-sm font-semibold rounded-lg border border-transparent bg-orange-800 text-white hover:bg-orange-600 ${className}`;
   return (
-    <button type={submit ? 'submit' : 'button'} className={finalClassname} onClick={onPress}>
+    <button disabled={disabled} type={submit ? 'submit' : 'button'} className={finalClassname} onClick={onPress}>
       {title}
     </button>
   );

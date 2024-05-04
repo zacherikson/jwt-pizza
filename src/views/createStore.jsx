@@ -12,9 +12,9 @@ export default function CreateStore() {
   const navigateToParentPath = useBreadcrumb();
   const [store, setStore] = React.useState({});
 
-  function createStore(event) {
+  async function createStore(event) {
     event.preventDefault();
-    pizzaService.createStore(state.franchise, store);
+    await pizzaService.createStore(state.franchise, store);
     navigateToParentPath();
   }
 
