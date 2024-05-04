@@ -5,6 +5,7 @@ import View from './view';
 import { TrashIcon, CautionIcon } from '../icons';
 import Button from '../components/button';
 import { pizzaService } from '../service/service';
+import { Role } from '../service/pizzaService';
 
 export default function FranchiseDashboard({ user }) {
   const navigate = useNavigate();
@@ -13,7 +14,8 @@ export default function FranchiseDashboard({ user }) {
   React.useEffect(() => {
     (async () => {
       if (user) {
-        setFranchise(await pizzaService.getFranchise(user));
+        const franchises = await pizzaService.getFranchise(user);
+        setFranchise(franchises[0]);
       }
     })();
   }, [user]);
@@ -83,7 +85,7 @@ function whyFranchise() {
   return (
     <View title='So you want a piece of the pie'>
       <div className='text-start py-8 px-4 sm:px-6 lg:px-8'>
-        <div className='my-4 bg-yellow-50 border border-yellow-200 text-sm text-yellow-800 rounded-lg p-4/10' role='alert'>
+        <div className='my-4 bg-yellow-50 border-4 border-slate-400 text-sm text-yellow-800 rounded-lg p-4/10' role='alert'>
           <div className='flex'>
             <div className='ms-4'>
               <div className='my-3 text-sm text-yellow-700'>
@@ -179,12 +181,11 @@ function whyFranchise() {
 function OrderNow() {
   return (
     <p className='py-2 text-white'>
-      Call{' '}
+      <span className='mx-2 text-orange-400 inline-block animate-pulse uppercase'>Call now</span>
       <span className='font-semibold text-orange-400 underline'>
         <a href='tel:800-555-5555'>800-555-5555</a>
       </span>
       {'  '}
-      <span className='mx-2 text-yellow-300 inline-block animate-pulse'>NOW</span>
     </p>
   );
 }

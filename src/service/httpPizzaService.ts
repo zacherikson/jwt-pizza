@@ -86,9 +86,7 @@ class HttpPizzaService implements PizzaService {
   }
 
   async createStore(franchise: Franchise, store: Store): Promise<Store> {
-    return new Promise((resolve) => {
-      resolve({} as Store);
-    });
+    return this.callEndpoint(`/api/franchise/${franchise.id}/store`, 'POST', store);
   }
 
   async closeStore(franchise: Franchise, store: Store): Promise<null> {
