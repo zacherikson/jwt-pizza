@@ -5,7 +5,6 @@ import View from './view';
 import { TrashIcon, CautionIcon } from '../icons';
 import Button from '../components/button';
 import { pizzaService } from '../service/service';
-import { Role } from '../service/pizzaService';
 
 export default function FranchiseDashboard({ user }) {
   const navigate = useNavigate();
