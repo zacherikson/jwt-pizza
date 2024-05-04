@@ -38,7 +38,7 @@ export default function CreateFranchise() {
               <input
                 type='email'
                 required
-                onChange={(e) => setFranchise({ ...franchise, admin: [e.target.value] })}
+                onChange={(e) => setFranchise({ ...franchise, admins: [{ email: e.target.value }] })}
                 className='peer py-3 px-4 ps-11 block w-full bg-gray-100 border-transparent rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none'
                 placeholder='franchisee admin email'
               />
