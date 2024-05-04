@@ -1,12 +1,8 @@
 import { PizzaService, Franchise, Store, OrderHistory, User, Menu, Order, Role } from './pizzaService';
 
 class HttpPizzaService implements PizzaService {
-  isAdmin(user: User | null): boolean {
-    return user != null && !!user.roles.find((r) => r.role === Role.Admin);
-  }
-
-  isFranchisee(user: User | null): boolean {
-    return user != null && !!user.roles.find((r) => r.role === Role.Franchisee);
+  isRole(user: User | null, role: Role): boolean {
+    return user != null && !!user.roles.find((r) => r.role === role);
   }
 
   async callEndpoint(path: string, method: string = 'GET', body?: any): Promise<any> {

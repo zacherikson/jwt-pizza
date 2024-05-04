@@ -8,7 +8,7 @@ export default function Header({ user, navItems }) {
   }
 
   function generateUserText(user) {
-    const names = user?.name.split(' ') || ['?'];
+    const names = user?.name?.split(' ') || ['?'];
     return names.length > 1 ? names[0].charAt(0) + names[names.length - 1].charAt(0) : names[0].charAt(0);
   }
 

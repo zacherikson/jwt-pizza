@@ -90,12 +90,8 @@ class MemoryPizzaService implements PizzaService {
     },
   ];
 
-  isAdmin(user: User | null): boolean {
-    return user != null && !!user.roles.find((r) => r.role === Role.Admin);
-  }
-
-  isFranchisee(user: User | null): boolean {
-    return user != null && !!user.roles.find((r) => r.role === Role.Franchisee);
+  isRole(user: User | null, role: Role): boolean {
+    return user != null && !!user.roles.find((r) => r.role === role);
   }
 
   async login(email: string, password: string): Promise<User> {
@@ -155,7 +151,7 @@ class MemoryPizzaService implements PizzaService {
 
       if (requestUser) {
         const user = await this.getUser();
-        if (user && (this.isAdmin(user) || user.id === requestUser.id)) {
+        if (user && (this.isRole(user, Role.Admin) || user.id === requestUser.id)) {
           const orderHistory: OrderHistory | undefined = this.orderHistory.find((order) => order.dinerId === requestUser.id);
           if (orderHistory) {
             result = orderHistory;
@@ -199,7 +195,7 @@ class MemoryPizzaService implements PizzaService {
     return new Promise(async (resolve) => {
       if (franchiseUser) {
         const user = await this.getUser();
-        if (user != null && (this.isFranchisee(user) || this.isAdmin(user))) {
+        if (user != null && (this.isRole(user, Role.Franchisee) || this.isRole(user, Role.Admin))) {
           const franchise = this.franchises.find((franchise) => (franchise.admins ?? []).find((a) => a.id === franchiseUser.id));
           if (franchise) {
             resolve(franchise);
@@ -235,7 +231,7 @@ class MemoryPizzaService implements PizzaService {
   async getFranchises(): Promise<Franchise[]> {
     return new Promise(async (resolve, reject) => {
       const user = await this.getUser();
-      if (this.isAdmin(user)) {
+      if (this.isRole(user, Role.Admin)) {
         resolve(this.franchises);
       } else {
         resolve(
@@ -256,7 +252,7 @@ class MemoryPizzaService implements PizzaService {
   async closeFranchise(franchise: Franchise): Promise<void> {
     return new Promise(async (resolve, reject) => {
       const user = await this.getUser();
-      if (this.isAdmin(user)) {
+      if (this.isRole(user, Role.Admin)) {
         this.franchises = this.franchises.filter((f) => f.id !== franchise.id);
         resolve();
         return;
@@ -269,7 +265,7 @@ class MemoryPizzaService implements PizzaService {
     return new Promise(async (resolve, reject) => {
       if (store?.name) {
         const user = await this.getUser();
-        if (this.isFranchisee(user) || this.isAdmin(user)) {
+        if (this.isRole(user, Role.Franchisee) || this.isRole(user, Role.Admin)) {
           const dbFranchise = this.franchises.find((candidate) => candidate.name === franchise.name);
           if (dbFranchise) {
             if (dbFranchise.stores.find((candidate) => candidate.name === store.name)) {
@@ -291,7 +287,7 @@ class MemoryPizzaService implements PizzaService {
   async closeStore(franchise: Franchise, store: Store): Promise<null> {
     return new Promise(async (resolve, reject) => {
       const user = await this.getUser();
-      if (this.isFranchisee(user) || this.isAdmin(user)) {
+      if (this.isRole(user, Role.Franchisee) || this.isRole(user, Role.Admin)) {
         const dbFranchise = this.franchises.find((candidate) => candidate.name === franchise.name);
         if (dbFranchise) {
           dbFranchise.stores = dbFranchise.stores.filter((s) => s.id !== store.id);

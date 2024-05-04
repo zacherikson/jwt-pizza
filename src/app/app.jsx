@@ -21,7 +21,7 @@ import CloseStore from '../views/closeStore';
 import Payment from '../views/payment';
 import NotFound from '../views/notFound';
 import Breadcrumb from '../components/breadcrumb';
-import { pizzaService } from '../service/service';
+import { pizzaService, Role } from '../service/service';
 import 'preline/preline';
 
 export default function App() {
@@ -47,10 +47,10 @@ export default function App() {
     return !loggedIn();
   }
   function isAdmin() {
-    return pizzaService.isAdmin(user);
+    return pizzaService.isRole(user, Role.Admin);
   }
   function isNotAdmin() {
-    return !pizzaService.isAdmin(user);
+    return !isAdmin();
   }
 
   const navItems = [

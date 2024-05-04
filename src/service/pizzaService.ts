@@ -61,8 +61,7 @@ type Franchise = {
 };
 
 interface PizzaService {
-  isAdmin(user: User): boolean;
-  isFranchisee(user: User): boolean;
+  isRole(user: User, role: Role): boolean;
   login(email: string, password: string): Promise<User>;
   register(email: string, password: string, role: string): Promise<User>;
   logout(): Promise<void>;
