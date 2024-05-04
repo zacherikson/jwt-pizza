@@ -4,6 +4,12 @@ enum Role {
   Admin = 'admin',
 }
 
+namespace Role {
+  export function isRole(user: User | null, role: Role): boolean {
+    return user != null && !!user.roles.find((r) => r.role === role);
+  }
+}
+
 type Menu = Pizza[];
 
 type Pizza = {
@@ -61,7 +67,6 @@ type Franchise = {
 };
 
 interface PizzaService {
-  isRole(user: User, role: Role): boolean;
   login(email: string, password: string): Promise<User>;
   register(email: string, password: string, role: string): Promise<User>;
   logout(): Promise<void>;

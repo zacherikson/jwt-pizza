@@ -1,10 +1,6 @@
 import { PizzaService, Franchise, Store, OrderHistory, User, Menu, Order, Role } from './pizzaService';
 
 class HttpPizzaService implements PizzaService {
-  isRole(user: User | null, role: Role): boolean {
-    return user != null && !!user.roles.find((r) => r.role === role);
-  }
-
   async callEndpoint(path: string, method: string = 'GET', body?: any): Promise<any> {
     return new Promise(async (resolve, reject) => {
       try {
@@ -40,7 +36,7 @@ class HttpPizzaService implements PizzaService {
   }
 
   async register(name: string, email: string, password: string): Promise<User> {
-    const user = this.callEndpoint('/api/auth', 'POST', { name, email, password });
+    const user = await this.callEndpoint('/api/auth', 'POST', { name, email, password });
     localStorage.setItem('user', JSON.stringify(user));
     return Promise.resolve(user);
   }
