@@ -26,7 +26,7 @@ class MemoryPizzaService implements PizzaService {
   franchises: Franchise[] = [
     {
       name: 'SuperPie',
-      admins: ['12345678-1234-4abc-9def-123456789abc'],
+      admins: [{ id: '12345678-1234-4abc-9def-123456789abc', name: 'Rajah Singh', email: 'f@jwt.com' }],
       id: 'e7b6a8f2-4e1d-4d2d-9e8a-3e9c1a2b6d5f',
       stores: [
         { id: '12345678-1234-4abc-9def-123456789abc', name: 'Orem', totalRevenue: 3.0 },
@@ -36,7 +36,10 @@ class MemoryPizzaService implements PizzaService {
     },
     {
       name: 'LotaPizza',
-      admins: ['01234567-8901-4f4f-9f9f-9876543210ab', '65432109-8765-4e4e-9e9e-0123456789ab'],
+      admins: [
+        { id: '01234567-8901-4f4f-9f9f-9876543210ab', name: 'Luna Santos', email: 'luna@jwt.com' },
+        { id: '65432109-8765-4e4e-9e9e-0123456789ab', name: 'Niki Petrov', email: 'niki@jwt.com' },
+      ],
       id: 'abb3423f2-4e1d-4d2d-9e8a-3e9c1a2b6d77',
       stores: [
         { id: 'aabbccdd-eeff-4a4a-9a9a-bbccddeeff00', name: 'Lehi', totalRevenue: 0.25 },
@@ -46,7 +49,7 @@ class MemoryPizzaService implements PizzaService {
     },
     {
       name: 'PizzaCorp',
-      admins: ['65432109-8765-4e4e-9e9e-0123456789ab'],
+      admins: [{ id: '65432109-8765-4e4e-9e9e-0123456789ab', name: 'Niki Petrov', email: 'niki@jwt.com' }],
       id: '978b3423f2-4e1d-4d2d-9e8a-3e9c1a2b6d78',
       stores: [{ id: '44556677-3322-4d4d-9d9d-ccbbaa445566', name: 'Spanish Fork', totalRevenue: 3000000 }],
     },
@@ -63,8 +66,8 @@ class MemoryPizzaService implements PizzaService {
           storeId: '12345678-1234-4abc-9def-123456789abc',
           date: '2024-03-10T00:00:00Z',
           items: [
-            { id: 'a11111111-1111-1111-1111-111111111111', description: 'Veggie', price: 0.05 },
-            { id: 'a21111111-1111-1111-1111-111111111111', description: 'Margarita', price: 0.00345 },
+            { menuId: 'a11111111-1111-1111-1111-111111111111', description: 'Veggie', price: 0.05 },
+            { menuId: 'a21111111-1111-1111-1111-111111111111', description: 'Margarita', price: 0.00345 },
           ],
         },
       ],
@@ -79,8 +82,8 @@ class MemoryPizzaService implements PizzaService {
           storeId: '12345678-1234-4abc-9def-123456789abc',
           date: '2023-03-10T00:00:00Z',
           items: [
-            { id: 'a4111111-1111-1111-1111-111111111111', description: 'Pepperoni', price: 0.005 },
-            { id: 'a3111111-1111-1111-1111-111111111111', description: 'Crusty', price: 0.0045 },
+            { menuId: 'a4111111-1111-1111-1111-111111111111', description: 'Pepperoni', price: 0.005 },
+            { menuId: 'a3111111-1111-1111-1111-111111111111', description: 'Crusty', price: 0.0045 },
           ],
         },
       ],
@@ -197,7 +200,7 @@ class MemoryPizzaService implements PizzaService {
       if (franchiseUser) {
         const user = await this.getUser();
         if (user != null && (this.isFranchisee(user) || this.isAdmin(user))) {
-          const franchise = this.franchises.find((franchise) => (franchise.admins ?? []).includes(franchiseUser.id));
+          const franchise = this.franchises.find((franchise) => (franchise.admins ?? []).find((a) => a.id === franchiseUser.id));
           if (franchise) {
             resolve(franchise);
             return;
@@ -211,7 +214,7 @@ class MemoryPizzaService implements PizzaService {
   async createFranchise(franchise: Franchise): Promise<Franchise> {
     return new Promise((resolve, reject) => {
       if (franchise && franchise.name && (franchise.admins ?? []).length > 0) {
-        const franchiseAdmin = this.users.find((user) => user.id === (franchise.admins ?? [])[0]);
+        const franchiseAdmin = this.users.find((user) => (franchise.admins ?? []).find((a) => a.id === user.id));
         if (franchiseAdmin) {
           if (this.franchises.find((candidate) => candidate.name === franchise.name)) {
             reject({ code: 409, msg: 'franchise already exists' });

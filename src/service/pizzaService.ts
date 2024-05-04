@@ -55,7 +55,7 @@ type Store = {
 
 type Franchise = {
   id: string;
-  admins?: string[];
+  admins?: { id: string; name: string; email: string }[];
   name: string;
   stores: Store[];
 };

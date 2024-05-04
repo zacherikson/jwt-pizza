@@ -55,8 +55,8 @@ export default function AdminDashboard({ user }) {
                           <tbody key={findex} className='divide-y divide-gray-200'>
                             <tr className='border-neutral-500 border-t-2'>
                               <td className='text-start px-2 whitespace-nowrap text-l font-mono text-orange-600'>{franchise.name}</td>
-                              <td className='text-start px-2 whitespace-nowrap text-sm font-normal text-gray-800' colSpan={4}>
-                                {franchise.admins.join(', ')}
+                              <td className='text-start px-2 whitespace-nowrap text-sm font-normal text-gray-800' colSpan={3}>
+                                {franchise.admins.map((o) => o.name).join(', ')}
                               </td>
                               <td className='px-6 py-4 whitespace-nowrap text-end text-sm font-medium'>
                                 <button
