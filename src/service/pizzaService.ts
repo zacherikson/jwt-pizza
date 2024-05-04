@@ -63,11 +63,11 @@ type Franchise = {
 interface PizzaService {
   isAdmin(user: User): boolean;
   isFranchisee(user: User): boolean;
-  getMenu(): Promise<Menu>;
   login(email: string, password: string): Promise<User>;
   register(email: string, password: string, role: string): Promise<User>;
   logout(): Promise<void>;
   getUser(): Promise<User | null>;
+  getMenu(): Promise<Menu>;
   getOrders(user: User): Promise<Order[]>;
   order(order: Order): Promise<Order>;
   getFranchise(user: User): Promise<Franchise | null>;
