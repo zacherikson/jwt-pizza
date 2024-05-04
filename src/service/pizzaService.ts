@@ -28,7 +28,7 @@ type Order = {
   items: OrderItem[];
 };
 
-type PurchaseHistory = {
+type OrderHistory = {
   id: string;
   dinerId: string;
   orders: Order[];
@@ -68,8 +68,8 @@ interface PizzaService {
   register(email: string, password: string, role: string): Promise<User>;
   logout(): Promise<void>;
   getUser(): Promise<User | null>;
-  getPurchases(user: User): Promise<Order[]>;
-  purchase(order: Order): Promise<Order>;
+  getOrders(user: User): Promise<Order[]>;
+  order(order: Order): Promise<Order>;
   getFranchise(user: User): Promise<Franchise | null>;
   createFranchise(franchise: Franchise): Promise<Franchise>;
   getFranchises(): Promise<Franchise[]>;
@@ -78,4 +78,4 @@ interface PizzaService {
   closeStore(franchise: Franchise, store: Store): Promise<null>;
 }
 
-export { Role, PizzaService, User, Menu, Pizza, PurchaseHistory, Order, Franchise, Store, OrderItem };
+export { Role, PizzaService, User, Menu, Pizza, OrderHistory, Order, Franchise, Store, OrderItem };

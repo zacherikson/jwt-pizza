@@ -6,11 +6,11 @@ import { pizzaService } from '../service/service';
 import { Role } from '../service/pizzaService';
 
 export default function DinerDashboard({ user }) {
-  const [purchases, setPurchases] = React.useState([]);
+  const [orders, setOrders] = React.useState([]);
 
   React.useEffect(() => {
     (async () => {
-      setPurchases(await pizzaService.getPurchases(user));
+      setOrders(await pizzaService.getOrders(user));
     })();
   }, [user]);
 
@@ -49,7 +49,7 @@ export default function DinerDashboard({ user }) {
           </div>
         </div>
 
-        {purchases?.length === 0 && (
+        {orders?.length === 0 && (
           <div className='text-neutral-100'>
             How have you lived this long without having a pizza?{' '}
             <Link className='text-orange-400 underline font-semibold' to='/menu'>
@@ -58,7 +58,7 @@ export default function DinerDashboard({ user }) {
             now!
           </div>
         )}
-        {purchases?.length > 0 && (
+        {orders?.length > 0 && (
           <>
             <div className='text-neutral-100'>Here is your history of all the good times.</div>
             <div className='bg-neutral-100 overflow-clip my-4'>
@@ -81,7 +81,7 @@ export default function DinerDashboard({ user }) {
                           </tr>
                         </thead>
                         <tbody className='divide-y divide-gray-200'>
-                          {purchases.map((order, index) => (
+                          {orders.map((order, index) => (
                             <tr key={index} className='hover:bg-gray-100'>
                               <td className='px-6 py-4 whitespace-nowrap text-start text-xs sm:text-sm font-medium text-gray-800'>{order.id}</td>
                               <td className='px-6 py-4 whitespace-nowrap text-start text-xs sm:text-sm text-gray-800'>{order.items.reduce((a, c) => a + c.price, 0).toLocaleString()} ₿</td>

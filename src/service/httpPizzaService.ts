@@ -37,10 +37,6 @@ class HttpPizzaService implements PizzaService {
     });
   }
 
-  async getMenu(): Promise<Menu> {
-    return this.callEndpoint('/api/pizza/menu');
-  }
-
   async login(email: string, password: string): Promise<User> {
     const user = await this.callEndpoint('/api/auth', 'PUT', { email, password });
     localStorage.setItem('user', JSON.stringify(user));
@@ -69,14 +65,16 @@ class HttpPizzaService implements PizzaService {
     });
   }
 
-  async getPurchases(user: User): Promise<Order[]> {
-    return new Promise((resolve) => {
-      resolve([] as Order[]);
-    });
+  async getMenu(): Promise<Menu> {
+    return this.callEndpoint('/api/order/menu');
   }
 
-  async purchase(order: Order): Promise<Order> {
-    return this.callEndpoint('/api/pizza/order', 'POST', order);
+  async getOrders(user: User): Promise<Order[]> {
+    return this.callEndpoint('/api/order');
+  }
+
+  async order(order: Order): Promise<Order> {
+    return this.callEndpoint('/api/order', 'POST', order);
   }
 
   async getFranchise(user: User): Promise<Franchise | null> {

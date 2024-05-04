@@ -20,7 +20,7 @@ export default function Payment() {
   }, []);
 
   async function processPayment() {
-    const confirmation = await pizzaService.purchase(order);
+    const confirmation = await pizzaService.order(order);
     navigate('/delivery', { state: { order: confirmation } });
   }
 

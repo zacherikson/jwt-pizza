@@ -1,4 +1,4 @@
-import { Role, PizzaService, User, Menu, PurchaseHistory, Pizza, Order, Franchise, Store, OrderItem } from './pizzaService';
+import { Role, PizzaService, User, Menu, OrderHistory, Pizza, Order, Franchise, Store, OrderItem } from './pizzaService';
 
 const pizzaMenu: Menu = [
   { id: '11111111-1111-1111-1111-111111111111', title: 'Veggie', description: 'A garden of delight', image: 'pizza1.png', price: 0.0038 },
@@ -55,7 +55,7 @@ class MemoryPizzaService implements PizzaService {
     },
   ];
 
-  purchaseHistory: PurchaseHistory[] = [
+  orderHistory: OrderHistory[] = [
     {
       id: 'ph1',
       dinerId: '87654321-4321-4def-9abc-987654321def',
@@ -96,12 +96,6 @@ class MemoryPizzaService implements PizzaService {
 
   isFranchisee(user: User | null): boolean {
     return user != null && !!user.roles.find((r) => r.role === Role.Franchisee);
-  }
-
-  async getMenu(): Promise<Menu> {
-    return new Promise((resolve) => {
-      resolve(pizzaMenu);
-    });
   }
 
   async login(email: string, password: string): Promise<User> {
@@ -149,16 +143,22 @@ class MemoryPizzaService implements PizzaService {
     });
   }
 
-  async getPurchases(purchasingUser): Promise<Order[]> {
+  async getMenu(): Promise<Menu> {
+    return new Promise((resolve) => {
+      resolve(pizzaMenu);
+    });
+  }
+
+  async getOrders(requestUser): Promise<Order[]> {
     return new Promise(async (resolve) => {
       let result: Order[] = [];
 
-      if (purchasingUser) {
+      if (requestUser) {
         const user = await this.getUser();
-        if (user && (this.isAdmin(user) || user.id === purchasingUser.id)) {
-          const purchases = this.purchaseHistory.find((purchase) => purchase.dinerId === purchasingUser.id) as PurchaseHistory;
-          if (purchases) {
-            result = purchases.orders;
+        if (user && (this.isAdmin(user) || user.id === requestUser.id)) {
+          const orders = this.orderHistory.find((order) => order.dinerId === requestUser.id) as OrderHistory;
+          if (orders) {
+            result = orders.orders;
           }
         }
       }
@@ -166,19 +166,19 @@ class MemoryPizzaService implements PizzaService {
     });
   }
 
-  async purchase(order: Order): Promise<Order> {
+  async order(order: Order): Promise<Order> {
     return new Promise(async (resolve, reject) => {
       const user = await this.getUser();
       if (user) {
         order.id = this.generateUUID();
         order.date = new Date().toISOString();
 
-        let userPurchaseHistory: PurchaseHistory = this.purchaseHistory.find((purchase) => purchase.id === user.id) as PurchaseHistory;
-        if (!userPurchaseHistory) {
-          userPurchaseHistory = { id: this.generateUUID(), dinerId: user.id, orders: [] };
-          this.purchaseHistory.push(userPurchaseHistory);
+        let userOrderHistory: OrderHistory = this.orderHistory.find((order) => order.id === user.id) as OrderHistory;
+        if (!userOrderHistory) {
+          userOrderHistory = { id: this.generateUUID(), dinerId: user.id, orders: [] };
+          this.orderHistory.push(userOrderHistory);
         }
-        userPurchaseHistory.orders = [order, ...userPurchaseHistory.orders];
+        userOrderHistory.orders = [order, ...userOrderHistory.orders];
 
         this.franchises.find((franchise) => {
           const store = franchise.stores.find((store) => store.id === order.storeId);
