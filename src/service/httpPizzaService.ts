@@ -74,7 +74,7 @@ class HttpPizzaService implements PizzaService {
   }
 
   async verifyOrder(jwt: string): Promise<Order> {
-    return this.callEndpoint('http://localhost:4000/api/order/verify', 'POST', { jwt });
+    return this.callEndpoint('http://jwt-pizza-factory.cs329.click/api/order/verify', 'POST', { jwt });
   }
 
   async getFranchise(user: User): Promise<Franchise | null> {
