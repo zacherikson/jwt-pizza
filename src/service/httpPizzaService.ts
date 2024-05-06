@@ -16,7 +16,11 @@ class HttpPizzaService implements PizzaService {
           options.body = JSON.stringify(body);
         }
 
-        const r = await fetch('http://localhost:3000' + path, options);
+        if (!path.startsWith('http')) {
+          path = 'http://localhost:3000' + path;
+        }
+
+        const r = await fetch(path, options);
         const j = await r.json();
         if (r.ok) {
           resolve(j);
@@ -67,6 +71,10 @@ class HttpPizzaService implements PizzaService {
 
   async order(order: Order): Promise<Order> {
     return this.callEndpoint('/api/order', 'POST', order);
+  }
+
+  async verifyOrder(jwt: string): Promise<Order> {
+    return this.callEndpoint('http://localhost:4000/api/order/verify', 'POST', { jwt });
   }
 
   async getFranchise(user: User): Promise<Franchise | null> {

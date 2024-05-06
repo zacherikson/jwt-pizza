@@ -5,6 +5,7 @@ import Button from '../components/button';
 import { pizzaService } from '../service/service';
 
 export default function Payment() {
+  const [errMessage, setErrorMessage] = React.useState('');
   const location = useLocation();
   const order = location.state?.order || { items: [] };
   const navigate = useNavigate();
@@ -20,8 +21,12 @@ export default function Payment() {
   }, []);
 
   async function processPayment() {
-    const confirmation = await pizzaService.order(order);
-    navigate('/delivery', { state: { order: confirmation } });
+    try {
+      const confirmation = await pizzaService.order(order);
+      navigate('/delivery', { state: { order: confirmation.order, jwt: confirmation.jwt } });
+    } catch (err) {
+      setErrorMessage(err.message);
+    }
   }
 
   function cancel() {
@@ -31,8 +36,9 @@ export default function Payment() {
   return (
     <View title='So worth it'>
       <div className='flex flex-col justify-center items-center py-8 px-4 sm:px-6 lg:px-8'>
-        {order.items.length === 1 && <div className='text-neutral-100'>Send me that pizza right now!</div>}
-        {order.items.length > 1 && <div className='text-neutral-100'>Send me those {order.items.length} pizzas right now!</div>}
+        {errMessage && <div className='text-orange-700 bg-yellow-100 p-2 rounded-md'>⚠️ {errMessage}</div>}
+        {!errMessage && order.items.length === 1 && <div className='text-neutral-100  p-2 rounded-md'>Send me that pizza right now!</div>}
+        {!errMessage && order.items.length > 1 && <div className='text-neutral-100 p-2 rounded-md'>Send me those {order.items.length} pizzas right now!</div>}
         <div>
           <Button title='Pay now' onPress={processPayment} />
           <Button title='Cancel' onPress={cancel} className='bg-transparent border-neutral-300' />

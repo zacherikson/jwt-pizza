@@ -74,6 +74,7 @@ interface PizzaService {
   getMenu(): Promise<Menu>;
   getOrders(user: User): Promise<OrderHistory>;
   order(order: Order): Promise<Order>;
+  verifyOrder(jwt: string): Promise<Order>;
   getFranchise(user: User): Promise<Franchise | null>;
   createFranchise(franchise: Franchise): Promise<Franchise>;
   getFranchises(): Promise<Franchise[]>;

@@ -190,10 +190,12 @@ function StoreIcon() {
   );
 }
 
-function HamburgerIcon() {
+function HamburgerIcon({ className }) {
+  const finalClassName = `inline flex-shrink-0 size-4 ${className}`;
+
   return (
     <svg
-      className='hs-collapse-open:hidden flex-shrink-0 size-4'
+      className={finalClassName}
       xmlns='http://www.w3.org/2000/svg'
       width='24'
       height='24'
@@ -211,10 +213,11 @@ function HamburgerIcon() {
   );
 }
 
-function CloseIcon() {
+function CloseIcon({ className }) {
+  const finalClassName = `inline flex-shrink-0 size-4 ${className}`;
   return (
     <svg
-      className='hs-collapse-open:block hidden flex-shrink-0 size-4'
+      className={finalClassName}
       xmlns='http://www.w3.org/2000/svg'
       width='24'
       height='24'

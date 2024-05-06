@@ -26,8 +26,8 @@ export default function Header({ user, navItems }) {
                 className='hs-collapse-toggle p-2 inline-flex justify-center items-center gap-2 rounded-lg border border-gray-700 font-medium bg-gray-800 text-gray-400 shadow-sm align-middle hover:bg-gray-700/[.25] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-blue-600 transition-all text-sm'
                 data-hs-collapse='#navbar-dark'
               >
-                <HamburgerIcon />
-                <CloseIcon />
+                <HamburgerIcon className='hs-collapse-open:hidden' />
+                <CloseIcon className='hs-collapse-open:block hidden' />
               </button>
             </div>
           </div>

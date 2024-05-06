@@ -82,7 +82,7 @@ export default function FranchiseDashboard({ user }) {
 
 function whyFranchise() {
   return (
-    <View title='So you want a piece of the pie'>
+    <View title='So you want a piece of the pie?'>
       <div className='text-start py-8 px-4 sm:px-6 lg:px-8'>
         <div className='my-4 bg-yellow-50 border-4 border-slate-400 text-sm text-yellow-800 rounded-lg p-4/10' role='alert'>
           <div className='flex'>
