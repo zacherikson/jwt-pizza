@@ -1,6 +1,7 @@
-import {PizzaService, Franchise, Store, OrderHistory, User, Menu, Order, Role} from './pizzaService';
+import { PizzaService, Franchise, Store, OrderHistory, User, Menu, Order, Role } from './pizzaService';
 
 const pizzaServiceUrl = import.meta.env.VITE_PIZZA_SERVICE_URL;
+const pizzaFactoryUrl = import.meta.env.VITE_PIZZA_FACTORY_URL;
 
 class HttpPizzaService implements PizzaService {
   async callEndpoint(path: string, method: string = 'GET', body?: any): Promise<any> {
@@ -27,22 +28,22 @@ class HttpPizzaService implements PizzaService {
         if (r.ok) {
           resolve(j);
         } else {
-          reject({code: r.status, message: j.message});
+          reject({ code: r.status, message: j.message });
         }
       } catch (e) {
-        reject({code: 500, message: e.message});
+        reject({ code: 500, message: e.message });
       }
     });
   }
 
   async login(email: string, password: string): Promise<User> {
-    const user = await this.callEndpoint('/api/auth', 'PUT', {email, password});
+    const user = await this.callEndpoint('/api/auth', 'PUT', { email, password });
     localStorage.setItem('user', JSON.stringify(user));
     return Promise.resolve(user);
   }
 
   async register(name: string, email: string, password: string): Promise<User> {
-    const user = await this.callEndpoint('/api/auth', 'POST', {name, email, password});
+    const user = await this.callEndpoint('/api/auth', 'POST', { name, email, password });
     localStorage.setItem('user', JSON.stringify(user));
     return Promise.resolve(user);
   }
@@ -76,7 +77,7 @@ class HttpPizzaService implements PizzaService {
   }
 
   async verifyOrder(jwt: string): Promise<Order> {
-    return this.callEndpoint('https://jwt-pizza-factory.cs329.click/api/order/verify', 'POST', {jwt});
+    return this.callEndpoint(pizzaFactoryUrl + '/api/order/verify', 'POST', { jwt });
   }
 
   async getFranchise(user: User): Promise<Franchise | null> {
