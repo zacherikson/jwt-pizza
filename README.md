@@ -4,6 +4,8 @@ A JSON Web Token, or JWT, (pronounced jot) is a digitally signed transfer of inf
 
 `JWT Pizza` takes the next stage of digital evolution by allowing you to buy pizzas that you can never actually eat. Not only does JWT exchange bitcoin and give you nothing in return, it also allows for you to be come a franchisee and turn the whole vapor company into an MLM.
 
+You can see a working example of the application at [pizza.cs329.click](https://pizza.cs329.click)
+
 ## Running locally
 
 1. Clone this repository
@@ -21,7 +23,7 @@ A JSON Web Token, or JWT, (pronounced jot) is a digitally signed transfer of inf
 
 ## Development notes
 
-JWT Pizza uses Vite, React, and Tailwind.
+JWT Pizza uses Vite, React, and Tailwind. The following contains some notes about how these components were integrated into the project.
 
 ### Vite
 
@@ -91,7 +93,7 @@ Modify `index.html` to include tailwind output.css.
 
 Now when you run with `npm run dev` the css will automatically be generated.
 
-## Preline
+### Preline
 
 Added the Tailwind [Preline component library](https://preline.co/) so that I can use all of their nifty nav, slideshow, containers, and cards.
 
@@ -137,6 +139,6 @@ export default function App() {
   //...
 ```
 
-## Icons
+### Icons
 
 [HeroIcons](https://heroicons.com/) - MIT license
