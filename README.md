@@ -8,12 +8,18 @@ You can see a working example of the application at [pizza.cs329.click](https://
 
 ## Running locally
 
-1. Clone this repository
+1. Fork this repository
+   ![Fork repo](forkRepo.png)
+
+   and then clone the fork from your GitHub account to your development environment.
+
    ```sh
-   git clone https://github.com/devops329/jwt-pizza.git
+   git clone https://github.com/youraccountnamehere/jwt-pizza.git
    ```
-2. Install the dependencies
+
+2. Change to the repo dir and install the dependencies
    ```sh
+   cd jwt-pizza
    npm install
    ```
 3. Run vite
