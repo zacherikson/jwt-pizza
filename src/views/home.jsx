@@ -38,7 +38,7 @@ export default function Home() {
         more. Whether you prefer classic flavors or adventurous toppings, our diverse menu has something for everyone. So why wait? Indulge in the pizza experience of a lifetime and visit JWT Pizza
         today!
       </p>
-      <img src='/pizza-shop-logo.png' className='border-solid border-2 border-orange-700 w-64 m-4 float-right' />
+      <img src='/jwt-pizza-logo.png' className='border-solid border-2 border-orange-700 w-64 m-4 float-right' />
       <p className='text-neutral-100 text-start mx-4 pb-4'>
         Pizza has come a long way since its humble beginnings. From its origins in Italy to becoming a global sensation, pizza has captured the hearts and taste buds of people worldwide. It has become
         a symbol of comfort, celebration, and togetherness. At JWT Pizza, we understand the magic of pizza and strive to deliver an unforgettable dining experience. Our cozy ambiance, friendly staff,
