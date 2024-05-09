@@ -29,7 +29,7 @@ You can see a working example of the application at [pizza.cs329.click](https://
 
 ## Development notes
 
-JWT Pizza uses Vite, React, and Tailwind. The following contains some notes about how these components were integrated into the project.
+JWT Pizza uses Vite, React, Tailwind, and Preline. The following contains some notes about how these components were integrated into the project.
 
 ### Vite
 
