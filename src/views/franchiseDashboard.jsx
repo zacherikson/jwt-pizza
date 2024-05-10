@@ -107,7 +107,7 @@ function whyFranchise() {
             Now is the time to get in on the JWT Pizza tsunami. The pizza sells itself. People cannot get enough. Setup your shop and let the pizza fly. Here are all the reasons why you should buy a
             franchise with JWT Pizza.
           </p>
-          <img src='/jwt-pizza-logo.png' className='border-solid border-2 border-orange-700 w-64 m-4 float-end' />
+          <img src='jwt-pizza-logo.png' className='border-solid border-2 border-orange-700 w-64 m-4 float-end' />
           <p className='py-2 text-white'>
             Owning a franchise with JWT Pizza can be highly profitable. With our proven business model and strong brand recognition, you can expect to generate significant revenue. Our profit
             forecasts show consistent growth year after year, making it a lucrative investment opportunity.
