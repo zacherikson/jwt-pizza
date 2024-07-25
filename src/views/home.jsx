@@ -29,7 +29,7 @@ export default function Home() {
         />
       </div>
       <p
-        className='text-neutral-100 text-start mx-4 mt-12 pb-4 first-line:uppercase first-line:tracking-widest
+        className='text-neutral-100 text-start mx-4 mt-12 pb-4
   first-letter:text-7xl first-letter:font-bold first-letter:text-orange-800
   first-letter:mr-3 first-letter:float-left'
       >
