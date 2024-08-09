@@ -6,7 +6,7 @@ enum Role {
 
 namespace Role {
   export function isRole(user: User | null, role: Role): boolean {
-    return user != null && !!user.roles.find((r) => r.role === role);
+    return user != null && Array.isArray(user.roles) && !!user.roles.find((r) => r.role === role);
   }
 }
 
@@ -61,7 +61,7 @@ type Store = {
 
 type Franchise = {
   id: string;
-  admins?: { id: string; name: string; email: string }[];
+  admins?: { email: string; id?: string; name?: string }[];
   name: string;
   stores: Store[];
 };
@@ -74,7 +74,7 @@ interface PizzaService {
   getMenu(): Promise<Menu>;
   getOrders(user: User): Promise<OrderHistory>;
   order(order: Order): Promise<Order>;
-  verifyOrder(jwt: string): Promise<Order>;
+  verifyOrder(jwt: string): Promise<any>;
   getFranchise(user: User): Promise<Franchise | null>;
   createFranchise(franchise: Franchise): Promise<Franchise>;
   getFranchises(): Promise<Franchise[]>;

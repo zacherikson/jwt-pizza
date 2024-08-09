@@ -1,6 +1,6 @@
 import { useLocation, useNavigate } from 'react-router-dom';
 
-function useBreadcrumb(sibling: string | null) {
+function useBreadcrumb(sibling?: string) {
   const location = useLocation();
   const navigate = useNavigate();
 

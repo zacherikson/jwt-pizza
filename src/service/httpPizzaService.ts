@@ -35,7 +35,7 @@ class HttpPizzaService implements PizzaService {
         } else {
           reject({ code: r.status, message: j.message });
         }
-      } catch (e) {
+      } catch (e: any) {
         reject({ code: 500, message: e.message });
       }
     });
@@ -84,7 +84,7 @@ class HttpPizzaService implements PizzaService {
     return this.callEndpoint('/api/order', 'POST', order);
   }
 
-  async verifyOrder(jwt: string): Promise<Order> {
+  async verifyOrder(jwt: string): Promise<any> {
     return this.callEndpoint(pizzaFactoryUrl + '/api/order/verify', 'POST', { jwt });
   }
 
