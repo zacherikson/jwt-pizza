@@ -26,6 +26,12 @@ import { pizzaService } from '../service/service';
 import { Role, User } from '../service/pizzaService';
 import 'preline/preline';
 
+declare global {
+  interface Window {
+    HSStaticMethods: any;
+  }
+}
+
 export default function App() {
   const [user, setUser] = React.useState<User | null>(null);
   const location = useLocation();

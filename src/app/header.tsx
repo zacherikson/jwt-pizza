@@ -4,7 +4,7 @@ import { HamburgerIcon, CloseIcon } from '../icons';
 import { User } from '../service/pizzaService';
 
 interface Props {
-  user: User;
+  user: User | null;
   navItems: { title: string; to: string; display: string[]; constraints?: (() => boolean)[] }[];
 }
 
@@ -18,7 +18,6 @@ export default function Header(props: Props) {
     return names.length > 1 ? names[0].charAt(0) + names[names.length - 1].charAt(0) : names[0].charAt(0);
   }
 
-  const userText = generateUserText(props.user);
   return (
     <div className="space-y-4">
       <header className="flex flex-wrap sm:justify-start sm:flex-nowrap w-full bg-gray-800 text-sm py-4">
@@ -57,7 +56,7 @@ export default function Header(props: Props) {
               <div className="hs-tooltip inline-block  [--placement:bottom]">
                 <div className="hs-tooltip-toggle pl-4 font-semibold text-orange-400">
                   <span className="inline-flex items-center justify-center size-[30px] rounded-full bg-orange-800 font-semibold text-white leading-none">
-                    {userText}
+                    {generateUserText(props.user)}
                   </span>
                 </div>
               </div>
