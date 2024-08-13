@@ -3,12 +3,12 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import View from './view';
 import Button from '../components/button';
 import { pizzaService } from '../service/service';
-import { OrderItem } from '../service/pizzaService';
+import { Order, OrderItem } from '../service/pizzaService';
 
 export default function Payment() {
   const [errMessage, setErrorMessage] = React.useState('');
   const location = useLocation();
-  const order = location.state?.order || { items: [] };
+  const order: Order = location.state?.order || { items: [] };
   const navigate = useNavigate();
 
   React.useEffect(() => {
@@ -24,7 +24,7 @@ export default function Payment() {
   async function processPayment() {
     try {
       const confirmation = await pizzaService.order(order);
-      navigate('/delivery', { state: { order: confirmation } });
+      navigate('/delivery', { state: { order: confirmation.order, jwt: confirmation.jwt } });
     } catch (err: any) {
       setErrorMessage(err.message);
     }

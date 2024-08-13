@@ -34,6 +34,11 @@ type Order = {
   items: OrderItem[];
 };
 
+type OrderResponse = {
+  order: Order;
+  jwt: string;
+};
+
 type OrderHistory = {
   id: string;
   dinerId: string;
@@ -66,6 +71,23 @@ type Franchise = {
   stores: Store[];
 };
 
+type Endpoint = {
+  requiresAuth: boolean;
+  method: string;
+  path: string;
+  description: string;
+  example: string;
+};
+
+type Endpoints = {
+  endpoints: Endpoint[];
+};
+
+type JWTPayload = {
+  message: string;
+  payload: object;
+};
+
 interface PizzaService {
   login(email: string, password: string): Promise<User>;
   register(email: string, password: string, role: string): Promise<User>;
@@ -73,15 +95,15 @@ interface PizzaService {
   getUser(): Promise<User | null>;
   getMenu(): Promise<Menu>;
   getOrders(user: User): Promise<OrderHistory>;
-  order(order: Order): Promise<Order>;
-  verifyOrder(jwt: string): Promise<any>;
+  order(order: Order): Promise<OrderResponse>;
+  verifyOrder(jwt: string): Promise<JWTPayload>;
   getFranchise(user: User): Promise<Franchise | null>;
   createFranchise(franchise: Franchise): Promise<Franchise>;
   getFranchises(): Promise<Franchise[]>;
   closeFranchise(franchise: Franchise): Promise<void>;
   createStore(franchise: Franchise, store: Store): Promise<Store>;
   closeStore(franchise: Franchise, store: Store): Promise<null>;
-  docs(docType: string): Promise<Object>;
+  docs(docType: string): Promise<Endpoints>;
 }
 
-export { Role, PizzaService, User, Menu, Pizza, OrderHistory, Order, Franchise, Store, OrderItem };
+export { Role, PizzaService, User, Menu, Pizza, OrderHistory, Order, Franchise, Store, OrderItem, Endpoint, Endpoints, OrderResponse, JWTPayload };

@@ -3,10 +3,10 @@ import { Link } from 'react-router-dom';
 import View from './view';
 import NotFound from './notFound';
 import { pizzaService } from '../service/service';
-import { Order, Role, User } from '../service/pizzaService';
+import { Order, OrderHistory, Role, User } from '../service/pizzaService';
 
 interface Props {
-  user: User;
+  user: User | null;
 }
 
 export default function DinerDashboard(props: Props) {
@@ -15,7 +15,7 @@ export default function DinerDashboard(props: Props) {
   React.useEffect(() => {
     (async () => {
       if (props.user) {
-        const r = await pizzaService.getOrders(props.user);
+        const r: OrderHistory = await pizzaService.getOrders(props.user);
         setOrders(r.orders);
       }
     })();

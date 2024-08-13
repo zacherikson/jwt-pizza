@@ -8,7 +8,7 @@ import { Franchise, Role, Store, User } from '../service/pizzaService';
 import { TrashIcon } from '../icons';
 
 interface Props {
-  user: User;
+  user: User | null;
 }
 
 export default function AdminDashboard(props: Props) {

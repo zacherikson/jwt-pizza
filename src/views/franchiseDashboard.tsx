@@ -8,7 +8,7 @@ import { pizzaService } from '../service/service';
 import { Franchise, Store, User } from '../service/pizzaService';
 
 interface Props {
-  user: User;
+  user: User | null;
 }
 
 export default function FranchiseDashboard(props: Props) {
