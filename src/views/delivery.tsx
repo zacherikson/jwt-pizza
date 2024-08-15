@@ -12,7 +12,7 @@ export default function Delivery() {
   const location = useLocation();
   const order: Order = location.state?.order || { pizzas: [] };
   const jwt: string = location.state?.jwt || 'error';
-  const [jwtPayload, setJwtPayload] = React.useState<JWTPayload>({ message: 'invalid', payload: { error: 'invalid JWT' } });
+  const [jwtPayload, setJwtPayload] = React.useState<JWTPayload>({ message: 'invalid', payload: "{ error: 'invalid JWT' }" });
 
   async function verify() {
     try {
@@ -73,7 +73,7 @@ export default function Delivery() {
               </button>
             </div>
             <div className="p-4 overflow-y-scroll max-h-52">
-              <pre className="text-gray-800 text-xs">{JSON.stringify(jwtPayload.payload)}</pre>
+              <pre className="text-gray-800 text-xs">{JSON.stringify(jwtPayload.payload, null, 2)}</pre>
             </div>
             <div className="flex justify-end items-center gap-x-2 py-3 px-4 border-t  bg-slate-200 rounded-b-xl">
               <button

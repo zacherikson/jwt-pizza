@@ -85,7 +85,7 @@ type Endpoints = {
 
 type JWTPayload = {
   message: string;
-  payload: object;
+  payload: string;
 };
 
 interface PizzaService {
