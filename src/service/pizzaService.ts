@@ -97,7 +97,7 @@ interface PizzaService {
   getOrders(user: User): Promise<OrderHistory>;
   order(order: Order): Promise<OrderResponse>;
   verifyOrder(jwt: string): Promise<JWTPayload>;
-  getFranchise(user: User): Promise<Franchise | null>;
+  getFranchise(user: User): Promise<Franchise[]>;
   createFranchise(franchise: Franchise): Promise<Franchise>;
   getFranchises(): Promise<Franchise[]>;
   closeFranchise(franchise: Franchise): Promise<void>;
