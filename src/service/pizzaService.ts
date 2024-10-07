@@ -77,6 +77,7 @@ type Endpoint = {
   path: string;
   description: string;
   example: string;
+  response: any;
 };
 
 type Endpoints = {
