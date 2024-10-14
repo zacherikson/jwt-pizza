@@ -23,15 +23,14 @@ export default function Header(props: Props) {
       <header className="flex flex-wrap sm:justify-start sm:flex-nowrap w-full bg-gray-800 text-sm py-4">
         <nav className="max-w-[85rem] w-full mx-auto px-4 sm:flex sm:items-center sm:justify-between" aria-label="Global">
           <div className="flex items-center justify-between">
-            <img className="w-10 m-3" src="jwt-pizza-icon.png" />
-            <span className="font-normal flex-none text-4xl bg-clip-text bg-gradient-to-tr from-orange-500 to-orange-300 text-transparent">
-              JWT Pizza
-            </span>
+            <img className="w-10 m-3" src="/jwt-pizza-icon.png" />
+            <span className="font-normal flex-none text-4xl bg-clip-text bg-gradient-to-tr from-orange-500 to-orange-300 text-transparent">JWT Pizza</span>
             <div className="sm:hidden">
               <button
                 type="button"
                 className="hs-collapse-toggle p-2 inline-flex justify-center items-center gap-2 rounded-lg border border-gray-700 font-medium bg-gray-800 text-gray-400 shadow-sm align-middle hover:bg-gray-700/[.25] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-blue-600 transition-all text-sm"
-                data-hs-collapse="#navbar-dark">
+                data-hs-collapse="#navbar-dark"
+              >
                 <HamburgerIcon className="hs-collapse-open:hidden" />
                 <CloseIcon className="hs-collapse-open:block hidden" />
               </button>
