@@ -144,7 +144,7 @@ test("purchase with login", async ({ page }) => {
 });
 
 test("Franchisee add and delete", async ({ page }) => {
-  await page.goto("http://localhost:5174/");
+  await page.goto("/");
   await page
     .getByLabel("Global")
     .getByRole("link", { name: "Franchise" })
@@ -175,7 +175,7 @@ test("Franchisee add and delete", async ({ page }) => {
 });
 
 test("Register", async ({ page }) => {
-  await page.goto("http://localhost:5174/");
+  await page.goto("/");
   await page.getByRole("link", { name: "Register" }).click();
   await page.getByRole("textbox", { name: "Full name" }).fill("Jeff");
   await page.getByRole("textbox", { name: "Full name" }).press("Tab");
@@ -189,7 +189,7 @@ test("Register", async ({ page }) => {
 });
 
 test("About and history page, create and close store", async ({ page }) => {
-  await page.goto("http://localhost:5174/");
+  await page.goto("/");
   await page.getByRole("link", { name: "About" }).click();
   await page.getByRole("link", { name: "History" }).click();
   await page
